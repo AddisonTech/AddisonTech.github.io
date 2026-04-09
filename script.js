@@ -112,25 +112,3 @@ function typeStep() {
 // Small initial delay so the page has settled
 setTimeout(typeStep, 600);
 
-/* ============================================================
-   Contact form — mailto fallback
-   ============================================================ */
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const name    = contactForm.querySelector('#fname').value.trim();
-        const email   = contactForm.querySelector('#femail').value.trim();
-        const subject = contactForm.querySelector('#fsubject').value.trim();
-        const message = contactForm.querySelector('#fmessage').value.trim();
-
-        const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-        const uri  = `mailto:stalor54@yahoo.com`
-                   + `?subject=${encodeURIComponent(subject || 'Portfolio Contact')}`
-                   + `&body=${encodeURIComponent(body)}`;
-
-        window.location.href = uri;
-    });
-}
