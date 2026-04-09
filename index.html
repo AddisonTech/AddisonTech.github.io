@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Addison Smith — Controls Engineering Technician and Software Developer transitioning into AI/ML. Portfolio of Python, AI agent systems, and data projects.">
+    <meta name="keywords" content="Addison Smith, AI, machine learning, controls engineering, Python, software developer, mechatronics">
+    <meta name="author" content="Addison Smith">
+    <meta property="og:title" content="Addison Smith | Portfolio">
+    <meta property="og:description" content="Controls Engineering Technician & Software Developer — building at the intersection of industrial automation and AI.">
+    <meta property="og:type" content="website">
+
+    <title>Addison Smith | Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Free -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- AOS — Animate On Scroll -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ======================== NAVBAR ======================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">AS<span class="accent">.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ======================== HERO ======================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-grid"></div>
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-name">Addison <span class="gradient-text">Smith</span></h1>
+
+            <p class="hero-title" id="typedText"><span class="cursor"></span></p>
+
+            <p class="hero-bio">
+                Controls Engineering Technician at Daedalus Industrial — bridging mechatronics and
+                intelligent software. Building at the intersection of industrial automation and AI.
+            </p>
+
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+
+            <div class="hero-socials">
+                <a href="https://github.com/AddisonTech" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/addison-smith-tech/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:stalor54@yahoo.com" aria-label="Send email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator" aria-hidden="true">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- ======================== ABOUT ======================== -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">About Me</span>
+                <h2 class="section-title">Engineer. Developer. <span class="gradient-text">Builder.</span></h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text" data-aos="fade-right">
+                    <p>
+                        I'm a Controls Engineering Technician at <strong>Daedalus Industrial</strong>, where
+                        I bridge the gap between industrial hardware and intelligent software. My background
+                        in mechatronics gives me a rare perspective — I understand systems from the physical
+                        layer up.
+                    </p>
+                    <p>
+                        Currently pursuing a <strong>BS in Information Technology with an AI/ML focus</strong>
+                        at ECPI University (graduating February 2027), I'm building agentic systems, data
+                        pipelines, and smart automation tools.
+                    </p>
+                    <p>
+                        My goal: apply AI to industrial problems that most ML engineers have never seen on
+                        a factory floor.
+                    </p>
+                </div>
+
+                <div class="about-skills" data-aos="fade-left">
+                    <h3>Tech Stack</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <span class="skill-cat-label">Languages</span>
+                            <div class="skill-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">SQL</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">HTML / CSS</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <span class="skill-cat-label">AI / ML</span>
+                            <div class="skill-tags">
+                                <span class="tag tag-accent">LLM APIs</span>
+                                <span class="tag tag-accent">Agentic Systems</span>
+                                <span class="tag tag-accent">Prompt Engineering</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <span class="skill-cat-label">Engineering</span>
+                            <div class="skill-tags">
+                                <span class="tag tag-purple">PLC / Controls</span>
+                                <span class="tag tag-purple">Mechatronics</span>
+                                <span class="tag tag-purple">Automation</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <span class="skill-cat-label">Tools</span>
+                            <div class="skill-tags">
+                                <span class="tag">Git</span>
+                                <span class="tag">Oracle Apex</span>
+                                <span class="tag">Streamlit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== PROJECTS ======================== -->
+    <section class="section section-alt" id="projects">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Projects</span>
+                <h2 class="section-title">Things I've <span class="gradient-text">Built</span></h2>
+            </div>
+
+            <div class="projects-grid">
+
+                <!-- Featured -->
+                <div class="project-card project-featured" data-aos="fade-up">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <span class="project-label">Featured Project</span>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/Smith_Agentic" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Smith_Agentic</h3>
+                        <p class="project-desc">
+                            A modular multi-agent AI system purpose-built for engineering workflows. Four specialized
+                            agents — Orchestrator, Researcher, Builder, and Critic — collaborate to tackle complex
+                            engineering and software problems. A production-grade framework for applying LLMs to
+                            real industrial and development challenges.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag tag-accent">Python</span>
+                            <span class="tag tag-accent">Multi-Agent</span>
+                            <span class="tag tag-accent">LLM</span>
+                            <span class="tag tag-accent">AI / ML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="50">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-file-code project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/resume-portfolio-builder" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Resume Portfolio Builder</h3>
+                        <p class="project-desc">Python-based Streamlit application that generates professional, formatted resumes from structured input — automating a process most people do by hand.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Streamlit</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-database project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/SDC250-Final" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">SDC250 Final</h3>
+                        <p class="project-desc">Comprehensive SQL project demonstrating relational database design, complex multi-table querying, and structured data modeling.</p>
+                        <div class="project-tags">
+                            <span class="tag">SQL</span>
+                            <span class="tag tag-purple">Database Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-chart-bar project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/summarizing-data-sql" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Summarizing Data SQL</h3>
+                        <p class="project-desc">Oracle Apex and SQL project for aggregating and summarizing structured datasets using advanced analytical query techniques.</p>
+                        <div class="project-tags">
+                            <span class="tag">SQL</span>
+                            <span class="tag tag-purple">Oracle Apex</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-table project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/W2_CreatingTables" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">W2 Creating Tables</h3>
+                        <p class="project-desc">SQL table creation and schema design in Oracle Apex, demonstrating DDL proficiency, normalization principles, and relational integrity.</p>
+                        <div class="project-tags">
+                            <span class="tag">SQL</span>
+                            <span class="tag tag-purple">Oracle Apex</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="projects-cta" data-aos="fade-up">
+                <a href="https://github.com/AddisonTech" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> View All on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== EXPERIENCE ======================== -->
+    <section class="section" id="experience">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Background</span>
+                <h2 class="section-title">Experience &amp; <span class="gradient-text">Education</span></h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>Controls Engineering Technician</h3>
+                                <p class="timeline-org">Daedalus Industrial</p>
+                            </div>
+                            <span class="timeline-date">Current</span>
+                        </div>
+                        <p>
+                            Industrial controls and automation engineering at the hardware-software boundary.
+                            Programming, maintaining, and optimizing PLC-controlled systems — while building
+                            intelligent software tools to make them smarter.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag tag-purple">PLC</span>
+                            <span class="tag tag-purple">Controls</span>
+                            <span class="tag tag-purple">Automation</span>
+                            <span class="tag tag-purple">Mechatronics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>BS Information Technology — AI/ML Focus</h3>
+                                <p class="timeline-org">ECPI University</p>
+                            </div>
+                            <span class="timeline-date">Feb 2027</span>
+                        </div>
+                        <p>
+                            Bachelor of Science in Information Technology with a concentration in Artificial
+                            Intelligence and Machine Learning. Coursework spans databases, algorithms, neural
+                            networks, agentic systems, and full-stack software development.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag tag-accent">AI / ML</span>
+                            <span class="tag tag-accent">Python</span>
+                            <span class="tag tag-accent">SQL</span>
+                            <span class="tag tag-accent">Databases</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== BLOG ======================== -->
+    <section class="section section-alt" id="blog">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Writing</span>
+                <h2 class="section-title">From the <span class="gradient-text">Blog</span></h2>
+            </div>
+
+            <div class="blog-card" data-aos="fade-up">
+                <a href="https://addisonsmithdev.wordpress.com" target="_blank" rel="noopener noreferrer" class="blog-card-inner">
+                    <div class="blog-icon">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-label">Personal Blog</p>
+                        <h3>Addison Smith — Dev Notes</h3>
+                        <p>
+                            Thoughts on AI engineering, industrial automation, and the road from mechatronics
+                            to machine learning. Follow along at addisonsmithdev.wordpress.com
+                        </p>
+                        <span class="btn btn-primary btn-sm">
+                            Read Blog <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== CONTACT ======================== -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Contact</span>
+                <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <p class="contact-intro">
+                        Open to new opportunities, collaborations, and interesting conversations about AI,
+                        automation, and engineering. Don't hesitate to reach out.
+                    </p>
+
+                    <div class="contact-items">
+                        <a href="tel:8649416314" class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <span class="contact-item-label">Phone</span>
+                                <span class="contact-item-value">864-941-6314</span>
+                            </div>
+                        </a>
+                        <a href="mailto:stalor54@yahoo.com" class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <span class="contact-item-label">Email</span>
+                                <span class="contact-item-value">stalor54@yahoo.com</span>
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/addison-smith-tech/" target="_blank" rel="noopener noreferrer" class="contact-item">
+                            <div class="contact-item-icon"><i class="fab fa-linkedin"></i></div>
+                            <div>
+                                <span class="contact-item-label">LinkedIn</span>
+                                <span class="contact-item-value">linkedin.com/in/addison-smith</span>
+                            </div>
+                        </a>
+                        <a href="https://github.com/AddisonTech" target="_blank" rel="noopener noreferrer" class="contact-item">
+                            <div class="contact-item-icon"><i class="fab fa-github"></i></div>
+                            <div>
+                                <span class="contact-item-label">GitHub</span>
+                                <span class="contact-item-value">github.com/AddisonTech</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrap" data-aos="fade-left">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="fname">Name</label>
+                            <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="femail">Email</label>
+                            <input type="email" id="femail" name="email" placeholder="your@email.com" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="fsubject">Subject</label>
+                            <input type="text" id="fsubject" name="subject" placeholder="What's this about?">
+                        </div>
+                        <div class="form-group">
+                            <label for="fmessage">Message</label>
+                            <textarea id="fmessage" name="message" rows="5" placeholder="Your message..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Send Message <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== FOOTER ======================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="https://github.com/AddisonTech" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/addison-smith-tech/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:stalor54@yahoo.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+</html>
