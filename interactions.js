@@ -144,34 +144,31 @@
     const fills = document.querySelectorAll('.skill-bar-fill');
     if (!fills.length) return;
 
-    new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            const el  = entry.target;
-            const idx = [...fills].indexOf(el);
-            setTimeout(() => {
-                el.style.width = (el.dataset.pct || '0') + '%';
-            }, idx * 55);
-        });
-    }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' }).observe(
-        document.querySelector('.skill-bars') || document.body
-    );
-
-    // Trigger all at once when the container is visible
     const container = document.querySelector('.skill-bars');
     if (!container) return;
 
     let triggered = false;
-    new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && !triggered) {
-            triggered = true;
-            fills.forEach((el, i) => {
-                setTimeout(() => {
-                    el.style.width = (el.dataset.pct || '0') + '%';
-                }, i * 60);
-            });
+
+    function runBars() {
+        if (triggered) return;
+        triggered = true;
+        fills.forEach((el, i) => {
+            setTimeout(() => {
+                el.style.width = (el.dataset.pct || '0') + '%';
+            }, i * 65);
+        });
+    }
+
+    // Delay past AOS fade-in (AOS duration = 680ms) so the
+    // width transition is visible, not hidden behind opacity:0
+    const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            obs.disconnect();
+            setTimeout(runBars, 750);
         }
-    }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' }).observe(container);
+    }, { threshold: 0.1 });
+
+    obs.observe(container);
 })();
 
 
