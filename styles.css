@@ -523,9 +523,35 @@ h1, h2, h3, h4 {
    ============================================================ */
 .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 52px;
     align-items: start;
+}
+
+.about-photo {
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+}
+
+.profile-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(34, 211, 238, 0.35);
+    box-shadow:
+        0 0 0 7px rgba(34, 211, 238, 0.07),
+        0 16px 48px rgba(0, 0, 0, 0.45);
+    transition: var(--t);
+}
+
+.profile-photo:hover {
+    border-color: rgba(34, 211, 238, 0.65);
+    box-shadow:
+        0 0 0 10px rgba(34, 211, 238, 0.09),
+        0 20px 60px rgba(0, 0, 0, 0.55);
+    transform: scale(1.02);
 }
 
 .about-text p {
@@ -573,6 +599,144 @@ h1, h2, h3, h4 {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+}
+
+/* ============================================================
+   Certifications
+   ============================================================ */
+.certs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.cert-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 22px 24px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: var(--t);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.cert-card:hover {
+    border-color: var(--border-a);
+    transform: translateY(-4px);
+    background: var(--bg-card-h);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(34, 211, 238, 0.07);
+}
+
+.cert-featured {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg,
+        rgba(34, 211, 238, 0.06) 0%,
+        rgba(167, 139, 250, 0.06) 100%);
+    border-color: rgba(34, 211, 238, 0.18);
+    position: relative;
+    overflow: hidden;
+}
+
+.cert-featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient);
+}
+
+.cert-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.15rem;
+}
+
+.cert-icon-cyan {
+    background: rgba(34, 211, 238, 0.11);
+    color: var(--cyan);
+    border: 1px solid rgba(34, 211, 238, 0.22);
+}
+
+.cert-icon-purple {
+    background: rgba(167, 139, 250, 0.11);
+    color: var(--violet);
+    border: 1px solid rgba(167, 139, 250, 0.22);
+}
+
+.cert-icon-accent {
+    background: rgba(34, 211, 238, 0.11);
+    color: var(--cyan);
+    border: 1px solid rgba(34, 211, 238, 0.22);
+}
+
+.cert-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.cert-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.cert-badge {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.cert-name {
+    font-family: var(--ff-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-0);
+    margin-bottom: 4px;
+    line-height: 1.35;
+}
+
+.cert-featured .cert-name {
+    font-size: 1.15rem;
+}
+
+.cert-issuer {
+    font-size: 0.84rem;
+    color: var(--cyan);
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.cert-featured .cert-issuer {
+    color: var(--text-1);
+}
+
+.cert-date {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    padding: 3px 11px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.cert-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
 }
 
 /* ============================================================
@@ -1081,10 +1245,18 @@ h1, h2, h3, h4 {
 /* ============================================================
    Responsive — Tablet
    ============================================================ */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
     .about-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 40px;
+    }
+
+    .about-photo {
+        grid-column: 1 / -1;
+    }
+
+    .certs-grid {
+        grid-template-columns: 1fr;
     }
 
     .contact-grid {
@@ -1132,6 +1304,10 @@ h1, h2, h3, h4 {
     .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .nav-toggle.active span:nth-child(2) { opacity: 0; width: 0; }
     .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* About — single column */
+    .about-grid { grid-template-columns: 1fr; }
+    .about-photo { grid-column: 1; }
 
     /* Projects — single column */
     .projects-grid { grid-template-columns: 1fr; }
