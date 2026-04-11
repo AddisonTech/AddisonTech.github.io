@@ -1243,8 +1243,214 @@ h1, h2, h3, h4 {
 .footer-socials a:hover { color: var(--cyan); }
 
 /* ============================================================
+   Starfield Canvas
+   ============================================================ */
+#starfield-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.75;
+}
+
+/* ============================================================
+   Three.js Hero Accent
+   ============================================================ */
+#threejs-hero {
+    position: absolute;
+    right: 4%;
+    top: 50%;
+    transform: translateY(-52%);
+    width: 360px;
+    height: 360px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInThree 1.8s ease 1s forwards;
+}
+
+#threejs-hero canvas {
+    display: block;
+}
+
+@keyframes fadeInThree {
+    to { opacity: 0.6; }
+}
+
+/* ============================================================
+   Hero Floating Accent Dots
+   ============================================================ */
+.hero-accent {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-accent-1 {
+    width: 7px;
+    height: 7px;
+    background: var(--cyan);
+    top: 28%;
+    left: 12%;
+    opacity: 0.55;
+    box-shadow: 0 0 14px var(--cyan);
+    animation: floatBob 4.2s ease-in-out infinite;
+}
+
+.hero-accent-2 {
+    width: 5px;
+    height: 5px;
+    background: var(--violet);
+    top: 62%;
+    right: 14%;
+    opacity: 0.45;
+    box-shadow: 0 0 10px var(--violet);
+    animation: floatBob 5.5s ease-in-out 1.4s infinite;
+}
+
+.hero-accent-3 {
+    width: 3px;
+    height: 3px;
+    background: var(--cyan);
+    top: 75%;
+    left: 22%;
+    opacity: 0.35;
+    box-shadow: 0 0 6px var(--cyan);
+    animation: floatBob 3.8s ease-in-out 0.7s infinite;
+}
+
+@keyframes floatBob {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   Custom Cursor
+   ============================================================ */
+#cursor-dot {
+    position: fixed;
+    width: 7px;
+    height: 7px;
+    background: var(--cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10001;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.25s;
+    box-shadow: 0 0 8px var(--cyan);
+}
+
+#cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(34, 211, 238, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.22s var(--ease), height 0.22s var(--ease),
+                border-color 0.22s var(--ease), background 0.22s var(--ease),
+                opacity 0.25s;
+}
+
+#cursor-ring.cursor-expanded {
+    width: 54px;
+    height: 54px;
+    border-color: rgba(167, 139, 250, 0.6);
+    background: rgba(34, 211, 238, 0.04);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body.custom-cursor-active,
+    body.custom-cursor-active * { cursor: none !important; }
+}
+
+@media (hover: none) {
+    #cursor-dot,
+    #cursor-ring { display: none !important; }
+}
+
+/* ============================================================
+   Animated Skill Bars
+   ============================================================ */
+.skill-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.skill-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skill-group .skill-cat-label {
+    margin-bottom: 2px;
+}
+
+.skill-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.skill-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skill-bar-name {
+    font-family: var(--ff-mono);
+    font-size: 0.77rem;
+    color: var(--text-1);
+}
+
+.skill-bar-pct {
+    font-family: var(--ff-mono);
+    font-size: 0.69rem;
+    color: var(--text-2);
+}
+
+.skill-bar-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--cyan) 0%, var(--violet) 100%);
+    transition: width 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
    Responsive — Tablet
    ============================================================ */
+@media (max-width: 1100px) {
+    #threejs-hero {
+        width: 280px;
+        height: 280px;
+        right: 1%;
+    }
+}
+
+@media (max-width: 900px) {
+    #threejs-hero { display: none; }
+    .hero-accent-1, .hero-accent-2, .hero-accent-3 { display: none; }
+}
+
 @media (max-width: 960px) {
     .about-grid {
         grid-template-columns: 1fr 1fr;

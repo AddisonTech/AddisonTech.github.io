@@ -32,6 +32,10 @@
 </head>
 <body>
 
+    <!-- Custom cursor -->
+    <div id="cursor-dot"  aria-hidden="true"></div>
+    <div id="cursor-ring" aria-hidden="true"></div>
+
     <!-- ======================== NAVBAR ======================== -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -55,10 +59,19 @@
     <!-- ======================== HERO ======================== -->
     <section class="hero" id="home">
         <div class="hero-bg">
+            <canvas id="starfield-canvas" aria-hidden="true"></canvas>
             <div class="hero-grid"></div>
             <div class="hero-glow hero-glow-1"></div>
             <div class="hero-glow hero-glow-2"></div>
         </div>
+
+        <!-- Three.js accent geometry -->
+        <div id="threejs-hero" aria-hidden="true"></div>
+
+        <!-- Floating accent dots -->
+        <div class="hero-accent hero-accent-1" aria-hidden="true"></div>
+        <div class="hero-accent hero-accent-2" aria-hidden="true"></div>
+        <div class="hero-accent hero-accent-3" aria-hidden="true"></div>
 
         <div class="hero-content">
             <h1 class="hero-name">Addison <span class="gradient-text">Smith</span></h1>
@@ -129,40 +142,76 @@
 
                 <div class="about-skills" data-aos="fade-left">
                     <h3>Tech Stack</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category">
+                    <div class="skill-bars">
+
+                        <div class="skill-group">
                             <span class="skill-cat-label">Languages</span>
-                            <div class="skill-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">SQL</span>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">HTML / CSS</span>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Python</span><span class="skill-bar-pct">88%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="88"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">HTML / CSS</span><span class="skill-bar-pct">80%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="80"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">SQL</span><span class="skill-bar-pct">74%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="74"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">JavaScript</span><span class="skill-bar-pct">72%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="72"></div></div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-group">
                             <span class="skill-cat-label">AI / ML</span>
-                            <div class="skill-tags">
-                                <span class="tag tag-accent">LLM APIs</span>
-                                <span class="tag tag-accent">Agentic Systems</span>
-                                <span class="tag tag-accent">Prompt Engineering</span>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Prompt Engineering</span><span class="skill-bar-pct">86%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="86"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">LLM APIs</span><span class="skill-bar-pct">82%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="82"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Agentic Systems</span><span class="skill-bar-pct">78%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="78"></div></div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-group">
                             <span class="skill-cat-label">Engineering</span>
-                            <div class="skill-tags">
-                                <span class="tag tag-purple">PLC / Controls</span>
-                                <span class="tag tag-purple">Mechatronics</span>
-                                <span class="tag tag-purple">Automation</span>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">PLC / Controls</span><span class="skill-bar-pct">88%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="88"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Automation</span><span class="skill-bar-pct">86%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="86"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Mechatronics</span><span class="skill-bar-pct">84%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="84"></div></div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-group">
                             <span class="skill-cat-label">Tools</span>
-                            <div class="skill-tags">
-                                <span class="tag">Git</span>
-                                <span class="tag">Oracle Apex</span>
-                                <span class="tag">Streamlit</span>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Git</span><span class="skill-bar-pct">78%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="78"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Streamlit</span><span class="skill-bar-pct">72%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="72"></div></div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Oracle Apex</span><span class="skill-bar-pct">66%</span></div>
+                                <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="66"></div></div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -620,6 +669,9 @@
 
     <!-- AOS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
+    <script src="interactions.js"></script>
 </body>
 </html>
