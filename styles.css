@@ -1911,7 +1911,7 @@ h1, h2, h3, h4 {
 #circuit-hero .trace {
     stroke: #22d3ee;
     stroke-width: 1.2;
-    stroke-opacity: 0.07;
+    stroke-opacity: 0.18;
     fill: none;
     stroke-linecap: round;
 }
@@ -1920,25 +1920,25 @@ h1, h2, h3, h4 {
     fill: none;
     stroke: #22d3ee;
     stroke-width: 1.2;
-    stroke-opacity: 0.09;
+    stroke-opacity: 0.22;
 }
 
 #circuit-hero .chip {
     fill: none;
     stroke: #22d3ee;
     stroke-width: 1.2;
-    stroke-opacity: 0.07;
+    stroke-opacity: 0.18;
 }
 
 #circuit-hero .chip-pin {
-    stroke-opacity: 0.06;
+    stroke-opacity: 0.16;
 }
 
 #circuit-hero .via-amber {
     fill: none;
     stroke: #f59e0b;
     stroke-width: 1.2;
-    stroke-opacity: 0.13;
+    stroke-opacity: 0.32;
 }
 
 @media (max-width: 900px) {
