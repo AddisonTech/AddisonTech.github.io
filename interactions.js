@@ -71,69 +71,169 @@
 
 
 /* ============================================================
-   2. THREE.JS — dual wireframe icosahedron with mouse parallax
+   2. NEURAL NET — animated network visualization in hero
    ============================================================ */
 (function () {
-    if (typeof THREE === 'undefined') return;
     if (window.matchMedia('(max-width: 768px)').matches) return;
 
     const container = document.getElementById('threejs-hero');
     if (!container) return;
 
     const SIZE = 360;
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(SIZE, SIZE);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.setClearColor(0x000000, 0);
-    container.appendChild(renderer.domElement);
+    const canvas = document.createElement('canvas');
+    canvas.width  = SIZE;
+    canvas.height = SIZE;
+    canvas.style.display = 'block';
+    container.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
 
-    const scene  = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.z = 4.0;
+    // Layer config
+    const LAYER_CFG = [
+        { xFrac: 0.14, count: 4, label: 'Input'  },
+        { xFrac: 0.38, count: 6, label: ''        },
+        { xFrac: 0.62, count: 6, label: ''        },
+        { xFrac: 0.86, count: 4, label: 'Output'  },
+    ];
 
-    // Outer icosahedron — cyan wireframe
-    const outerMesh = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(1.3, 1),
-        new THREE.MeshBasicMaterial({ color: 0x22d3ee, wireframe: true, transparent: true, opacity: 0.30 })
-    );
-    scene.add(outerMesh);
+    // Build node objects
+    const nodes = [];
+    LAYER_CFG.forEach((layer, li) => {
+        const n = layer.count;
+        const spacing = (SIZE * 0.78) / (n + 1);
+        const yOffset = (SIZE - spacing * n) / 2;
+        for (let i = 0; i < n; i++) {
+            nodes.push({
+                li,
+                baseX: layer.xFrac * SIZE,
+                baseY: yOffset + spacing * (i + 1),
+                x: 0, y: 0,
+                phase: Math.random() * Math.PI * 2,
+                bobSpeed: 0.25 + Math.random() * 0.35,
+            });
+        }
+    });
 
-    // Inner icosahedron — violet, counter-rotating
-    const innerMesh = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(0.75, 0),
-        new THREE.MeshBasicMaterial({ color: 0xa78bfa, wireframe: true, transparent: true, opacity: 0.20 })
-    );
-    scene.add(innerMesh);
+    // Build connections (adjacent layers, all-to-all)
+    const connections = [];
+    for (let li = 0; li < LAYER_CFG.length - 1; li++) {
+        const lA = nodes.filter(n => n.li === li);
+        const lB = nodes.filter(n => n.li === li + 1);
+        for (const a of lA) {
+            for (const b of lB) {
+                connections.push({
+                    a, b,
+                    pulse: Math.random(),
+                    pulseSpeed: 0.25 + Math.random() * 0.4,
+                });
+            }
+        }
+    }
 
-    let tX = 0, tY = 0, cX = 0, cY = 0;
+    // Color: cyan (#22d3ee) at li=0 -> violet (#a78bfa) at li=3
+    function lerpColor(li, alpha) {
+        const t = li / (LAYER_CFG.length - 1);
+        const r = Math.round(34  + (167 - 34)  * t);
+        const g = Math.round(211 + (139 - 211) * t);
+        const b = Math.round(238 + (250 - 238) * t);
+        return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    let mx = 0.5, my = 0.5;
     document.addEventListener('mousemove', e => {
-        tX = (e.clientX / window.innerWidth  - 0.5) * 0.65;
-        tY = (e.clientY / window.innerHeight - 0.5) * 0.65;
+        mx = e.clientX / window.innerWidth;
+        my = e.clientY / window.innerHeight;
     }, { passive: true });
 
-    let threeRaf = null;
-    function animate() {
-        threeRaf = requestAnimationFrame(animate);
-        cX += (tX - cX) * 0.04;
-        cY += (tY - cY) * 0.04;
+    let nnRaf = null;
+    let elapsed = 0;
+    let lastTs = null;
 
-        outerMesh.rotation.x += 0.003 + cY * 0.007;
-        outerMesh.rotation.y += 0.005 + cX * 0.007;
-        innerMesh.rotation.x -= 0.005 - cY * 0.005;
-        innerMesh.rotation.y -= 0.003 - cX * 0.005;
+    function drawFrame(ts) {
+        if (!lastTs) lastTs = ts;
+        const dt = Math.min((ts - lastTs) / 1000, 0.05);
+        lastTs = ts;
+        elapsed += dt;
 
-        renderer.render(scene, camera);
+        ctx.clearRect(0, 0, SIZE, SIZE);
+
+        const offX = (mx - 0.5) * 20;
+        const offY = (my - 0.5) * 12;
+
+        // Update node positions (bob + parallax)
+        for (const n of nodes) {
+            const layerFrac = n.li / (LAYER_CFG.length - 1);
+            n.x = n.baseX + offX * (layerFrac - 0.5) * 0.9;
+            n.y = n.baseY + Math.sin(elapsed * n.bobSpeed + n.phase) * 4 + offY * 0.25;
+        }
+
+        // Draw connections
+        for (const c of connections) {
+            c.pulse = (c.pulse + c.pulseSpeed * dt) % 1;
+
+            // Base line
+            const lineGrad = ctx.createLinearGradient(c.a.x, c.a.y, c.b.x, c.b.y);
+            lineGrad.addColorStop(0, lerpColor(c.a.li, 0.07));
+            lineGrad.addColorStop(1, lerpColor(c.b.li, 0.07));
+            ctx.beginPath();
+            ctx.moveTo(c.a.x, c.a.y);
+            ctx.lineTo(c.b.x, c.b.y);
+            ctx.strokeStyle = lineGrad;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+
+            // Traveling pulse dot
+            const px = c.a.x + (c.b.x - c.a.x) * c.pulse;
+            const py = c.a.y + (c.b.y - c.a.y) * c.pulse;
+            const pli = c.a.li + (c.b.li - c.a.li) * c.pulse;
+            ctx.beginPath();
+            ctx.arc(px, py, 1.8, 0, Math.PI * 2);
+            ctx.fillStyle = lerpColor(pli, 0.75);
+            ctx.fill();
+        }
+
+        // Draw nodes
+        for (const n of nodes) {
+            // Glow halo
+            const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 14);
+            grd.addColorStop(0, lerpColor(n.li, 0.25));
+            grd.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, 14, 0, Math.PI * 2);
+            ctx.fillStyle = grd;
+            ctx.fill();
+
+            // Node ring
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, 4.5, 0, Math.PI * 2);
+            ctx.fillStyle = lerpColor(n.li, 0.18);
+            ctx.fill();
+            ctx.strokeStyle = lerpColor(n.li, 0.9);
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+        }
+
+        // Layer labels
+        ctx.font = '9px "JetBrains Mono", "Courier New", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'rgba(148,163,184,0.45)';
+        const labelY = SIZE - 10;
+        ctx.fillText('Input',        LAYER_CFG[0].xFrac * SIZE + offX * (-0.5) * 0.9, labelY);
+        ctx.fillText('Hidden layers', (LAYER_CFG[1].xFrac + LAYER_CFG[2].xFrac) / 2 * SIZE, labelY);
+        ctx.fillText('Output',       LAYER_CFG[3].xFrac * SIZE + offX * (0.5) * 0.9, labelY);
+
+        nnRaf = requestAnimationFrame(drawFrame);
     }
 
     new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
-            if (!threeRaf) animate();
+            if (!nnRaf) { lastTs = null; nnRaf = requestAnimationFrame(drawFrame); }
         } else {
-            if (threeRaf) { cancelAnimationFrame(threeRaf); threeRaf = null; }
+            if (nnRaf) { cancelAnimationFrame(nnRaf); nnRaf = null; }
         }
     }, { threshold: 0 }).observe(container);
 
-    animate();
+    lastTs = null;
+    nnRaf = requestAnimationFrame(drawFrame);
 })();
 
 

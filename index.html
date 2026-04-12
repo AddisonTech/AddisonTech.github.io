@@ -44,6 +44,8 @@
 </head>
 <body>
 
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+
     <!-- Custom cursor -->
     <div id="cursor-dot"  aria-hidden="true"></div>
     <div id="cursor-ring" aria-hidden="true"></div>
@@ -54,9 +56,9 @@
             <a href="#home" class="nav-logo">AS<span class="accent">.</span></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#experience">Experience</a></li>
                 <li><a href="#blog">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -68,8 +70,10 @@
         </div>
     </nav>
 
+    <main id="main-content">
+
     <!-- ======================== HERO ======================== -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" aria-label="Hero">
         <div class="hero-bg">
             <canvas id="starfield-canvas" aria-hidden="true"></canvas>
             <div class="hero-grid"></div>
@@ -123,7 +127,7 @@
     </section>
 
     <!-- ======================== ABOUT ======================== -->
-    <section class="section" id="about">
+    <section class="section" id="about" aria-label="About">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">About Me</span>
@@ -135,25 +139,28 @@
                     <img src="addison_professional.jpg" alt="Addison Smith" class="profile-photo">
                 </div>
                 <div class="about-text" data-aos="fade-up">
-                    <p>
-                        I work at the intersection of automation, electrical systems, and intelligent software.
-                    </p>
-                    <p>
-                        At <strong>Daedalus Industrial</strong>, I serve as a Controls Engineering Technician contributing to the wiring, setup, and testing of control systems used in automation and research environments. My work includes PLC troubleshooting, system integration, and supporting machine learning initiatives related to computer vision and intelligent automation.
-                    </p>
-                    <p>
-                        My background began in hands-on electrical and mechatronics work, where I learned how real machines behave outside of textbooks. That experience taught me how critical reliability, precision, and practical problem solving are when technology moves from theory into real-world systems.
-                    </p>
-                    <p>
-                        I am currently pursuing a <strong>Bachelor of Science in Information Technology</strong> at ECPI University with a focus on software development, artificial intelligence, and machine learning. My goal is to combine my foundation in controls engineering with modern software and data-driven systems.
-                    </p>
-                    <p>
-                        I am especially interested in building intelligent systems that connect hardware, software, and data. This ranges from control logic on the factory floor to machine learning models and cloud-based decision systems, and I enjoy solving problems where the physical and digital worlds meet.
-                    </p>
-                    <p>
-                        Long term, I want to help design and build the next generation of industrial systems where automation, AI, and real-world engineering come together to create smarter, more efficient environments.
-                    </p>
-                </div>
+    <p class="about-position">I wire 480V control panels at 8am and train neural networks at 8pm. I bridge the gap between industrial hardware and intelligent software.</p>
+
+    <div class="about-what">
+        <div class="about-what-col">
+            <div class="about-what-icon"><i class="fas fa-industry"></i></div>
+            <h4>Controls Engineering</h4>
+            <p>PLC troubleshooting, system integration, industrial wiring, and automation R&D.</p>
+        </div>
+        <div class="about-what-col">
+            <div class="about-what-icon"><i class="fas fa-brain"></i></div>
+            <h4>AI &amp; Machine Learning</h4>
+            <p>Computer vision, model training, data pipelines, and agentic systems.</p>
+        </div>
+        <div class="about-what-col">
+            <div class="about-what-icon"><i class="fas fa-code"></i></div>
+            <h4>Software Development</h4>
+            <p>Python, JavaScript, SQL, web apps, and database design.</p>
+        </div>
+    </div>
+
+    <p class="about-close">My goal is to design the next generation of industrial systems where automation, AI, and real-world engineering come together.</p>
+</div>
 
                 <div class="about-skills" data-aos="fade-left">
                     <h3>Tech Stack</h3>
@@ -162,19 +169,19 @@
                         <div class="skill-group">
                             <span class="skill-cat-label">Languages</span>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Python</span><span class="skill-bar-pct">88%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">Python</span><span class="skill-bar-pct">Advanced</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="88"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">HTML / CSS</span><span class="skill-bar-pct">80%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">HTML / CSS</span><span class="skill-bar-pct">Proficient</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="80"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">SQL</span><span class="skill-bar-pct">74%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">SQL</span><span class="skill-bar-pct">Proficient</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="74"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">JavaScript</span><span class="skill-bar-pct">72%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">JavaScript</span><span class="skill-bar-pct">Proficient</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="72"></div></div>
                             </div>
                         </div>
@@ -182,15 +189,15 @@
                         <div class="skill-group">
                             <span class="skill-cat-label">AI / ML</span>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Prompt Engineering</span><span class="skill-bar-pct">86%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">Prompt Engineering</span><span class="skill-bar-pct">Advanced</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="86"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">LLM APIs</span><span class="skill-bar-pct">82%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">LLM APIs</span><span class="skill-bar-pct">Proficient</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="82"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Agentic Systems</span><span class="skill-bar-pct">78%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">Agentic Systems</span><span class="skill-bar-pct">Proficient</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="78"></div></div>
                             </div>
                         </div>
@@ -198,15 +205,15 @@
                         <div class="skill-group">
                             <span class="skill-cat-label">Engineering</span>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">PLC / Controls</span><span class="skill-bar-pct">88%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">PLC / Controls</span><span class="skill-bar-pct">Advanced</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="88"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Automation</span><span class="skill-bar-pct">86%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">Automation</span><span class="skill-bar-pct">Advanced</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="86"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Mechatronics</span><span class="skill-bar-pct">84%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">Mechatronics</span><span class="skill-bar-pct">Proficient</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="84"></div></div>
                             </div>
                         </div>
@@ -214,15 +221,15 @@
                         <div class="skill-group">
                             <span class="skill-cat-label">Tools</span>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Git</span><span class="skill-bar-pct">78%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">Git</span><span class="skill-bar-pct">Proficient</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="78"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Streamlit</span><span class="skill-bar-pct">72%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">Streamlit</span><span class="skill-bar-pct">Proficient</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="72"></div></div>
                             </div>
                             <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Oracle Apex</span><span class="skill-bar-pct">66%</span></div>
+                                <div class="skill-bar-header"><span class="skill-bar-name">Oracle Apex</span><span class="skill-bar-pct">Familiar</span></div>
                                 <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="66"></div></div>
                             </div>
                         </div>
@@ -233,8 +240,132 @@
         </div>
     </section>
 
+    <!-- ======================== EXPERIENCE ======================== -->
+    <section class="section" id="experience" aria-label="Experience and Education">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Background</span>
+                <h2 class="section-title">Experience &amp; <span class="gradient-text">Education</span></h2>
+            </div>
+
+            <div class="dual-timeline">
+
+                <!-- Work Experience -->
+                <div class="dual-timeline-col" data-aos="fade-right">
+                    <h3 class="dual-timeline-heading"><i class="fas fa-briefcase"></i> Work Experience</h3>
+                    <div class="timeline">
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div>
+                                        <h3>Controls Engineering Technician</h3>
+                                        <p class="timeline-org">Daedalus Industrial</p>
+                                    </div>
+                                    <span class="timeline-date">Sep 2025 – Present</span>
+                                </div>
+                                <p class="bullet-section">Controls Engineering</p>
+                                <ul class="timeline-bullets">
+                                    <li>Execute wiring, setup, and testing of control systems for automation and R&amp;D projects, ensuring reliable performance</li>
+                                    <li>Troubleshoot and assist with PLC programming and system integration to support development and production environments</li>
+                                </ul>
+                                <p class="bullet-section">Machine Learning</p>
+                                <ul class="timeline-bullets">
+                                    <li>Contribute to model training and validation for applied computer vision and automation tasks</li>
+                                    <li>Support data collection, labeling, and analysis to improve model accuracy and operational efficiency</li>
+                                </ul>
+                                <p class="bullet-section">Information Technology</p>
+                                <ul class="timeline-bullets">
+                                    <li>Provide general IT support for control systems and connected devices, ensuring smooth integration and network functionality</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div>
+                                        <h3>Electrical Technician</h3>
+                                        <p class="timeline-org">AIRSYS USA</p>
+                                    </div>
+                                    <span class="timeline-date">Jun 2024 – Sep 2025</span>
+                                </div>
+                                <ul class="timeline-bullets">
+                                    <li>R&amp;D support for cooling systems used in chip and data center applications</li>
+                                    <li>Build and wire 110V–480V control panels</li>
+                                    <li>Read schematics, troubleshoot systems, and configure sensors</li>
+                                    <li>Collaborate with engineers on prototype testing and updates</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div>
+                                        <h3>Wiring Technician</h3>
+                                        <p class="timeline-org">Vertiv</p>
+                                    </div>
+                                    <span class="timeline-date">Sep 2023 – Jun 2024</span>
+                                </div>
+                                <ul class="timeline-bullets">
+                                    <li>Wired industrial switchgear systems following detailed schematics and NEC safety codes</li>
+                                    <li>Conducted quality checks to ensure accuracy and reliability of assemblies</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="dual-timeline-col" data-aos="fade-left">
+                    <h3 class="dual-timeline-heading"><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <div class="timeline">
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div>
+                                        <h3>BS Software Development - AI &amp; ML</h3>
+                                        <p class="timeline-org">ECPI University</p>
+                                    </div>
+                                    <span class="timeline-date">Jul 2025 – Feb 2027 (Expected)</span>
+                                </div>
+                                <span class="gpa-badge"><i class="fas fa-star"></i> 4.0 GPA</span>
+                                <p>Bachelor of Science in Software Development with a concentration in Artificial Intelligence and Machine Learning.</p>
+                                <p class="timeline-coursework"><strong>Relevant Coursework:</strong> Linux Administration, Databases, Structured Query Language, Statistics, Networking, Operating Systems, Web Interface Design, Programming</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div>
+                                        <h3>AS Mechatronics, Robotics &amp; Automation Engineering</h3>
+                                        <p class="timeline-org">Piedmont Technical College</p>
+                                    </div>
+                                    <span class="timeline-date">Jan 2017 – Jan 2019</span>
+                                </div>
+                                <span class="gpa-badge"><i class="fas fa-star"></i> 3.8 GPA</span>
+                                <p>Graduated with 3.8 GPA. Hands-on training in electrical, mechanical, and automation systems.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- ======================== PROJECTS ======================== -->
-    <section class="section section-alt" id="projects">
+    <section class="section section-alt" id="projects" aria-label="Projects">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Projects</span>
@@ -357,7 +488,7 @@
     </section>
 
     <!-- ======================== CERTIFICATIONS ======================== -->
-    <section class="section" id="certifications">
+    <section class="section" id="certifications" aria-label="Certifications">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Credentials</span>
@@ -513,161 +644,48 @@
         </div>
     </section>
 
-    <!-- ======================== EXPERIENCE ======================== -->
-    <section class="section" id="experience">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-label">Background</span>
-                <h2 class="section-title">Experience &amp; <span class="gradient-text">Education</span></h2>
-            </div>
-
-            <div class="dual-timeline">
-
-                <!-- Work Experience -->
-                <div class="dual-timeline-col" data-aos="fade-right">
-                    <h3 class="dual-timeline-heading"><i class="fas fa-briefcase"></i> Work Experience</h3>
-                    <div class="timeline">
-
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <div>
-                                        <h3>Controls Engineering Technician</h3>
-                                        <p class="timeline-org">Daedalus Industrial</p>
-                                    </div>
-                                    <span class="timeline-date">Sep 2025 – Present</span>
-                                </div>
-                                <p class="bullet-section">Controls Engineering</p>
-                                <ul class="timeline-bullets">
-                                    <li>Execute wiring, setup, and testing of control systems for automation and R&amp;D projects, ensuring reliable performance</li>
-                                    <li>Troubleshoot and assist with PLC programming and system integration to support development and production environments</li>
-                                </ul>
-                                <p class="bullet-section">Machine Learning</p>
-                                <ul class="timeline-bullets">
-                                    <li>Contribute to model training and validation for applied computer vision and automation tasks</li>
-                                    <li>Support data collection, labeling, and analysis to improve model accuracy and operational efficiency</li>
-                                </ul>
-                                <p class="bullet-section">Information Technology</p>
-                                <ul class="timeline-bullets">
-                                    <li>Provide general IT support for control systems and connected devices, ensuring smooth integration and network functionality</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <div>
-                                        <h3>Electrical Technician</h3>
-                                        <p class="timeline-org">AIRSYS USA</p>
-                                    </div>
-                                    <span class="timeline-date">Jun 2024 – Sep 2025</span>
-                                </div>
-                                <ul class="timeline-bullets">
-                                    <li>R&amp;D support for cooling systems used in chip and data center applications</li>
-                                    <li>Build and wire 110V–480V control panels</li>
-                                    <li>Read schematics, troubleshoot systems, and configure sensors</li>
-                                    <li>Collaborate with engineers on prototype testing and updates</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <div>
-                                        <h3>Wiring Technician</h3>
-                                        <p class="timeline-org">Vertiv</p>
-                                    </div>
-                                    <span class="timeline-date">Sep 2023 – Jun 2024</span>
-                                </div>
-                                <ul class="timeline-bullets">
-                                    <li>Wired industrial switchgear systems following detailed schematics and NEC safety codes</li>
-                                    <li>Conducted quality checks to ensure accuracy and reliability of assemblies</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div class="dual-timeline-col" data-aos="fade-left">
-                    <h3 class="dual-timeline-heading"><i class="fas fa-graduation-cap"></i> Education</h3>
-                    <div class="timeline">
-
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <div>
-                                        <h3>BS Software Development - AI &amp; ML</h3>
-                                        <p class="timeline-org">ECPI University</p>
-                                    </div>
-                                    <span class="timeline-date">Jul 2025 – Feb 2027 (Expected)</span>
-                                </div>
-                                <span class="gpa-badge"><i class="fas fa-star"></i> 4.0 GPA</span>
-                                <p>Bachelor of Science in Software Development with a concentration in Artificial Intelligence and Machine Learning.</p>
-                                <p class="timeline-coursework"><strong>Relevant Coursework:</strong> Linux Administration, Databases, Structured Query Language, Statistics, Networking, Operating Systems, Web Interface Design, Programming</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <div>
-                                        <h3>AS Mechatronics, Robotics &amp; Automation Engineering</h3>
-                                        <p class="timeline-org">Piedmont Technical College</p>
-                                    </div>
-                                    <span class="timeline-date">Jan 2017 – Jan 2019</span>
-                                </div>
-                                <span class="gpa-badge"><i class="fas fa-star"></i> 3.8 GPA</span>
-                                <p>Graduated with 3.8 GPA. Hands-on training in electrical, mechanical, and automation systems.</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <!-- ======================== BLOG ======================== -->
-    <section class="section section-alt" id="blog">
+    <section class="section section-alt" id="blog" aria-label="Blog">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Writing</span>
                 <h2 class="section-title">From the <span class="gradient-text">Blog</span></h2>
             </div>
 
-            <div class="blog-card" data-aos="fade-up">
-                <a href="https://addisonsmithdev.wordpress.com" target="_blank" rel="noopener noreferrer" class="blog-card-inner">
-                    <div class="blog-icon">
-                        <i class="fas fa-pen-nib"></i>
-                    </div>
-                    <div class="blog-content">
-                        <p class="blog-label">Personal Blog</p>
-                        <h3>Addison Smith: Dev Notes</h3>
-                        <p>
-                            Thoughts on AI engineering, industrial automation, and the road from mechatronics
-                            to machine learning. Follow along at addisonsmithdev.wordpress.com
-                        </p>
-                        <span class="btn btn-primary btn-sm">
-                            Read Blog <i class="fas fa-arrow-right"></i>
-                        </span>
-                    </div>
-                </a>
-            </div>
+        <div class="blog-grid" data-aos="fade-up" data-aos-delay="100">
+            <a href="https://addisonsmithdev.wordpress.com" target="_blank" rel="noopener noreferrer" class="blog-post-card">
+                <div class="blog-post-tag blog-tag-ai">AI/ML</div>
+                <h3 class="blog-post-title">From the Factory Floor to Machine Learning</h3>
+                <p class="blog-post-excerpt">How my background in mechatronics and industrial controls shaped my approach to building AI systems.</p>
+                <div class="blog-post-footer">
+                    <span class="blog-post-date">2026</span>
+                    <span class="blog-post-read">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="https://addisonsmithdev.wordpress.com" target="_blank" rel="noopener noreferrer" class="blog-post-card">
+                <div class="blog-post-tag blog-tag-proj">Projects</div>
+                <h3 class="blog-post-title">Building a Multi-Agent System from Scratch</h3>
+                <p class="blog-post-excerpt">Lessons learned designing Smith_Agentic, a 4-agent pipeline for engineering workflows.</p>
+                <div class="blog-post-footer">
+                    <span class="blog-post-date">2026</span>
+                    <span class="blog-post-read">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="https://addisonsmithdev.wordpress.com" target="_blank" rel="noopener noreferrer" class="blog-post-card">
+                <div class="blog-post-tag blog-tag-eng">Engineering</div>
+                <h3 class="blog-post-title">Why Controls Engineers Should Learn Python</h3>
+                <p class="blog-post-excerpt">The bridge between PLC programming and modern software development is shorter than you think.</p>
+                <div class="blog-post-footer">
+                    <span class="blog-post-date">2026</span>
+                    <span class="blog-post-read">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+        </div>
         </div>
     </section>
 
     <!-- ======================== CONTACT ======================== -->
-    <section class="section" id="contact">
+    <section class="section" id="contact" aria-label="Contact">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Contact</span>
@@ -709,6 +727,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- ======================== FOOTER ======================== -->
     <footer class="footer">
         <div class="container">
@@ -726,8 +746,6 @@
 
     <!-- AOS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
     <script src="interactions.js"></script>
 </body>

@@ -103,6 +103,11 @@ h1, h2, h3, h4 {
     background-color: var(--bg-1);
 }
 
+.section,
+.section-alt {
+    border-top: 1px solid rgba(34, 211, 238, 0.06);
+}
+
 .section-header {
     text-align: center;
     margin-bottom: 64px;
@@ -126,6 +131,16 @@ h1, h2, h3, h4 {
 .section-title {
     font-size: clamp(2rem, 4vw, 2.8rem);
     letter-spacing: -0.02em;
+}
+
+.section-header::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+    margin-bottom: 16px;
+    border-radius: 2px;
 }
 
 /* ============================================================
@@ -1659,4 +1674,215 @@ h1, h2, h3, h4 {
     .hero-cta { flex-direction: column; align-items: center; }
     .section-header { margin-bottom: 48px; }
     .contact-form-wrap { padding: 24px; }
+}
+
+/* ============================================================
+   About — Restructured Bio
+   ============================================================ */
+.about-position {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-0);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.about-what {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.about-what-col {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 18px 16px;
+    transition: border-color var(--t);
+}
+
+.about-what-col:hover {
+    border-color: var(--border-a);
+}
+
+.about-what-icon {
+    font-size: 1.2rem;
+    color: var(--cyan);
+    margin-bottom: 10px;
+}
+
+.about-what-col h4 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-0);
+    margin-bottom: 8px;
+    font-family: var(--ff-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.about-what-col p {
+    font-size: 0.82rem;
+    color: var(--text-2);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.about-close {
+    font-size: 0.9rem;
+    color: var(--text-1);
+    line-height: 1.7;
+    font-style: italic;
+    padding-top: 4px;
+}
+
+@media (max-width: 768px) {
+    .about-what {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+/* ============================================================
+   Blog — 3-Post Grid
+   ============================================================ */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.blog-post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 28px 24px 22px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: var(--t);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.blog-post-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-s);
+    border-radius: var(--r-lg);
+    opacity: 0;
+    transition: opacity var(--t);
+    pointer-events: none;
+}
+
+.blog-post-card:hover {
+    border-color: var(--border-a);
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.blog-post-card:hover::after { opacity: 1; }
+
+.blog-post-tag {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    font-family: var(--ff-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    width: fit-content;
+}
+
+.blog-tag-ai   { background: rgba(34, 211, 238, 0.12); color: var(--cyan); border: 1px solid rgba(34,211,238,0.25); }
+.blog-tag-proj { background: rgba(167, 139, 250, 0.12); color: var(--violet); border: 1px solid rgba(167,139,250,0.25); }
+.blog-tag-eng  { background: rgba(34, 211, 238, 0.08); color: #7dd3fc; border: 1px solid rgba(125,211,252,0.2); }
+
+.blog-post-title {
+    position: relative;
+    z-index: 1;
+    font-size: 1.0rem;
+    font-weight: 600;
+    color: var(--text-0);
+    line-height: 1.45;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+}
+
+.blog-post-excerpt {
+    position: relative;
+    z-index: 1;
+    font-size: 0.84rem;
+    color: var(--text-2);
+    line-height: 1.65;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.blog-post-footer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.blog-post-date {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    color: var(--text-2);
+}
+
+.blog-post-read {
+    font-size: 0.78rem;
+    color: var(--cyan);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap var(--t);
+}
+
+.blog-post-card:hover .blog-post-read { gap: 10px; }
+
+@media (max-width: 900px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+/* ============================================================
+   Skip Navigation
+   ============================================================ */
+.skip-nav {
+    position: absolute;
+    left: -9999px;
+    top: 8px;
+    z-index: 9999;
+    padding: 8px 20px;
+    background: var(--cyan);
+    color: #06060f;
+    font-weight: 600;
+    border-radius: var(--r-sm);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: left 0s;
+}
+
+.skip-nav:focus {
+    left: 8px;
 }
