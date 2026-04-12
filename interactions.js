@@ -1,4 +1,5 @@
 'use strict';
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ============================================================
    Portfolio — Interactive Visual Upgrades
    ============================================================ */
@@ -10,6 +11,7 @@
 (function () {
     const canvas = document.getElementById('starfield-canvas');
     if (!canvas) return;
+    if (REDUCED_MOTION) return;
     const ctx = canvas.getContext('2d');
 
     let W, H, stars = [], raf = null;
@@ -74,6 +76,7 @@
    2. NEURAL NET — animated network visualization in hero
    ============================================================ */
 (function () {
+    if (REDUCED_MOTION) return;
     if (window.matchMedia('(max-width: 768px)').matches) return;
 
     const container = document.getElementById('threejs-hero');
@@ -87,15 +90,13 @@
     container.appendChild(canvas);
     const ctx = canvas.getContext('2d');
 
-    // Layer config
     const LAYER_CFG = [
-        { xFrac: 0.14, count: 4, label: 'Input'  },
-        { xFrac: 0.38, count: 6, label: ''        },
-        { xFrac: 0.62, count: 6, label: ''        },
-        { xFrac: 0.86, count: 4, label: 'Output'  },
+        { xFrac: 0.14, count: 4 },
+        { xFrac: 0.38, count: 6 },
+        { xFrac: 0.62, count: 6 },
+        { xFrac: 0.86, count: 4 },
     ];
 
-    // Build node objects
     const nodes = [];
     LAYER_CFG.forEach((layer, li) => {
         const n = layer.count;
@@ -109,11 +110,11 @@
                 x: 0, y: 0,
                 phase: Math.random() * Math.PI * 2,
                 bobSpeed: 0.25 + Math.random() * 0.35,
+                pulseAmt: 0,
             });
         }
     });
 
-    // Build connections (adjacent layers, all-to-all)
     const connections = [];
     for (let li = 0; li < LAYER_CFG.length - 1; li++) {
         const lA = nodes.filter(n => n.li === li);
@@ -124,12 +125,12 @@
                     a, b,
                     pulse: Math.random(),
                     pulseSpeed: 0.25 + Math.random() * 0.4,
+                    cascadeAlpha: 0,
                 });
             }
         }
     }
 
-    // Color: cyan (#22d3ee) at li=0 -> violet (#a78bfa) at li=3
     function lerpColor(li, alpha) {
         const t = li / (LAYER_CFG.length - 1);
         const r = Math.round(34  + (167 - 34)  * t);
@@ -139,10 +140,45 @@
     }
 
     let mx = 0.5, my = 0.5;
+    let localMX = -999, localMY = -999;
+
     document.addEventListener('mousemove', e => {
         mx = e.clientX / window.innerWidth;
         my = e.clientY / window.innerHeight;
+        const rect = container.getBoundingClientRect();
+        localMX = e.clientX - rect.left;
+        localMY = e.clientY - rect.top;
     }, { passive: true });
+
+    function triggerCascade(node) {
+        node.pulseAmt = 1.0;
+        const connected = connections.filter(c => c.a === node || c.b === node);
+        connected.forEach(c => {
+            c.cascadeAlpha = 1.0;
+            const neighbor = c.a === node ? c.b : c.a;
+            if (neighbor.li !== node.li) {
+                setTimeout(() => {
+                    if (neighbor.pulseAmt < 0.3) triggerCascade(neighbor);
+                }, 120 + Math.random() * 80);
+            }
+        });
+    }
+
+    let lastHoverNode = null;
+    function checkHover() {
+        for (const n of nodes) {
+            const dx = n.x - localMX;
+            const dy = n.y - localMY;
+            if (Math.sqrt(dx * dx + dy * dy) < 18) {
+                if (lastHoverNode !== n) {
+                    lastHoverNode = n;
+                    triggerCascade(n);
+                }
+                return;
+            }
+        }
+        lastHoverNode = null;
+    }
 
     let nnRaf = null;
     let elapsed = 0;
@@ -159,67 +195,71 @@
         const offX = (mx - 0.5) * 20;
         const offY = (my - 0.5) * 12;
 
-        // Update node positions (bob + parallax)
+        checkHover();
+
         for (const n of nodes) {
             const layerFrac = n.li / (LAYER_CFG.length - 1);
             n.x = n.baseX + offX * (layerFrac - 0.5) * 0.9;
             n.y = n.baseY + Math.sin(elapsed * n.bobSpeed + n.phase) * 4 + offY * 0.25;
+            if (n.pulseAmt > 0) n.pulseAmt = Math.max(0, n.pulseAmt - dt * 1.8);
         }
 
-        // Draw connections
         for (const c of connections) {
             c.pulse = (c.pulse + c.pulseSpeed * dt) % 1;
+            if (c.cascadeAlpha > 0) c.cascadeAlpha = Math.max(0, c.cascadeAlpha - dt * 1.5);
 
-            // Base line
+            const baseA = 0.07 + c.cascadeAlpha * 0.3;
             const lineGrad = ctx.createLinearGradient(c.a.x, c.a.y, c.b.x, c.b.y);
-            lineGrad.addColorStop(0, lerpColor(c.a.li, 0.07));
-            lineGrad.addColorStop(1, lerpColor(c.b.li, 0.07));
+            lineGrad.addColorStop(0, lerpColor(c.a.li, baseA));
+            lineGrad.addColorStop(1, lerpColor(c.b.li, baseA));
             ctx.beginPath();
             ctx.moveTo(c.a.x, c.a.y);
             ctx.lineTo(c.b.x, c.b.y);
             ctx.strokeStyle = lineGrad;
-            ctx.lineWidth = 0.7;
+            ctx.lineWidth = 0.7 + c.cascadeAlpha * 0.8;
             ctx.stroke();
 
-            // Traveling pulse dot
-            const px = c.a.x + (c.b.x - c.a.x) * c.pulse;
-            const py = c.a.y + (c.b.y - c.a.y) * c.pulse;
-            const pli = c.a.li + (c.b.li - c.a.li) * c.pulse;
+            const px2 = c.a.x + (c.b.x - c.a.x) * c.pulse;
+            const py2 = c.a.y + (c.b.y - c.a.y) * c.pulse;
+            const pli  = c.a.li + (c.b.li - c.a.li) * c.pulse;
             ctx.beginPath();
-            ctx.arc(px, py, 1.8, 0, Math.PI * 2);
-            ctx.fillStyle = lerpColor(pli, 0.75);
+            ctx.arc(px2, py2, 1.8 + c.cascadeAlpha, 0, Math.PI * 2);
+            ctx.fillStyle = lerpColor(pli, 0.75 + c.cascadeAlpha * 0.25);
             ctx.fill();
         }
 
-        // Draw nodes
         for (const n of nodes) {
-            // Glow halo
-            const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 14);
-            grd.addColorStop(0, lerpColor(n.li, 0.25));
+            const boost = n.pulseAmt;
+            const glowR = 14 + boost * 10;
+            const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
+            grd.addColorStop(0, lerpColor(n.li, 0.25 + boost * 0.4));
             grd.addColorStop(1, 'rgba(0,0,0,0)');
             ctx.beginPath();
-            ctx.arc(n.x, n.y, 14, 0, Math.PI * 2);
+            ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
             ctx.fillStyle = grd;
             ctx.fill();
 
-            // Node ring
             ctx.beginPath();
-            ctx.arc(n.x, n.y, 4.5, 0, Math.PI * 2);
-            ctx.fillStyle = lerpColor(n.li, 0.18);
+            ctx.arc(n.x, n.y, 4.5 + boost * 2, 0, Math.PI * 2);
+            ctx.fillStyle = lerpColor(n.li, 0.18 + boost * 0.25);
             ctx.fill();
             ctx.strokeStyle = lerpColor(n.li, 0.9);
-            ctx.lineWidth = 1.4;
+            ctx.lineWidth = 1.4 + boost * 0.8;
             ctx.stroke();
         }
 
-        // Layer labels
         ctx.font = '9px "JetBrains Mono", "Courier New", monospace';
         ctx.textAlign = 'center';
         ctx.fillStyle = 'rgba(148,163,184,0.45)';
-        const labelY = SIZE - 10;
-        ctx.fillText('Input',        LAYER_CFG[0].xFrac * SIZE + offX * (-0.5) * 0.9, labelY);
+        const labelY = SIZE - 22;
+        ctx.fillText('Input',         LAYER_CFG[0].xFrac * SIZE + offX * (-0.5) * 0.9, labelY);
         ctx.fillText('Hidden layers', (LAYER_CFG[1].xFrac + LAYER_CFG[2].xFrac) / 2 * SIZE, labelY);
-        ctx.fillText('Output',       LAYER_CFG[3].xFrac * SIZE + offX * (0.5) * 0.9, labelY);
+        ctx.fillText('Output',        LAYER_CFG[3].xFrac * SIZE + offX * (0.5) * 0.9, labelY);
+
+        ctx.font = '8px "JetBrains Mono", "Courier New", monospace';
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(34,211,238,0.25)';
+        ctx.fillText('// neural_net.canvas', 8, SIZE - 8);
 
         nnRaf = requestAnimationFrame(drawFrame);
     }
@@ -332,6 +372,7 @@
     const glow1       = document.querySelector('.hero-glow-1');
     const glow2       = document.querySelector('.hero-glow-2');
     if (!heroSection || !heroContent) return;
+    if (REDUCED_MOTION) return;
 
     // Preserve any existing inline transform on glows from CSS animations
     // by using a wrapper translate on top of them

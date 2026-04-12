@@ -112,3 +112,17 @@ function typeStep() {
 // Small initial delay so the page has settled
 setTimeout(typeStep, 600);
 
+/* ============================================================
+   Back to Top Button
+   ============================================================ */
+const backToTop = document.getElementById('back-to-top');
+
+if (backToTop) {
+    window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > window.innerHeight * 0.8);
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}

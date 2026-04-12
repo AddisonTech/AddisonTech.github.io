@@ -41,6 +41,35 @@
     <link rel="shortcut icon" href="favicon.ico">
 
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Addison Smith",
+      "jobTitle": "Controls Engineering Technician",
+      "url": "https://addisontech.github.io",
+      "sameAs": [
+        "https://linkedin.com/in/addison-smith-tech",
+        "https://github.com/AddisonTech",
+        "https://addisonsmithdev.wordpress.com"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Daedalus Industrial"
+      },
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "ECPI University"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Piedmont Technical College"
+        }
+      ],
+      "knowsAbout": ["Controls Engineering", "PLC Programming", "Machine Learning", "Computer Vision", "Python", "Industrial Automation"]
+    }
+    </script>
 </head>
 <body>
 
@@ -79,6 +108,44 @@
             <div class="hero-grid"></div>
             <div class="hero-glow hero-glow-1"></div>
             <div class="hero-glow hero-glow-2"></div>
+        </div>
+
+        <!-- Circuit board left accent -->
+        <div id="circuit-hero" aria-hidden="true">
+            <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <line x1="20"  y1="60"  x2="120" y2="60"  class="trace"/>
+                <line x1="20"  y1="140" x2="160" y2="140" class="trace"/>
+                <line x1="20"  y1="220" x2="100" y2="220" class="trace"/>
+                <line x1="20"  y1="300" x2="140" y2="300" class="trace"/>
+                <line x1="20"  y1="380" x2="110" y2="380" class="trace"/>
+                <line x1="80"  y1="20"  x2="80"  y2="160" class="trace"/>
+                <line x1="140" y1="40"  x2="140" y2="200" class="trace"/>
+                <line x1="60"  y1="200" x2="60"  y2="380" class="trace"/>
+                <line x1="120" y1="100" x2="120" y2="320" class="trace"/>
+                <line x1="180" y1="60"  x2="180" y2="240" class="trace"/>
+                <polyline points="120,60 160,60 160,140" class="trace" fill="none"/>
+                <polyline points="100,220 100,300 140,300" class="trace" fill="none"/>
+                <polyline points="110,380 180,380 180,300" class="trace" fill="none"/>
+                <polyline points="80,160 80,220 100,220" class="trace" fill="none"/>
+                <circle cx="80"  cy="60"  r="4" class="via"/>
+                <circle cx="140" cy="60"  r="4" class="via"/>
+                <circle cx="80"  cy="140" r="4" class="via"/>
+                <circle cx="160" cy="140" r="4" class="via"/>
+                <circle cx="60"  cy="220" r="4" class="via"/>
+                <circle cx="100" cy="220" r="4" class="via"/>
+                <circle cx="120" cy="300" r="4" class="via"/>
+                <circle cx="140" cy="300" r="4" class="via"/>
+                <circle cx="60"  cy="380" r="4" class="via"/>
+                <circle cx="110" cy="380" r="4" class="via"/>
+                <rect x="90" y="168" width="60" height="44" rx="3" class="chip"/>
+                <line x1="90"  y1="180" x2="80"  y2="180" class="trace chip-pin"/>
+                <line x1="90"  y1="192" x2="80"  y2="192" class="trace chip-pin"/>
+                <line x1="150" y1="180" x2="160" y2="180" class="trace chip-pin"/>
+                <line x1="150" y1="192" x2="160" y2="192" class="trace chip-pin"/>
+                <circle cx="140" cy="60"  r="3.5" class="via-amber"/>
+                <circle cx="120" cy="300" r="3.5" class="via-amber"/>
+                <circle cx="180" cy="140" r="3.5" class="via-amber"/>
+            </svg>
         </div>
 
         <!-- Three.js accent geometry -->
@@ -136,7 +203,7 @@
 
             <div class="about-grid">
                 <div class="about-photo" data-aos="fade-right">
-                    <img src="addison_professional.jpg" alt="Addison Smith" class="profile-photo">
+                    <img src="addison_professional.jpg" alt="Addison Smith" class="profile-photo" width="280" height="280" loading="lazy">
                 </div>
                 <div class="about-text" data-aos="fade-up">
     <p class="about-position">I wire 480V control panels at 8am and train neural networks at 8pm. I bridge the gap between industrial hardware and intelligent software.</p>
@@ -392,6 +459,7 @@
                             engineering and software problems. A production-grade framework for applying LLMs to
                             real industrial and development challenges.
                         </p>
+                        <p class="project-outcome">Reduces complex multi-step engineering tasks from hours of manual work to minutes of automated orchestration.</p>
                         <div class="project-tags">
                             <span class="tag tag-accent">Python</span>
                             <span class="tag tag-accent">Multi-Agent</span>
@@ -413,6 +481,7 @@
                         </div>
                         <h3 class="project-title">Resume Portfolio Builder</h3>
                         <p class="project-desc">Python-based Streamlit application that generates professional, formatted resumes from structured input, automating a process most people do by hand.</p>
+                        <p class="project-outcome">Eliminates manual resume formatting, generating polished documents in seconds from structured data.</p>
                         <div class="project-tags">
                             <span class="tag">Python</span>
                             <span class="tag">Streamlit</span>
@@ -430,8 +499,9 @@
                                 </a>
                             </div>
                         </div>
-                        <h3 class="project-title">SDC250 Final</h3>
+                        <h3 class="project-title">Relational Database Querying</h3>
                         <p class="project-desc">Comprehensive SQL project demonstrating relational database design, complex multi-table querying, and structured data modeling.</p>
+                        <p class="project-outcome">Demonstrates complex JOIN operations across 5+ related tables with optimized query performance.</p>
                         <div class="project-tags">
                             <span class="tag">SQL</span>
                             <span class="tag tag-purple">Database Design</span>
@@ -449,8 +519,9 @@
                                 </a>
                             </div>
                         </div>
-                        <h3 class="project-title">Summarizing Data SQL</h3>
+                        <h3 class="project-title">Data Aggregation &amp; Analytics</h3>
                         <p class="project-desc">Oracle Apex and SQL project for aggregating and summarizing structured datasets using advanced analytical query techniques.</p>
+                        <p class="project-outcome">Processes and summarizes structured datasets using advanced GROUP BY, HAVING, and window functions.</p>
                         <div class="project-tags">
                             <span class="tag">SQL</span>
                             <span class="tag tag-purple">Oracle Apex</span>
@@ -468,8 +539,9 @@
                                 </a>
                             </div>
                         </div>
-                        <h3 class="project-title">W2 Creating Tables</h3>
+                        <h3 class="project-title">Database Schema Design</h3>
                         <p class="project-desc">SQL table creation and schema design in Oracle Apex, demonstrating DDL proficiency, normalization principles, and relational integrity.</p>
+                        <p class="project-outcome">Implements normalized table structures following 3NF principles with enforced referential integrity.</p>
                         <div class="project-tags">
                             <span class="tag">SQL</span>
                             <span class="tag tag-purple">Oracle Apex</span>
@@ -693,6 +765,7 @@
             </div>
 
             <div class="contact-links-only" data-aos="fade-up">
+                <p class="contact-intro">I'm always interested in connecting with people working at the intersection of industrial automation and intelligent software. Whether you want to talk about controls engineering, AI/ML, or potential opportunities, feel free to reach out. I typically respond within 24 hours.</p>
                 <div class="contact-items">
                     <a href="tel:8649416314" class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
@@ -746,6 +819,13 @@
 
     <!-- AOS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Back to top -->
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
     <script src="script.js"></script>
     <script src="interactions.js"></script>
 </body>

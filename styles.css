@@ -1392,7 +1392,7 @@ h1, h2, h3, h4 {
 }
 
 @keyframes fadeInThree {
-    to { opacity: 0.6; }
+    to { opacity: 0.88; }
 }
 
 /* ============================================================
@@ -1885,4 +1885,139 @@ h1, h2, h3, h4 {
 
 .skip-nav:focus {
     left: 8px;
+}
+
+/* ============================================================
+   Circuit Board Hero Accent
+   ============================================================ */
+#circuit-hero {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 280px;
+    height: 360px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInThree 2.2s ease 1.2s forwards;
+}
+
+#circuit-hero svg {
+    width: 100%;
+    height: 100%;
+}
+
+#circuit-hero .trace {
+    stroke: #22d3ee;
+    stroke-width: 1.2;
+    stroke-opacity: 0.07;
+    fill: none;
+    stroke-linecap: round;
+}
+
+#circuit-hero .via {
+    fill: none;
+    stroke: #22d3ee;
+    stroke-width: 1.2;
+    stroke-opacity: 0.09;
+}
+
+#circuit-hero .chip {
+    fill: none;
+    stroke: #22d3ee;
+    stroke-width: 1.2;
+    stroke-opacity: 0.07;
+}
+
+#circuit-hero .chip-pin {
+    stroke-opacity: 0.06;
+}
+
+#circuit-hero .via-amber {
+    fill: none;
+    stroke: #f59e0b;
+    stroke-width: 1.2;
+    stroke-opacity: 0.13;
+}
+
+@media (max-width: 900px) {
+    #circuit-hero { display: none; }
+}
+
+.contact-intro {
+    max-width: 560px;
+    margin: 0 auto 36px;
+    text-align: center;
+    color: var(--text-1);
+    font-size: 0.95rem;
+    line-height: 1.75;
+}
+
+.project-outcome {
+    font-size: 0.82rem;
+    color: var(--cyan);
+    font-family: var(--ff-mono);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(34, 211, 238, 0.15);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+}
+
+/* ============================================================
+   Back to Top Button
+   ============================================================ */
+#back-to-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 900;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    background: rgba(12, 12, 26, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--cyan);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    border-color: rgba(34, 211, 238, 0.7);
+    background: rgba(34, 211, 238, 0.1);
+}
+
+#back-to-top svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================================
+   Reduced Motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
