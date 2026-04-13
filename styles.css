@@ -937,6 +937,19 @@ h1, h2, h3, h4 {
 
 .project-links a:hover { color: var(--cyan); }
 
+.project-links .project-demo-btn {
+    color: #05050d;
+    font-size: 0.82rem;
+    align-self: center;
+}
+
+.project-links .project-demo-btn:hover {
+    color: #05050d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.28);
+    filter: brightness(1.07);
+}
+
 .project-title {
     font-size: 1.2rem;
     color: var(--text-0);
