@@ -278,6 +278,281 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 
 /* ============================================================
+   2.5. CIRCUIT BOARD — interactive canvas accent in hero
+   ============================================================ */
+(function () {
+    if (REDUCED_MOTION) return;
+    if (window.matchMedia('(max-width: 768px)').matches) return;
+
+    const container = document.getElementById('circuit-hero');
+    if (!container) return;
+
+    // Replace static SVG with canvas
+    container.innerHTML = '';
+
+    const W = 420, H = 360;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const canvas = document.createElement('canvas');
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.cssText = 'display:block;width:' + W + 'px;height:' + H + 'px;';
+    container.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    // ── Trace segments [x1, y1, x2, y2] ──────────────────────────
+    const SEGS = [
+        // Horizontals
+        [0,   40,  290,  40],
+        [0,   95,  310,  95],
+        [0,  155,  350, 155],
+        [0,  215,  270, 215],
+        [0,  270,  310, 270],
+        [0,  325,  350, 325],
+        // Verticals
+        [ 65,  40,  65,  95],
+        [ 65, 155,  65, 325],
+        [ 85, 270,  85, 325],
+        [130,  40, 130, 215],
+        [165,  95, 165, 325],
+        [200,  40, 200,  95],
+        [230,  40, 230, 155],
+        [230, 215, 230, 270],
+        [270,  95, 270, 215],
+        [290,  40, 290, 155],
+        [310,  95, 310, 270],
+        [350, 155, 350, 325],
+    ];
+
+    // ── Via nodes ─────────────────────────────────────────────────
+    const NODES = [
+        // y=40
+        {x: 65, y: 40,  amber: false},
+        {x:130, y: 40,  amber: false},
+        {x:200, y: 40,  amber: true },
+        {x:230, y: 40,  amber: false},
+        {x:290, y: 40,  amber: false},
+        // y=95
+        {x: 65, y: 95,  amber: false},
+        {x:130, y: 95,  amber: false},
+        {x:165, y: 95,  amber: false},
+        {x:200, y: 95,  amber: false},
+        {x:270, y: 95,  amber: true },
+        {x:310, y: 95,  amber: false},
+        // y=155
+        {x: 65, y:155,  amber: false},
+        {x:130, y:155,  amber: false},
+        {x:165, y:155,  amber: false},
+        {x:230, y:155,  amber: false},
+        {x:290, y:155,  amber: false},
+        {x:350, y:155,  amber: true },
+        // y=215
+        {x: 65, y:215,  amber: false},
+        {x:130, y:215,  amber: false},
+        {x:165, y:215,  amber: true },
+        {x:230, y:215,  amber: false},
+        {x:270, y:215,  amber: false},
+        // y=270
+        {x: 65, y:270,  amber: false},
+        {x: 85, y:270,  amber: false},
+        {x:165, y:270,  amber: false},
+        {x:230, y:270,  amber: true },
+        {x:310, y:270,  amber: false},
+        // y=325
+        {x: 65, y:325,  amber: true },
+        {x: 85, y:325,  amber: false},
+        {x:165, y:325,  amber: false},
+        {x:350, y:325,  amber: true },
+    ];
+
+    // ── IC chip outlines ───────────────────────────────────────────
+    const CHIPS = [
+        {
+            rx:80, ry:102, rw:75, rh:46,
+            pins:[
+                [80,114, 65,114],[80,127, 65,127],[80,140, 65,140],
+                [155,114,170,114],[155,127,170,127],[155,140,170,140],
+            ],
+        },
+        {
+            rx:238, ry:162, rw:60, rh:46,
+            pins:[
+                [252,162,252,150],[264,162,264,150],[276,162,276,150],
+                [252,208,252,220],[264,208,264,220],[276,208,276,220],
+            ],
+        },
+    ];
+
+    // ── Animation state ───────────────────────────────────────────
+    const segState  = SEGS.map(() => ({
+        pos:   Math.random(),
+        speed: 0.07 + Math.random() * 0.10,
+        hover: 0,
+    }));
+    const nodeState = NODES.map(() => ({ hover: 0 }));
+
+    // ── Mouse coords in canvas-logical space ──────────────────────
+    let localMX = -9999, localMY = -9999;
+    document.addEventListener('mousemove', e => {
+        const r = container.getBoundingClientRect();
+        localMX = (e.clientX - r.left) * (W / r.width);
+        localMY = (e.clientY - r.top)  * (H / r.height);
+    }, { passive: true });
+
+    // Point-to-segment distance
+    function distSeg(px, py, x1, y1, x2, y2) {
+        const dx = x2 - x1, dy = y2 - y1;
+        const len2 = dx * dx + dy * dy;
+        if (len2 === 0) return Math.hypot(px - x1, py - y1);
+        const t = Math.max(0, Math.min(1, ((px - x1) * dx + (py - y1) * dy) / len2));
+        return Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
+    }
+
+    // ── Color helpers ─────────────────────────────────────────────
+    const CYAN  = [34, 211, 238];
+    const AMBER = [245, 158, 11];
+
+    function rc(r, g, b, a) { return `rgba(${r},${g},${b},${+a.toFixed(3)})`; }
+
+    // ── Render loop ───────────────────────────────────────────────
+    let cbRaf = null, elapsed = 0, lastTs = null;
+
+    function drawFrame(ts) {
+        if (!lastTs) lastTs = ts;
+        const dt = Math.min((ts - lastTs) / 1000, 0.05);
+        lastTs = ts;
+        elapsed += dt;
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Proximity updates
+        SEGS.forEach((seg, i) => {
+            const d = distSeg(localMX, localMY, seg[0], seg[1], seg[2], seg[3]);
+            const target = Math.max(0, 1 - d / 42);
+            segState[i].hover += (target - segState[i].hover) * 0.14;
+        });
+        NODES.forEach((nd, i) => {
+            const d = Math.hypot(localMX - nd.x, localMY - nd.y);
+            const target = Math.max(0, 1 - d / 38);
+            nodeState[i].hover += (target - nodeState[i].hover) * 0.14;
+        });
+
+        // ── Draw traces ──────────────────────────────────────────
+        ctx.lineCap = 'round';
+        SEGS.forEach((seg, i) => {
+            const h = segState[i].hover;
+            const baseA = 0.14 + h * 0.30;
+
+            ctx.beginPath();
+            ctx.moveTo(seg[0], seg[1]);
+            ctx.lineTo(seg[2], seg[3]);
+            ctx.strokeStyle = rc(CYAN[0], CYAN[1], CYAN[2], baseA);
+            ctx.lineWidth = 1.2 + h * 1.1;
+            ctx.stroke();
+
+            // Soft glow on hover
+            if (h > 0.04) {
+                ctx.beginPath();
+                ctx.moveTo(seg[0], seg[1]);
+                ctx.lineTo(seg[2], seg[3]);
+                ctx.strokeStyle = rc(CYAN[0], CYAN[1], CYAN[2], h * 0.13);
+                ctx.lineWidth = 8 + h * 8;
+                ctx.stroke();
+            }
+
+            // Traveling pulse dot
+            segState[i].pos = (segState[i].pos + segState[i].speed * dt) % 1;
+            const px = seg[0] + (seg[2] - seg[0]) * segState[i].pos;
+            const py = seg[1] + (seg[3] - seg[1]) * segState[i].pos;
+            ctx.beginPath();
+            ctx.arc(px, py, 1.8 + h * 1.2, 0, Math.PI * 2);
+            ctx.fillStyle = rc(CYAN[0], CYAN[1], CYAN[2], 0.55 + h * 0.30);
+            ctx.fill();
+        });
+
+        // ── Draw chips ───────────────────────────────────────────
+        CHIPS.forEach(chip => {
+            ctx.beginPath();
+            ctx.rect(chip.rx, chip.ry, chip.rw, chip.rh);
+            ctx.strokeStyle = rc(CYAN[0], CYAN[1], CYAN[2], 0.22);
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            chip.pins.forEach(([x1, y1, x2, y2]) => {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = rc(CYAN[0], CYAN[1], CYAN[2], 0.15);
+                ctx.lineWidth = 1.0;
+                ctx.stroke();
+            });
+        });
+
+        // ── Draw vias ────────────────────────────────────────────
+        NODES.forEach((nd, i) => {
+            const h = nodeState[i].hover;
+            const isAmber = nd.amber;
+            const [r, g, b] = isAmber ? AMBER : CYAN;
+
+            // Ambient pulse for amber nodes
+            const pulse = isAmber
+                ? (Math.sin(elapsed * 1.6 + i * 1.3) + 1) * 0.5
+                : 0;
+
+            const totalGlow = h + pulse * 0.28;
+            const strokeA   = (isAmber ? 0.34 : 0.22) + totalGlow * 0.5;
+            const radius    = 4.5 + h * 2.0 + pulse * 2.5;
+
+            // Outer glow halo
+            if (totalGlow > 0.06) {
+                const grd = ctx.createRadialGradient(nd.x, nd.y, 0, nd.x, nd.y, 18 + totalGlow * 8);
+                grd.addColorStop(0, rc(r, g, b, Math.min(totalGlow * 0.45, 0.55)));
+                grd.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.beginPath();
+                ctx.arc(nd.x, nd.y, 18 + totalGlow * 8, 0, Math.PI * 2);
+                ctx.fillStyle = grd;
+                ctx.fill();
+            }
+
+            // Via ring
+            ctx.beginPath();
+            ctx.arc(nd.x, nd.y, radius, 0, Math.PI * 2);
+            ctx.strokeStyle = rc(r, g, b, strokeA);
+            ctx.lineWidth = 1.3 + h * 0.8;
+            ctx.stroke();
+
+            // Centre fill for amber
+            if (isAmber) {
+                ctx.beginPath();
+                ctx.arc(nd.x, nd.y, 1.8, 0, Math.PI * 2);
+                ctx.fillStyle = rc(r, g, b, strokeA * 0.7);
+                ctx.fill();
+            }
+        });
+
+        // ── Label ─────────────────────────────────────────────────
+        ctx.font = '8px "JetBrains Mono","Courier New",monospace';
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(245,158,11,0.25)';
+        ctx.fillText('// circuit_board.svg', 8, H - 8);
+
+        cbRaf = requestAnimationFrame(drawFrame);
+    }
+
+    // IntersectionObserver — pause when hero is off-screen
+    new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            if (!cbRaf) { lastTs = null; cbRaf = requestAnimationFrame(drawFrame); }
+        } else {
+            if (cbRaf) { cancelAnimationFrame(cbRaf); cbRaf = null; }
+        }
+    }, { threshold: 0 }).observe(container);
+
+    lastTs = null;
+    cbRaf = requestAnimationFrame(drawFrame);
+})();
+
+
+/* ============================================================
    3. ANIMATED SKILL BARS — animate on scroll into view
    ============================================================ */
 (function () {

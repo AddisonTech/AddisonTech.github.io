@@ -1908,7 +1908,7 @@ h1, h2, h3, h4 {
     left: 5%;
     top: 50%;
     transform: translateY(-50%);
-    width: 280px;
+    width: 420px;
     height: 360px;
     pointer-events: none;
     z-index: 1;
@@ -1954,7 +1954,7 @@ h1, h2, h3, h4 {
     stroke-opacity: 0.32;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     #circuit-hero { display: none; }
 }
 
