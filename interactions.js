@@ -1,12 +1,12 @@
 'use strict';
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ============================================================
-   Portfolio — Interactive Visual Upgrades
+   Portfolio - Interactive Visual Upgrades
    ============================================================ */
 
 
 /* ============================================================
-   1. STARFIELD — animated particle canvas in hero
+   1. STARFIELD - animated particle canvas in hero
    ============================================================ */
 (function () {
     const canvas = document.getElementById('starfield-canvas');
@@ -73,7 +73,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 
 /* ============================================================
-   2. NEURAL NET — animated network visualization in hero
+   2. NEURAL NET - animated network visualization in hero
    ============================================================ */
 (function () {
     if (REDUCED_MOTION) return;
@@ -278,7 +278,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 
 /* ============================================================
-   2.5. CIRCUIT BOARD — interactive canvas accent in hero
+   2.5. CIRCUIT BOARD - interactive canvas accent in hero
    ============================================================ */
 (function () {
     if (REDUCED_MOTION) return;
@@ -538,7 +538,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
         cbRaf = requestAnimationFrame(drawFrame);
     }
 
-    // IntersectionObserver — pause when hero is off-screen
+    // IntersectionObserver - pause when hero is off-screen
     new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
             if (!cbRaf) { lastTs = null; cbRaf = requestAnimationFrame(drawFrame); }
@@ -553,7 +553,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 
 /* ============================================================
-   3. ANIMATED SKILL BARS — animate on scroll into view
+   3. ANIMATED SKILL BARS - animate on scroll into view
    ============================================================ */
 (function () {
     const fills = document.querySelectorAll('.skill-bar-fill');
@@ -588,7 +588,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 
 /* ============================================================
-   4. CUSTOM CURSOR — glowing dot + trailing ring
+   4. CUSTOM CURSOR - glowing dot + trailing ring
    ============================================================ */
 (function () {
     if (window.matchMedia('(hover: none)').matches) return;
@@ -639,7 +639,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 
 /* ============================================================
-   5. HERO PARALLAX — depth layers on scroll
+   5. HERO PARALLAX - depth layers on scroll
    ============================================================ */
 (function () {
     const heroSection = document.querySelector('.hero');

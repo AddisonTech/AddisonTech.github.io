@@ -1,4 +1,4 @@
-# Addison Smith — Personal Portfolio
+# Addison Smith - Personal Portfolio
 
 Personal portfolio website for Addison Smith, Controls Engineering Technician and Software Developer at Daedalus Industrial, transitioning into AI/ML engineering.
 
@@ -15,7 +15,7 @@ Built to showcase projects, background, and contact information. The design prio
 - Project cards linking directly to GitHub repositories
 - Experience and education timeline
 - Contact section with direct phone, email, LinkedIn, and GitHub links
-- Fully responsive — mobile, tablet, and desktop
+- Fully responsive - mobile, tablet, and desktop
 - Scroll-triggered animations via AOS
 
 ## Technologies
@@ -23,9 +23,9 @@ Built to showcase projects, background, and contact information. The design prio
 - HTML5
 - CSS3 (custom properties, glassmorphism, CSS Grid, Flexbox)
 - Vanilla JavaScript
-- [Google Fonts](https://fonts.google.com) — Space Grotesk, Inter, JetBrains Mono
-- [Font Awesome](https://fontawesome.com) — icons
-- [AOS](https://michalsnik.github.io/aos/) — scroll animations
+- [Google Fonts](https://fonts.google.com): Space Grotesk, Inter, JetBrains Mono
+- [Font Awesome](https://fontawesome.com): icons
+- [AOS](https://michalsnik.github.io/aos/): scroll animations
 
 ## Author
 

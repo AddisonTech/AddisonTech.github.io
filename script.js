@@ -1,5 +1,5 @@
 /* ============================================================
-   AOS — Animate On Scroll
+   AOS - Animate On Scroll
    ============================================================ */
 AOS.init({
     duration: 680,
@@ -9,7 +9,7 @@ AOS.init({
 });
 
 /* ============================================================
-   Navbar — scroll state
+   Navbar - scroll state
    ============================================================ */
 const navbar = document.getElementById('navbar');
 
@@ -68,7 +68,7 @@ const sectionObserver = new IntersectionObserver((entries) => {
 sections.forEach(s => sectionObserver.observe(s));
 
 /* ============================================================
-   Typewriter — hero subtitle
+   Typewriter - hero subtitle
    ============================================================ */
 const PHRASES = [
     'Controls Engineering Technician',

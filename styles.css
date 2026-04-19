@@ -763,7 +763,7 @@ h1, h2, h3, h4 {
     gap: 7px;
 }
 
-/* Cert row — issuer + date side by side */
+/* Cert row - issuer + date side by side */
 .cert-row {
     display: flex;
     align-items: center;
@@ -1021,7 +1021,7 @@ h1, h2, h3, h4 {
 }
 
 .timeline-bullets li::before {
-    content: '—';
+    content: '-';
     position: absolute;
     left: 0;
     color: var(--cyan);
@@ -1329,7 +1329,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
-   Contact — links only layout
+   Contact - links only layout
    ============================================================ */
 .contact-links-only {
     max-width: 560px;
@@ -1579,7 +1579,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
-   Responsive — Tablet
+   Responsive - Tablet
    ============================================================ */
 @media (max-width: 1100px) {
     #threejs-hero {
@@ -1615,7 +1615,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
-   Responsive — Mobile
+   Responsive - Mobile
    ============================================================ */
 @media (max-width: 768px) {
     .section { padding: 80px 0; }
@@ -1654,15 +1654,15 @@ h1, h2, h3, h4 {
     .nav-toggle.active span:nth-child(2) { opacity: 0; width: 0; }
     .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-    /* About — single column */
+    /* About - single column */
     .about-grid { grid-template-columns: 1fr; }
     .about-photo { grid-column: 1; }
 
-    /* Projects — single column */
+    /* Projects - single column */
     .projects-grid { grid-template-columns: 1fr; }
     .project-featured { grid-column: 1; }
 
-    /* Dual timeline — single column */
+    /* Dual timeline - single column */
     .dual-timeline { grid-template-columns: 1fr; gap: 40px; }
 
     /* Blog card */
@@ -1690,7 +1690,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
-   About — Restructured Bio
+   About - Restructured Bio
    ============================================================ */
 .about-position {
     font-size: 1.1rem;
@@ -1760,7 +1760,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
-   Blog — 3-Post Grid
+   Blog - 3-Post Grid
    ============================================================ */
 .blog-grid {
     display: grid;
