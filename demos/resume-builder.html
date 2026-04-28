@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resume Builder Live Demo - watch the live bullet-strength analyzer transform a weak draft into a hire-ready resume in real time.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Resume Builder | Live Demo</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Free -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <!-- Inherit base portfolio design tokens & utilities -->
+    <link rel="stylesheet" href="../styles.css">
+    <!-- Demo-specific styles -->
+    <link rel="stylesheet" href="resume-builder.css">
+</head>
+<body class="demo-body">
+
+    <a href="#stage" class="skip-nav">Skip to demo</a>
+
+    <!-- ======================== NAVBAR ======================== -->
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#projects" class="nav-logo" aria-label="Back to portfolio home">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="main-content">
+
+        <!-- Background ambient glows -->
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <!-- ======================== HERO PANEL ======================== -->
+            <section class="demo-hero" aria-labelledby="demo-title">
+                <span class="section-label">Live Demo</span>
+                <h1 class="demo-title" id="demo-title">
+                    Resume <span class="gradient-text">Coach</span>
+                </h1>
+                <p class="demo-subhead">
+                    Most resume tools typeset. This one teaches. Watch the live analyzer flag every weak bullet,
+                    suggest a stronger rewrite, and grade the whole resume out of 100 — all while you type.
+                </p>
+
+                <div class="demo-goal">
+                    <span class="demo-goal-label">Pitch</span>
+                    <p class="demo-goal-text" id="goal-text">
+                        Take a draft resume from <strong>32/100</strong> to <strong>hire-ready</strong>.
+                        Each bullet is scored on three signals — a strong verb, a quantified outcome, and a length sweet spot.
+                    </p>
+                </div>
+
+                <!-- Scenario switcher -->
+                <div class="demo-goal-switcher" role="group" aria-label="Choose resume scenario">
+                    <button class="goal-btn active" data-scene="controls" aria-pressed="true">
+                        <i class="fas fa-microchip" aria-hidden="true"></i>
+                        <span>Controls Engineer</span>
+                    </button>
+                    <button class="goal-btn" data-scene="software" aria-pressed="false">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        <span>Software Engineer</span>
+                    </button>
+                    <button class="goal-btn" data-scene="pm" aria-pressed="false">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        <span>Product Manager</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ======================== HEALTH SCORE BAR ======================== -->
+            <section class="health-bar" aria-label="Resume health score">
+                <div class="health-meta">
+                    <span class="health-eyebrow">// Health</span>
+                    <span class="health-state" id="health-state">Draft</span>
+                </div>
+                <div class="health-track" aria-hidden="true">
+                    <div class="health-fill" id="health-fill"></div>
+                    <div class="health-marker" id="health-marker"></div>
+                </div>
+                <div class="health-value">
+                    <span id="health-num">0</span><span class="health-denom">/100</span>
+                </div>
+            </section>
+
+            <!-- ======================== EDITOR + PREVIEW STAGE ======================== -->
+            <section class="stage-grid" id="stage" aria-label="Live editor and resume preview">
+
+                <!-- Editor pane (left) -->
+                <div class="editor-pane" aria-label="Editor">
+                    <header class="pane-head">
+                        <span class="pane-eyebrow">// Editor</span>
+                        <span class="pane-status" id="editor-status">
+                            <span class="dot dot-idle"></span>
+                            <span>Idle</span>
+                        </span>
+                    </header>
+
+                    <div class="editor-section">
+                        <div class="editor-label">Position</div>
+                        <div class="editor-line" id="ed-position"><span class="caret"></span></div>
+                    </div>
+
+                    <div class="editor-section">
+                        <div class="editor-label">Achievements (one per line)</div>
+                        <ol class="bullet-list" id="bullet-list">
+                            <li class="bullet-item" data-idx="0">
+                                <div class="bullet-num">L1</div>
+                                <div class="bullet-content">
+                                    <div class="bullet-text"></div>
+                                    <div class="bullet-chip"></div>
+                                </div>
+                            </li>
+                            <li class="bullet-item" data-idx="1">
+                                <div class="bullet-num">L2</div>
+                                <div class="bullet-content">
+                                    <div class="bullet-text"></div>
+                                    <div class="bullet-chip"></div>
+                                </div>
+                            </li>
+                            <li class="bullet-item" data-idx="2">
+                                <div class="bullet-num">L3</div>
+                                <div class="bullet-content">
+                                    <div class="bullet-text"></div>
+                                    <div class="bullet-chip"></div>
+                                </div>
+                            </li>
+                            <li class="bullet-item" data-idx="3">
+                                <div class="bullet-num">L4</div>
+                                <div class="bullet-content">
+                                    <div class="bullet-text"></div>
+                                    <div class="bullet-chip"></div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- Coaching tooltip — anchored above the active bullet -->
+                    <div class="coach-tip" id="coach-tip" aria-live="polite">
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        <span class="coach-text" id="coach-text">Coaching suggestions appear here.</span>
+                    </div>
+                </div>
+
+                <!-- Preview pane (right) -->
+                <div class="preview-pane" aria-label="Resume preview">
+                    <header class="pane-head">
+                        <span class="pane-eyebrow">// Preview</span>
+                        <span class="pane-status" id="preview-status">
+                            <span class="dot dot-idle"></span>
+                            <span>Modern template</span>
+                        </span>
+                    </header>
+
+                    <article class="resume-doc" id="resume-doc">
+                        <header class="doc-head">
+                            <h2 class="doc-name" id="doc-name">Your Name</h2>
+                            <p class="doc-title" id="doc-title">Position</p>
+                            <p class="doc-meta">name@domain.com &nbsp;·&nbsp; portfolio.dev &nbsp;·&nbsp; github.com/handle</p>
+                        </header>
+                        <hr class="doc-rule">
+                        <section class="doc-section">
+                            <h3 class="doc-section-title">Experience</h3>
+                            <div class="doc-job">
+                                <div class="doc-job-head">
+                                    <strong id="doc-company">Company</strong>
+                                    <span id="doc-tenure">2023 — Present</span>
+                                </div>
+                                <ul class="doc-bullets" id="doc-bullets">
+                                    <!-- Mirror of editor bullets, populated by JS -->
+                                </ul>
+                            </div>
+                        </section>
+                    </article>
+                </div>
+
+            </section>
+
+            <!-- ======================== TIMELINE ======================== -->
+            <section class="demo-timeline-section" aria-label="Coaching timeline">
+                <span class="stage-eyebrow">// Pipeline</span>
+                <ol class="demo-timeline" id="timeline" aria-live="polite">
+                    <li class="timeline-step" data-step="drafting">
+                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
+                        <span class="ts-label">Drafting</span>
+                    </li>
+                    <li class="timeline-step" data-step="scoring">
+                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
+                        <span class="ts-label">Scoring</span>
+                    </li>
+                    <li class="timeline-step" data-step="coaching">
+                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
+                        <span class="ts-label">Coaching</span>
+                    </li>
+                    <li class="timeline-step" data-step="rewriting">
+                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
+                        <span class="ts-label">Rewriting</span>
+                    </li>
+                    <li class="timeline-step" data-step="ready">
+                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
+                        <span class="ts-label">Hire-ready</span>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- ======================== ANALYZER OUTPUT PANE ======================== -->
+            <section class="output-pane" aria-label="Live analyzer output">
+                <div class="output-header">
+                    <div class="output-tabs" role="tablist">
+                        <span class="output-dot output-dot-r"></span>
+                        <span class="output-dot output-dot-y"></span>
+                        <span class="output-dot output-dot-g"></span>
+                    </div>
+                    <div class="output-meta">
+                        <span class="output-agent" id="output-mod">analyzers.py</span>
+                        <span class="output-sep">·</span>
+                        <span class="output-action" id="output-action">awaiting input</span>
+                    </div>
+                </div>
+                <pre class="output-body" id="output-body" aria-live="polite" aria-atomic="false"><code id="output-code">// Press play to score a draft resume in real time.</code><span class="output-caret" id="output-caret" aria-hidden="true"></span></pre>
+            </section>
+
+            <!-- ======================== CONTROLS ======================== -->
+            <section class="demo-controls" aria-label="Demo playback controls">
+                <button class="ctl-btn ctl-primary" id="btn-play" aria-label="Play or pause demo">
+                    <i class="fas fa-play" aria-hidden="true" id="play-icon"></i>
+                    <span id="play-label">Play</span>
+                </button>
+                <button class="ctl-btn" id="btn-speed" aria-label="Cycle playback speed">
+                    <i class="fas fa-gauge-high" aria-hidden="true"></i>
+                    <span id="speed-label">1&times;</span>
+                </button>
+                <button class="ctl-btn" id="btn-reset" aria-label="Reset demo">
+                    <i class="fas fa-rotate-left" aria-hidden="true"></i>
+                    <span>Reset</span>
+                </button>
+                <div class="ctl-spacer"></div>
+                <div class="ctl-hint" id="ctl-hint">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span>Same scoring logic the local Streamlit app runs on every keystroke.</span>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- ======================== FOOTER ======================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/resume-portfolio-builder" target="_blank" rel="noopener noreferrer" aria-label="Resume Builder GitHub repository"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="resume-builder.js"></script>
+</body>
+</html>
