@@ -273,6 +273,11 @@
         })();
 
         chipBox.innerHTML = c(cv, 'verb') + c(cn, 'number') + lenChip;
+        // Stagger the pop: ~70ms between chips so they cascade in instead
+        // of slamming all at once. Uses CSS animation-delay via inline style.
+        chipBox.querySelectorAll('.chip').forEach((el, i) => {
+            el.style.animationDelay = (i * 70) + 'ms';
+        });
     }
 
     function clearChip(idx) {
@@ -374,7 +379,7 @@
         const el = els.bulletItems[idx].querySelector('.bullet-text');
         const item = els.bulletItems[idx];
         item.classList.add('is-erasing');
-        await wait(280 / state.speed);
+        await wait(180 / state.speed);
         if (aborted(myRunId)) return;
 
         const current = state.bullets[idx];
@@ -407,7 +412,7 @@
         emitOutput('');
 
         // Position field
-        await typeInto(null, null, sc.position, 30, myRunId);
+        await typeInto(null, null, sc.position, 22, myRunId);
         if (aborted(myRunId)) return;
         els.docTitle.textContent = sc.position.split('  -  ')[0];
         els.docCompany.textContent = sc.company;
@@ -416,18 +421,18 @@
         for (let i = 0; i < sc.weak.length; i++) {
             if (aborted(myRunId)) return;
             setOutputAction(`drafting L${i+1}`);
-            await typeInto('.bullet-text', i, sc.weak[i], 18, myRunId);
+            await typeInto('.bullet-text', i, sc.weak[i], 14, myRunId);
             if (aborted(myRunId)) return;
 
             // Score it
             setTimelinePhase('scoring');
             setOutputAction(`scoring L${i+1}`);
-            await wait(220 / state.speed);
+            await wait(160 / state.speed);
             const a = analyzeBullet(sc.weak[i]);
             renderChip(i, a);
             renderHealth();
             emitOutput(jsonLine(i, a, a.score >= 3));
-            await wait(180 / state.speed);
+            await wait(120 / state.speed);
         }
 
         if (aborted(myRunId)) return;
@@ -440,7 +445,7 @@
         emitOutput('');
         emitOutput(`<span class="warn">// 4 of 4 bullets fall short of the hire-ready threshold (score &lt; 3).</span>`);
         emitOutput(`<span class="warn">// suggesting metric-driven rewrites...</span>`);
-        await wait(1600 / state.speed);
+        await wait(1100 / state.speed);
 
         if (aborted(myRunId)) return;
 
@@ -452,13 +457,13 @@
             setOutputAction(`rewriting L${i+1}`);
             await eraseBullet(i, myRunId);
             if (aborted(myRunId)) return;
-            await typeInto('.bullet-text', i, sc.strong[i], 14, myRunId);
+            await typeInto('.bullet-text', i, sc.strong[i], 11, myRunId);
             if (aborted(myRunId)) return;
             const a = analyzeBullet(sc.strong[i]);
             renderChip(i, a);
             renderHealth();
             emitOutput(jsonLine(i, a, a.score >= 3));
-            await wait(140 / state.speed);
+            await wait(100 / state.speed);
         }
 
         if (aborted(myRunId)) return;
@@ -558,6 +563,7 @@
     // ----------------------------------------------------------
     function bindControls() {
         els.btnPlay.addEventListener('click', () => {
+            els.btnPlay.classList.remove('is-pulse-hint');
             if (state.prefersReduced) {
                 renderStaticReady();
                 return;
@@ -611,6 +617,45 @@
     }
 
     // ----------------------------------------------------------
+    // Auto-play when the demo scrolls into view
+    // ----------------------------------------------------------
+    function setupAutoPlay() {
+        if (state.prefersReduced) return;
+
+        const stage = document.getElementById('stage');
+        if (!stage || !('IntersectionObserver' in window)) {
+            // Fallback: kick off after a short delay so something starts on load.
+            setTimeout(triggerAutoPlay, 1100);
+            return;
+        }
+
+        // Subtle pulse on the Play button while we wait for the user to scroll to it.
+        els.btnPlay.classList.add('is-pulse-hint');
+
+        const io = new IntersectionObserver((entries) => {
+            for (const e of entries) {
+                if (e.isIntersecting && !state.playing && !state.finished
+                    && state.bullets.every(b => b === '')) {
+                    setTimeout(triggerAutoPlay, 600);
+                    io.disconnect();
+                    break;
+                }
+            }
+        }, { threshold: 0.45 });
+        io.observe(stage);
+    }
+
+    function triggerAutoPlay() {
+        if (state.playing || state.finished) return;
+        if (!state.bullets.every(b => b === '')) return;
+        els.btnPlay.classList.remove('is-pulse-hint');
+        state.playing = true;
+        els.playIcon.className = 'fas fa-pause';
+        els.playLabel.textContent = 'Pause';
+        runScene(state.runId);
+    }
+
+    // ----------------------------------------------------------
     // Boot
     // ----------------------------------------------------------
     function init() {
@@ -620,7 +665,10 @@
         if (state.prefersReduced) {
             // Auto-render the final state for users who prefer no motion.
             renderStaticReady();
+            return;
         }
+
+        setupAutoPlay();
     }
 
     document.addEventListener('DOMContentLoaded', init);

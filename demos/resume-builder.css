@@ -1037,6 +1037,16 @@
     color: #05050d;
 }
 
+/* Subtle pulse hint while we wait for the demo to scroll into view */
+.ctl-primary.is-pulse-hint {
+    animation: ctlPulseHint 2.2s ease-in-out infinite;
+}
+
+@keyframes ctlPulseHint {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.0); }
+    50%      { box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.18); }
+}
+
 .ctl-primary i {
     color: #05050d;
 }
@@ -1141,7 +1151,8 @@
     .caret,
     .bullet-item.is-active .bullet-text::after,
     .health-fill,
-    .health-marker {
+    .health-marker,
+    .ctl-primary.is-pulse-hint {
         animation: none !important;
         transition: none !important;
     }
