@@ -516,9 +516,17 @@
     // Reset / scene-switch
     // ----------------------------------------------------------
     function resetUi() {
+        // Bump runId FIRST so any in-flight runScene aborts at its next
+        // await checkpoint before mutating DOM further. Also halts playback.
         state.runId += 1;
+        state.playing = false;
         state.bullets = ['','','',''];
         state.finished = false;
+        // Cancel any pending autoplay timer scheduled by IntersectionObserver.
+        if (state._autoplayTimer) {
+            clearTimeout(state._autoplayTimer);
+            state._autoplayTimer = null;
+        }
 
         // Clear bullets
         els.bulletItems.forEach((item, i) => {
@@ -564,6 +572,11 @@
     function bindControls() {
         els.btnPlay.addEventListener('click', () => {
             els.btnPlay.classList.remove('is-pulse-hint');
+            // Cancel any pending autoplay timer so it can't double-fire runScene.
+            if (state._autoplayTimer) {
+                clearTimeout(state._autoplayTimer);
+                state._autoplayTimer = null;
+            }
             if (state.prefersReduced) {
                 renderStaticReady();
                 return;
@@ -597,8 +610,10 @@
         });
 
         els.btnReset.addEventListener('click', () => {
-            state.playing = false;
             resetUi();
+            if (state.prefersReduced) {
+                renderStaticReady();
+            }
         });
 
         els.sceneBtns.forEach(btn => {
@@ -610,8 +625,13 @@
                     b.classList.toggle('active', b === btn);
                     b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
                 });
-                state.playing = false;
                 resetUi();
+                // Reduced-motion users have no Play button — re-render the
+                // static end-state for the new scenario so they aren't stuck
+                // on an empty editor with no path forward.
+                if (state.prefersReduced) {
+                    renderStaticReady();
+                }
             });
         });
     }
@@ -625,7 +645,7 @@
         const stage = document.getElementById('stage');
         if (!stage || !('IntersectionObserver' in window)) {
             // Fallback: kick off after a short delay so something starts on load.
-            setTimeout(triggerAutoPlay, 1100);
+            state._autoplayTimer = setTimeout(triggerAutoPlay, 1100);
             return;
         }
 
@@ -636,7 +656,7 @@
             for (const e of entries) {
                 if (e.isIntersecting && !state.playing && !state.finished
                     && state.bullets.every(b => b === '')) {
-                    setTimeout(triggerAutoPlay, 600);
+                    state._autoplayTimer = setTimeout(triggerAutoPlay, 600);
                     io.disconnect();
                     break;
                 }
@@ -646,6 +666,8 @@
     }
 
     function triggerAutoPlay() {
+        state._autoplayTimer = null;
+        // Re-check after the timer in case the user already started/aborted
         if (state.playing || state.finished) return;
         if (!state.bullets.every(b => b === '')) return;
         els.btnPlay.classList.remove('is-pulse-hint');

@@ -1161,5 +1161,8 @@
 
     .timeline-step { color: var(--text-1); }
 
-    .demo-controls { display: none; }
+    /* Reduced-motion users still get Reset (so they can switch scenarios
+       cleanly) and Speed is just a label — only hide Play, which is
+       meaningless when nothing animates. */
+    #btn-play { display: none; }
 }
