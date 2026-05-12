@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vision_Inspect Live Demo — local VLM-powered visual inspection for manufacturing using Ollama.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Vision_Inspect | Live Demo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="vision-inspect.css">
+</head>
+<body class="demo-body">
+
+    <a href="#insp-grid" class="skip-nav">Skip to demo</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#projects" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="main-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <!-- Hero -->
+            <section class="demo-hero" aria-labelledby="demo-title">
+                <span class="section-label">Live Demo</span>
+                <h1 class="demo-title" id="demo-title">
+                    Vision<span class="accent-slash">_</span><span class="gradient-text">Inspect</span>
+                </h1>
+                <p class="demo-subhead">
+                    Local shop-floor visual process monitoring using Visual Language Models via Ollama. Real-time inspection of manufacturing processes — sees everything, touches nothing, reports everything.
+                </p>
+                <p class="demo-caption">
+                    <i class="fas fa-circle-info" aria-hidden="true"></i>
+                    Simulated data — shows the inspection interface and VLM output format the system produces locally.
+                </p>
+            </section>
+
+            <!-- Main layout -->
+            <div class="insp-layout">
+
+                <!-- Left: grid + button -->
+                <div class="insp-main">
+
+                    <div class="insp-toolbar">
+                        <div class="insp-status-bar">
+                            <span class="status-indicator" aria-hidden="true"></span>
+                            <span class="status-text" id="status-text">System online — monitoring active</span>
+                        </div>
+                        <button class="insp-btn" id="btn-inspect" aria-label="Run a new inspection">
+                            <i class="fas fa-camera" aria-hidden="true"></i>
+                            Run New Inspection
+                        </button>
+                    </div>
+
+                    <div class="insp-grid" id="insp-grid" aria-label="Inspection results grid" aria-live="polite" aria-atomic="false">
+
+                        <!-- Card 1: PASS -->
+                        <article class="insp-card" aria-label="Part A1-2201 inspection result">
+                            <div class="insp-img insp-img-a">
+                                <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="12" y="10" width="96" height="70" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                                    <rect x="24" y="22" width="72" height="46" rx="2" fill="rgba(34,211,238,0.06)" stroke="rgba(34,211,238,0.2)" stroke-width="0.8"/>
+                                    <circle cx="36" cy="35" r="5" fill="none" stroke="rgba(34,211,238,0.35)" stroke-width="1"/>
+                                    <circle cx="84" cy="35" r="5" fill="none" stroke="rgba(34,211,238,0.35)" stroke-width="1"/>
+                                    <line x1="36" y1="55" x2="84" y2="55" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 3"/>
+                                    <text x="60" y="46" font-size="7" fill="rgba(255,255,255,0.3)" text-anchor="middle" font-family="monospace">A1-2201</text>
+                                </svg>
+                                <span class="img-scan-line" aria-hidden="true"></span>
+                            </div>
+                            <div class="insp-card-body">
+                                <div class="insp-card-top">
+                                    <span class="insp-id">Part #A1-2201</span>
+                                    <span class="insp-badge badge-pass"><i class="fas fa-check" aria-hidden="true"></i> PASS</span>
+                                </div>
+                                <div class="insp-conf-row">
+                                    <span class="insp-conf-label">Confidence</span>
+                                    <span class="insp-conf-val conf-high">96.4%</span>
+                                </div>
+                                <p class="insp-desc">Surface finish within spec. No visible defects detected.</p>
+                            </div>
+                        </article>
+
+                        <!-- Card 2: PASS -->
+                        <article class="insp-card" aria-label="Part A1-2202 inspection result">
+                            <div class="insp-img insp-img-b">
+                                <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="12" y="10" width="96" height="70" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                                    <rect x="20" y="18" width="36" height="54" rx="3" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.2)" stroke-width="0.8"/>
+                                    <rect x="64" y="18" width="36" height="54" rx="3" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.2)" stroke-width="0.8"/>
+                                    <line x1="56" y1="30" x2="64" y2="30" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                                    <line x1="56" y1="45" x2="64" y2="45" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                                    <line x1="56" y1="60" x2="64" y2="60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                                    <text x="60" y="80" font-size="7" fill="rgba(255,255,255,0.3)" text-anchor="middle" font-family="monospace">A1-2202</text>
+                                </svg>
+                                <span class="img-scan-line" aria-hidden="true"></span>
+                            </div>
+                            <div class="insp-card-body">
+                                <div class="insp-card-top">
+                                    <span class="insp-id">Part #A1-2202</span>
+                                    <span class="insp-badge badge-pass"><i class="fas fa-check" aria-hidden="true"></i> PASS</span>
+                                </div>
+                                <div class="insp-conf-row">
+                                    <span class="insp-conf-label">Confidence</span>
+                                    <span class="insp-conf-val conf-high">94.1%</span>
+                                </div>
+                                <p class="insp-desc">Dimensional geometry nominal. Edge condition clean throughout.</p>
+                            </div>
+                        </article>
+
+                        <!-- Card 3: FAIL -->
+                        <article class="insp-card" aria-label="Part B2-1087 inspection result">
+                            <div class="insp-img insp-img-c">
+                                <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="12" y="10" width="96" height="70" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                                    <rect x="22" y="20" width="76" height="50" rx="3" fill="rgba(239,68,68,0.05)" stroke="rgba(239,68,68,0.2)" stroke-width="0.8"/>
+                                    <line x1="35" y1="38" x2="58" y2="50" stroke="rgba(239,68,68,0.6)" stroke-width="1.5"/>
+                                    <circle cx="35" cy="38" r="3" fill="rgba(239,68,68,0.3)" stroke="rgba(239,68,68,0.7)" stroke-width="0.8"/>
+                                    <rect x="68" y="30" width="24" height="16" rx="2" fill="none" stroke="rgba(239,68,68,0.5)" stroke-width="1" stroke-dasharray="3 2"/>
+                                    <text x="60" y="80" font-size="7" fill="rgba(239,68,68,0.4)" text-anchor="middle" font-family="monospace">B2-1087</text>
+                                </svg>
+                                <span class="img-scan-line" aria-hidden="true"></span>
+                            </div>
+                            <div class="insp-card-body">
+                                <div class="insp-card-top">
+                                    <span class="insp-id">Part #B2-1087</span>
+                                    <span class="insp-badge badge-fail"><i class="fas fa-xmark" aria-hidden="true"></i> FAIL</span>
+                                </div>
+                                <div class="insp-conf-row">
+                                    <span class="insp-conf-label">Confidence</span>
+                                    <span class="insp-conf-val conf-mid">88.7%</span>
+                                </div>
+                                <p class="insp-desc">Detected: surface crack on upper face, 7mm length. Outside tolerance for Part Class B.</p>
+                            </div>
+                        </article>
+
+                        <!-- Card 4: REVIEW -->
+                        <article class="insp-card" aria-label="Part B2-1088 inspection result">
+                            <div class="insp-img insp-img-d">
+                                <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="12" y="10" width="96" height="70" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                                    <path d="M22 60 L50 20 L98 20 L98 70 L22 70 Z" fill="rgba(245,158,11,0.05)" stroke="rgba(245,158,11,0.2)" stroke-width="0.8"/>
+                                    <circle cx="32" cy="62" r="4" fill="rgba(245,158,11,0.2)" stroke="rgba(245,158,11,0.5)" stroke-width="1"/>
+                                    <text x="60" y="80" font-size="7" fill="rgba(245,158,11,0.35)" text-anchor="middle" font-family="monospace">B2-1088</text>
+                                </svg>
+                                <span class="img-scan-line" aria-hidden="true"></span>
+                            </div>
+                            <div class="insp-card-body">
+                                <div class="insp-card-top">
+                                    <span class="insp-id">Part #B2-1088</span>
+                                    <span class="insp-badge badge-review"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> REVIEW</span>
+                                </div>
+                                <div class="insp-conf-row">
+                                    <span class="insp-conf-label">Confidence</span>
+                                    <span class="insp-conf-val conf-low">79.2%</span>
+                                </div>
+                                <p class="insp-desc">Minor edge chipping, lower-left quadrant ~3mm. Marginally within tolerance. Supervisor review recommended.</p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- Right: live feed -->
+                <aside class="feed-panel" aria-label="Live inspection event log">
+                    <div class="feed-header">
+                        <span class="stage-eyebrow">// Live Feed</span>
+                        <span class="feed-dot" aria-hidden="true"></span>
+                    </div>
+                    <div class="feed-log" id="feed-log" aria-live="polite" aria-atomic="false">
+                    </div>
+                </aside>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/Vision_Inspect" target="_blank" rel="noopener noreferrer" aria-label="Vision_Inspect on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vision-inspect.js"></script>
+</body>
+</html>

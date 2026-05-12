@@ -3,37 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Smith_Agentic Live Demo - watch four specialized AI agents collaborate on an industrial controls and HMI engineering task.">
+    <meta name="description" content="Smith_Agentic Live Demo — watch twenty specialized agents across four crews collaborate on real engineering tasks.">
     <meta name="author" content="Addison Smith">
 
     <title>Smith_Agentic | Live Demo</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome Free -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
     <link rel="shortcut icon" href="../favicon.ico">
 
-    <!-- Inherit base portfolio design tokens & utilities -->
     <link rel="stylesheet" href="../styles.css">
-    <!-- Demo-specific overrides + new styles -->
     <link rel="stylesheet" href="smith-agentic.css">
 </head>
 <body class="demo-body">
 
-    <a href="#stage" class="skip-nav">Skip to demo</a>
+    <a href="#conv-section" class="skip-nav">Skip to demo</a>
 
-    <!-- ======================== NAVBAR ======================== -->
     <header class="demo-nav" role="banner">
         <div class="nav-container">
-            <a href="../index.html#projects" class="nav-logo" aria-label="Back to portfolio home">
+            <a href="../index.html#projects" class="nav-logo" aria-label="Back to portfolio">
                 AS<span class="accent">.</span>
             </a>
             <a href="../index.html#projects" class="demo-back-link">
@@ -45,7 +38,6 @@
 
     <main class="demo-main" id="main-content">
 
-        <!-- Background ambient glows -->
         <div class="demo-bg" aria-hidden="true">
             <div class="demo-glow demo-glow-1"></div>
             <div class="demo-glow demo-glow-2"></div>
@@ -54,217 +46,118 @@
 
         <div class="demo-container">
 
-            <!-- ======================== HERO PANEL ======================== -->
+            <!-- Hero -->
             <section class="demo-hero" aria-labelledby="demo-title">
                 <span class="section-label">Live Demo</span>
                 <h1 class="demo-title" id="demo-title">
                     Smith<span class="accent-slash">_</span><span class="gradient-text">Agentic</span>
                 </h1>
                 <p class="demo-subhead">
-                    Watch four specialized agents collaborate in real time. The Orchestrator decomposes the task,
-                    the Researcher gathers context, the Builder produces code, and the Critic enforces a Reflexion-style
-                    review loop until the work is approved.
+                    Twenty specialized agents across four crews — Default, PLC, React, and Vision. Select a crew, choose a goal, and watch each agent take its turn.
                 </p>
+                <p class="demo-caption">
+                    <i class="fas fa-circle-info" aria-hidden="true"></i>
+                    Recorded demo — the same outputs the framework produces running locally against Ollama.
+                </p>
+            </section>
 
-                <div class="demo-goal">
-                    <span class="demo-goal-label">Goal</span>
-                    <p class="demo-goal-text" id="goal-text">
-                        Generate a Studio 5000 ladder routine for a 3-station palletizer with safety interlocks,
-                        then write a React HMI page to visualize it.
-                    </p>
+            <!-- Crew + Goal selector -->
+            <section class="selector-panel" aria-label="Crew and goal selection">
+
+                <div class="selector-row">
+                    <span class="selector-label">Crew</span>
+                    <div class="crew-btns" role="group" aria-label="Select crew">
+                        <button class="crew-btn active" data-crew="default" aria-pressed="true">
+                            <i class="fas fa-layer-group" aria-hidden="true"></i>
+                            Default
+                        </button>
+                        <button class="crew-btn" data-crew="plc" aria-pressed="false">
+                            <i class="fas fa-microchip" aria-hidden="true"></i>
+                            PLC
+                        </button>
+                        <button class="crew-btn" data-crew="react" aria-pressed="false">
+                            <i class="fas fa-code" aria-hidden="true"></i>
+                            React
+                        </button>
+                        <button class="crew-btn" data-crew="vision" aria-pressed="false">
+                            <i class="fas fa-eye" aria-hidden="true"></i>
+                            Vision
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Goal switcher -->
-                <div class="demo-goal-switcher" role="group" aria-label="Choose demo scenario">
-                    <button class="goal-btn active" data-scene="plc" aria-pressed="true">
+                <div class="goal-box">
+                    <span class="goal-box-label">Goal</span>
+                    <p class="goal-box-text" id="goal-text">Select a preset below or type a custom goal.</p>
+                </div>
+
+                <div class="preset-btns" id="preset-btns" role="group" aria-label="Preset goals">
+                    <button class="preset-btn" data-crew="plc" aria-label="Use PLC preset goal">
                         <i class="fas fa-microchip" aria-hidden="true"></i>
-                        <span>PLC + HMI</span>
+                        <span>Conveyor ladder routine</span>
                     </button>
-                    <button class="goal-btn" data-scene="react" aria-pressed="false">
-                        <i class="fas fa-code" aria-hidden="true"></i>
-                        <span>React Dashboard</span>
+                    <button class="preset-btn" data-crew="react" aria-label="Use React preset goal">
+                        <i class="fas fa-table" aria-hidden="true"></i>
+                        <span>Sortable data table</span>
                     </button>
-                    <button class="goal-btn" data-scene="vision" aria-pressed="false">
-                        <i class="fas fa-eye" aria-hidden="true"></i>
-                        <span>Vision Inspection</span>
+                    <button class="preset-btn" data-crew="vision" aria-label="Use Vision preset goal">
+                        <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                        <span>Defect inspection</span>
                     </button>
+                </div>
+
+            </section>
+
+            <!-- Controls -->
+            <div class="demo-controls" aria-label="Demo controls">
+                <button class="ctl-btn ctl-primary" id="btn-run" aria-label="Run the selected crew">
+                    <i class="fas fa-play" aria-hidden="true" id="run-icon"></i>
+                    <span id="run-label">Run Crew</span>
+                </button>
+                <button class="ctl-btn" id="btn-reset" aria-label="Reset the demo">
+                    <i class="fas fa-rotate-left" aria-hidden="true"></i>
+                    <span>Reset</span>
+                </button>
+                <div class="ctl-spacer"></div>
+                <div class="ctl-hint" id="ctl-hint" aria-live="polite">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span id="hint-text">Pick a crew, then press Run Crew.</span>
+                </div>
+            </div>
+
+            <!-- Conversation feed -->
+            <section class="conv-section" id="conv-section" aria-label="Agent conversation">
+                <span class="stage-eyebrow">// Agent Conversation</span>
+                <div class="conv-panel">
+                    <div class="conv-feed" id="conv-feed" aria-live="polite" aria-atomic="false">
+                        <div class="conv-empty" id="conv-empty">
+                            <i class="fas fa-comments" aria-hidden="true"></i>
+                            <p>Select a crew and click <strong>Run Crew</strong> to watch the agents work.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- ======================== AGENT STAGE ======================== -->
-            <section class="agent-stage" id="stage" aria-label="Multi-agent workflow stage">
-                <div class="stage-header">
-                    <span class="stage-eyebrow">// Workflow</span>
-                    <span class="stage-status" id="stage-status" aria-live="polite">
-                        <span class="status-dot"></span>
-                        <span class="status-text">Idle — press play to begin</span>
-                    </span>
-                </div>
-
-                <div class="agent-flow" id="agent-flow">
-
-                    <!-- SVG edges layer -->
-                    <svg class="agent-edges" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
-                        <defs>
-                            <linearGradient id="edge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.55"/>
-                                <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.55"/>
-                            </linearGradient>
-                            <linearGradient id="edge-loopback" x1="100%" y1="0%" x2="0%" y2="0%">
-                                <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.6"/>
-                                <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.55"/>
-                            </linearGradient>
-                            <radialGradient id="packet-glow" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="#22d3ee" stop-opacity="1"/>
-                                <stop offset="60%" stop-color="#22d3ee" stop-opacity="0.4"/>
-                                <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
-                            </radialGradient>
-                        </defs>
-
-                        <!-- Forward edges -->
-                        <path id="edge-0-1" class="edge" d="M 130 110 L 370 110" stroke="url(#edge-gradient)"/>
-                        <path id="edge-1-2" class="edge" d="M 500 110 L 740 110" stroke="url(#edge-gradient)"/>
-                        <path id="edge-2-3" class="edge" d="M 870 110 L 990 110" stroke="url(#edge-gradient)"/>
-
-                        <!-- Loopback Critic -> Builder (revision) -->
-                        <path id="edge-loop" class="edge edge-loop"
-                              d="M 935 80 C 935 0, 805 0, 805 80"
-                              stroke="url(#edge-loopback)"/>
-
-                        <!-- Animated packets (positioned dynamically by JS) -->
-                        <circle id="packet" class="packet" r="6" cx="-100" cy="-100" fill="url(#packet-glow)"/>
-                    </svg>
-
-                    <!-- Agent cards -->
-                    <div class="agent-card" data-agent="orchestrator" data-index="0">
-                        <div class="agent-glow" aria-hidden="true"></div>
-                        <div class="agent-icon" aria-hidden="true">
-                            <i class="fas fa-sitemap"></i>
-                        </div>
-                        <div class="agent-name">Orchestrator</div>
-                        <div class="agent-role">Plans &amp; routes</div>
-                        <div class="agent-status">
-                            <span class="agent-pulse" aria-hidden="true"></span>
-                            <span class="agent-status-text">Idle</span>
-                        </div>
-                    </div>
-
-                    <div class="agent-card" data-agent="researcher" data-index="1">
-                        <div class="agent-glow" aria-hidden="true"></div>
-                        <div class="agent-icon" aria-hidden="true">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </div>
-                        <div class="agent-name">Researcher</div>
-                        <div class="agent-role">Retrieves context</div>
-                        <div class="agent-status">
-                            <span class="agent-pulse" aria-hidden="true"></span>
-                            <span class="agent-status-text">Idle</span>
-                        </div>
-                    </div>
-
-                    <div class="agent-card" data-agent="builder" data-index="2">
-                        <div class="agent-glow" aria-hidden="true"></div>
-                        <div class="agent-icon" aria-hidden="true">
-                            <i class="fas fa-hammer"></i>
-                        </div>
-                        <div class="agent-name">Builder</div>
-                        <div class="agent-role">Authors artifacts</div>
-                        <div class="agent-status">
-                            <span class="agent-pulse" aria-hidden="true"></span>
-                            <span class="agent-status-text">Idle</span>
-                        </div>
-                    </div>
-
-                    <div class="agent-card" data-agent="critic" data-index="3">
-                        <div class="agent-glow" aria-hidden="true"></div>
-                        <div class="agent-icon" aria-hidden="true">
-                            <i class="fas fa-shield-halved"></i>
-                        </div>
-                        <div class="agent-name">Critic</div>
-                        <div class="agent-role">Reviews &amp; gates</div>
-                        <div class="agent-status">
-                            <span class="agent-pulse" aria-hidden="true"></span>
-                            <span class="agent-status-text">Idle</span>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- ======================== TIMELINE ======================== -->
-            <section class="demo-timeline-section" aria-label="Workflow timeline">
-                <span class="stage-eyebrow">// Pipeline</span>
-                <ol class="demo-timeline" id="timeline" aria-live="polite">
-                    <li class="timeline-step" data-step="planning">
-                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
-                        <span class="ts-label">Planning</span>
-                    </li>
-                    <li class="timeline-step" data-step="researching">
-                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
-                        <span class="ts-label">Researching</span>
-                    </li>
-                    <li class="timeline-step" data-step="building">
-                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
-                        <span class="ts-label">Building</span>
-                    </li>
-                    <li class="timeline-step" data-step="critiquing">
-                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
-                        <span class="ts-label">Critiquing</span>
-                    </li>
-                    <li class="timeline-step" data-step="revising">
-                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
-                        <span class="ts-label">Revising</span>
-                    </li>
-                    <li class="timeline-step" data-step="done">
-                        <span class="ts-marker"><i class="fas fa-circle-notch" aria-hidden="true"></i></span>
-                        <span class="ts-label">Done</span>
-                    </li>
-                </ol>
-            </section>
-
-            <!-- ======================== OUTPUT PANE ======================== -->
-            <section class="output-pane" aria-label="Live agent output">
+            <!-- Output panel -->
+            <section class="output-pane" aria-label="Run output">
                 <div class="output-header">
-                    <div class="output-tabs" role="tablist">
+                    <div class="output-tabs" aria-hidden="true">
                         <span class="output-dot output-dot-r"></span>
                         <span class="output-dot output-dot-y"></span>
                         <span class="output-dot output-dot-g"></span>
                     </div>
                     <div class="output-meta">
-                        <span class="output-agent" id="output-agent">orchestrator</span>
-                        <span class="output-sep">·</span>
-                        <span class="output-action" id="output-action">awaiting start</span>
+                        <span class="output-agent" id="output-agent">system</span>
+                        <span class="output-sep" aria-hidden="true">·</span>
+                        <span class="output-action" id="output-action">awaiting run</span>
                     </div>
                 </div>
-                <pre class="output-body" id="output-body" aria-live="polite" aria-atomic="false"><code id="output-code">// Press play to launch the multi-agent run.</code><span class="output-caret" id="output-caret" aria-hidden="true"></span></pre>
-            </section>
-
-            <!-- ======================== CONTROLS ======================== -->
-            <section class="demo-controls" aria-label="Demo playback controls">
-                <button class="ctl-btn ctl-primary" id="btn-play" aria-label="Play or pause demo">
-                    <i class="fas fa-play" aria-hidden="true" id="play-icon"></i>
-                    <span id="play-label">Play</span>
-                </button>
-                <button class="ctl-btn" id="btn-speed" aria-label="Cycle playback speed">
-                    <i class="fas fa-gauge-high" aria-hidden="true"></i>
-                    <span id="speed-label">1&times;</span>
-                </button>
-                <button class="ctl-btn" id="btn-reset" aria-label="Reset demo">
-                    <i class="fas fa-rotate-left" aria-hidden="true"></i>
-                    <span>Reset</span>
-                </button>
-                <div class="ctl-spacer"></div>
-                <div class="ctl-hint" id="ctl-hint">
-                    <i class="fas fa-info-circle" aria-hidden="true"></i>
-                    <span>Same multi-agent loop the local Smith_Agentic CLI runs against Ollama.</span>
-                </div>
+                <pre class="output-body" id="output-body" aria-live="polite" aria-atomic="false"><code id="output-code">// Output appears here after the run completes.</code><span class="output-caret" id="output-caret" aria-hidden="true"></span></pre>
             </section>
 
         </div>
-
     </main>
 
-    <!-- ======================== FOOTER ======================== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-inner">
@@ -272,7 +165,7 @@
                 <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
                 <div class="footer-socials">
                     <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
-                    <a href="https://github.com/AddisonTech/Smith_Agentic" target="_blank" rel="noopener noreferrer" aria-label="Smith_Agentic GitHub repository"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/AddisonTech/Smith_Agentic" target="_blank" rel="noopener noreferrer" aria-label="Smith_Agentic on GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
