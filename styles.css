@@ -855,6 +855,41 @@ h1, h2, h3, h4 {
     font-weight: 500;
 }
 
+/* Grouped coursework layout */
+.coursework-groups { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.coursework-group { display: flex; flex-direction: column; gap: 6px; }
+.coursework-group-label {
+    font-family: var(--ff-mono); font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--cyan); opacity: 0.75;
+}
+.coursework-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-inprogress {
+    background: rgba(34,211,238,0.07);
+    border-color: rgba(34,211,238,0.4);
+    color: var(--cyan);
+    font-style: italic;
+}
+.tag-inprogress::before {
+    content: '';
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--cyan);
+    margin-right: 6px;
+    flex-shrink: 0;
+    animation: pulseDotSmall 2s ease-in-out infinite;
+}
+@keyframes pulseDotSmall {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
+    50%       { box-shadow: 0 0 0 4px rgba(34,211,238,0.18); }
+}
+
+/* Degree track subtitle */
+.timeline-track {
+    font-size: 0.78rem; color: var(--text-2); margin-top: 2px;
+    font-family: var(--ff-mono); letter-spacing: 0.02em;
+}
+
 /* ============================================================
    Projects
    ============================================================ */
