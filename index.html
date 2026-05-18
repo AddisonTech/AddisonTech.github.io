@@ -700,6 +700,31 @@
                     </div>
                 </div>
 
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-network-wired project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/ModBridge" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <button id="modbridge-demo-btn" class="btn btn-primary btn-sm project-demo-btn" aria-label="Live Demo">
+                                    <i class="fas fa-play"></i> Live Demo
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="project-title">ModBridge</h3>
+                        <p class="project-desc">Modbus TCP utility that polls live register values, serves them as a REST API, logs to CSV, and runs a built-in fake device for testing. Ships in both Rust and Python with identical feature sets.</p>
+                        <p class="project-outcome">Single-binary Rust build needs no runtime; Python version installs via pip for rapid prototyping and scripting against live field hardware.</p>
+                        <div class="project-tags">
+                            <span class="tag">Rust</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Modbus TCP</span>
+                            <span class="tag tag-accent">REST API</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="projects-cta" data-aos="fade-up">
@@ -1073,5 +1098,253 @@
 
     <script src="script.js"></script>
     <script src="interactions.js"></script>
+
+    <!-- ModBridge Demo Modal -->
+    <div id="mb-modal-overlay" class="mb-modal-overlay" role="dialog" aria-modal="true" aria-label="ModBridge demo">
+        <div class="mb-modal">
+            <div class="mb-modal-header">
+                <span class="mb-modal-title">modbridge -- live demo</span>
+                <button id="mb-close-btn" class="mb-modal-close" aria-label="Close demo">&times;</button>
+            </div>
+            <div class="mb-tab-bar">
+                <button class="mb-tab active" data-pane="rust">Rust (modbridge)</button>
+                <button class="mb-tab" data-pane="python">Python (ModBridge_py)</button>
+            </div>
+            <div id="mb-pane-rust" class="mb-panel">
+                <div class="mb-term-bar">
+                    <span class="mb-dot mb-dot-red"></span>
+                    <span class="mb-dot mb-dot-yel"></span>
+                    <span class="mb-dot mb-dot-grn"></span>
+                    <span class="mb-term-label">modbridge simulate + serve</span>
+                </div>
+                <div id="mb-rust-body" class="mb-term-body"></div>
+            </div>
+            <div id="mb-pane-python" class="mb-panel" hidden>
+                <div class="mb-term-bar">
+                    <span class="mb-dot mb-dot-red"></span>
+                    <span class="mb-dot mb-dot-yel"></span>
+                    <span class="mb-dot mb-dot-grn"></span>
+                    <span class="mb-term-label">python main.py simulate + serve</span>
+                </div>
+                <div id="mb-py-body" class="mb-term-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        var overlay   = document.getElementById('mb-modal-overlay');
+        var openBtn   = document.getElementById('modbridge-demo-btn');
+        var closeBtn  = document.getElementById('mb-close-btn');
+        var tabs      = document.querySelectorAll('.mb-tab');
+        var rustPane  = document.getElementById('mb-pane-rust');
+        var pyPane    = document.getElementById('mb-pane-python');
+        var rustBody  = document.getElementById('mb-rust-body');
+        var pyBody    = document.getElementById('mb-py-body');
+
+        var MB_REGS = [
+            { addr: 40001, val: 2341 },
+            { addr: 40002, val: 1987 },
+            { addr: 40003, val: 3102 },
+            { addr: 40004, val: 4450 }
+        ];
+
+        var walkTimer   = null;
+        var tableTimers = [];
+        var rustHolder  = {};
+        var pyHolder    = {};
+
+        function mbWalk() {
+            MB_REGS.forEach(function (r) {
+                var d = Math.floor(Math.random() * 101) - 50;
+                r.val = Math.max(0, Math.min(65535, r.val + d));
+            });
+        }
+
+        function mbHex(v) {
+            return '0x' + v.toString(16).toUpperCase().padStart(4, '0');
+        }
+
+        function mbNow() {
+            return new Date().toISOString().replace('T', ' ').slice(0, 19) + 'Z';
+        }
+
+        function mbSleep(ms) {
+            return new Promise(function (res) { setTimeout(res, ms); });
+        }
+
+        function sp(cls, txt) {
+            return '<span class="' + cls + '">' + txt + '</span>';
+        }
+
+        function mbRustDataHTML() {
+            var rows = '';
+            MB_REGS.forEach(function (r) {
+                var addr = String(r.addr).padStart(5, ' ');
+                var val  = String(r.val).padStart(5, ' ');
+                var hex  = mbHex(r.val);
+                rows += '  ' + sp('mb-addr', addr) + '    ' + sp('mb-val', val) + '    ' + sp('mb-hex', hex) + '\n';
+            });
+            rows += '\n  ' + sp('mb-dim', 'updated ' + mbNow());
+            return rows;
+        }
+
+        function mbPyDataHTML() {
+            var inner = '';
+            MB_REGS.forEach(function (r, i) {
+                var addr = String(r.addr).padStart(5, ' ');
+                var val  = String(r.val).padStart(5, ' ');
+                var hex  = mbHex(r.val);
+                if (i > 0) {
+                    inner += sp('mb-sep', '├────────┼─────────┼─────────┤') + '\n';
+                }
+                inner += sp('mb-sep', '│') + sp('mb-addr', ' ' + addr + '   ') + sp('mb-sep', '│') + sp('mb-val', ' ' + val + '    ') + sp('mb-sep', '│') + sp('mb-hex', ' ' + hex + '   ') + sp('mb-sep', '│') + '\n';
+            });
+            return (
+                sp('mb-sep',  '┏━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━┓') + '\n' +
+                sp('mb-hdr',  '┃ ADDR   ┃ VALUE   ┃ HEX     ┃') + '\n' +
+                sp('mb-sep',  '┡━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━┩') + '\n' +
+                inner +
+                sp('mb-sep',  '└────────┴─────────┴─────────┘') + '\n' +
+                sp('mb-dim',  'updated ' + mbNow())
+            );
+        }
+
+        async function runSequence(bodyEl, steps, holder) {
+            bodyEl.innerHTML = '';
+            for (var i = 0; i < steps.length; i++) {
+                var step = steps[i];
+                if (step.type === 'type') {
+                    var lineEl = document.createElement('div');
+                    bodyEl.appendChild(lineEl);
+                    var pSpan = document.createElement('span');
+                    pSpan.className = 'mb-prompt';
+                    pSpan.textContent = step.prompt || '$ ';
+                    lineEl.appendChild(pSpan);
+                    var tSpan = document.createElement('span');
+                    tSpan.className = 'mb-cmd-text';
+                    lineEl.appendChild(tSpan);
+                    var cur = document.createElement('span');
+                    cur.className = 'mb-cursor';
+                    lineEl.appendChild(cur);
+                    for (var ci = 0; ci < step.content.length; ci++) {
+                        tSpan.textContent += step.content[ci];
+                        bodyEl.scrollTop = bodyEl.scrollHeight;
+                        await mbSleep(step.delay || 42);
+                    }
+                    cur.remove();
+                } else if (step.type === 'line') {
+                    var el = document.createElement('div');
+                    el.innerHTML = step.content;
+                    bodyEl.appendChild(el);
+                    bodyEl.scrollTop = bodyEl.scrollHeight;
+                    await mbSleep(step.pause || 75);
+                } else if (step.type === 'wait') {
+                    await mbSleep(step.ms);
+                } else if (step.type === 'table') {
+                    var wrapper = document.createElement('div');
+                    wrapper.style.cssText = 'white-space:pre;line-height:1.6;';
+                    wrapper.innerHTML = step.fn();
+                    bodyEl.appendChild(wrapper);
+                    holder.el = wrapper;
+                    holder.fn = step.fn;
+                    bodyEl.scrollTop = bodyEl.scrollHeight;
+                }
+            }
+            var finalCur = document.createElement('span');
+            finalCur.className = 'mb-cursor';
+            bodyEl.appendChild(finalCur);
+        }
+
+        var rustSteps = [
+            { type: 'type',  prompt: '$ ', content: 'modbridge simulate', delay: 50 },
+            { type: 'wait',  ms: 280 },
+            { type: 'line',  content: '  ' + sp('mb-title', 'ModBridge simulator on localhost:502'), pause: 55 },
+            { type: 'line',  content: '  ' + sp('mb-dim', 'Serving 100 registers (40001-40100) with random-walking values'), pause: 55 },
+            { type: 'line',  content: '  ' + sp('mb-dim', 'Press Ctrl+C to stop'), pause: 220 },
+            { type: 'line',  content: '', pause: 60 },
+            { type: 'type',  prompt: '$ ', content: 'modbridge serve --host localhost --registers 40001-40004 --port 3000', delay: 32 },
+            { type: 'wait',  ms: 280 },
+            { type: 'line',  content: '  ' + sp('mb-ok', 'listening on 0.0.0.0:3000'), pause: 55 },
+            { type: 'line',  content: '  ' + sp('mb-dim', 'polling localhost:502 every 1.0s'), pause: 220 },
+            { type: 'line',  content: '', pause: 55 },
+            { type: 'line',  content: '  ' + sp('mb-hdr', 'ADDR     VALUE    HEX'), pause: 30 },
+            { type: 'line',  content: '  ' + sp('mb-sep', '-----    -----    ------'), pause: 30 },
+            { type: 'table', fn: mbRustDataHTML }
+        ];
+
+        var pySteps = [
+            { type: 'type',  prompt: '$ ', content: 'python main.py simulate', delay: 50 },
+            { type: 'wait',  ms: 280 },
+            { type: 'line',  content: '  ' + sp('mb-title', 'ModBridge_py simulator on localhost:502'), pause: 55 },
+            { type: 'line',  content: '  ' + sp('mb-dim', '100 registers (40001-40100), random-walk every 1.0s'), pause: 55 },
+            { type: 'line',  content: '  ' + sp('mb-dim', 'Press Ctrl+C to stop'), pause: 220 },
+            { type: 'line',  content: '', pause: 60 },
+            { type: 'type',  prompt: '$ ', content: 'python main.py serve --host localhost --registers 40001-40004 --port 3000', delay: 32 },
+            { type: 'wait',  ms: 280 },
+            { type: 'line',  content: '  ' + sp('mb-ok', 'INFO:     Uvicorn running on http://0.0.0.0:3000'), pause: 55 },
+            { type: 'line',  content: '  ' + sp('mb-dim', 'INFO:     Startup complete'), pause: 220 },
+            { type: 'line',  content: '', pause: 55 },
+            { type: 'table', fn: mbPyDataHTML }
+        ];
+
+        function startWalking() {
+            walkTimer = setInterval(function () {
+                mbWalk();
+                if (rustHolder.el) rustHolder.el.innerHTML = rustHolder.fn();
+                if (pyHolder.el)   pyHolder.el.innerHTML   = pyHolder.fn();
+            }, 1000);
+        }
+
+        function stopWalking() {
+            if (walkTimer) { clearInterval(walkTimer); walkTimer = null; }
+        }
+
+        function openModal() {
+            overlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            rustHolder = {};
+            pyHolder   = {};
+            rustBody.innerHTML = '';
+            pyBody.innerHTML   = '';
+            runSequence(rustBody, rustSteps, rustHolder).then(startWalking);
+        }
+
+        function closeModal() {
+            overlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+            stopWalking();
+        }
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) closeModal();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+        });
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                tabs.forEach(function (t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                var pane = tab.getAttribute('data-pane');
+                if (pane === 'rust') {
+                    rustPane.hidden = false;
+                    pyPane.hidden   = true;
+                } else {
+                    pyPane.hidden   = false;
+                    rustPane.hidden = true;
+                    if (!pyHolder.el) {
+                        runSequence(pyBody, pySteps, pyHolder);
+                    }
+                }
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
