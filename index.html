@@ -539,6 +539,11 @@
                 <h2 class="section-title">Things I've <span class="gradient-text">Built</span></h2>
             </div>
 
+            <!-- Industrial & AI Systems -->
+            <div data-aos="fade-up" style="margin: 2.5rem 0 1.25rem 0;">
+                <span class="section-label">Industrial &amp; AI Systems</span>
+            </div>
+
             <div class="projects-grid">
 
                 <!-- Featured -->
@@ -562,7 +567,7 @@
                             a template library of 18 pre-built tasks across Code, PLC, HMI, Vision, Safety, and Ops categories,
                             and offline demo mode, and an MCP server that exposes crew runs as tools for Claude Code and Claude Desktop.
                         </p>
-                        <p class="project-outcome">Twenty agents. Four crews. One framework for engineering automation.</p>
+                        <p class="project-outcome">Twenty specialized agents. Four crews. One framework that turns engineering goals into finished deliverables without touching the cloud.</p>
                         <div class="project-tags">
                             <span class="tag tag-accent">Python</span>
                             <span class="tag tag-accent">CrewAI</span>
@@ -602,7 +607,7 @@
                         </div>
                         <h3 class="project-title">Argus</h3>
                         <p class="project-desc">Industrial anomaly detection platform. Monitors live Modbus register data using statistical analysis, generates plain-English diagnoses via local LLM, and fires alerts before problems become failures.</p>
-                        <p class="project-outcome">3-sigma, CUSUM, and rate-of-change detection with Ollama-powered diagnosis and Teams/SMTP alerting.</p>
+                        <p class="project-outcome">Watches your Modbus registers around the clock, catches drift before it becomes failure, and tells you exactly what's wrong in plain English.</p>
                         <div class="project-tags">
                             <span class="tag">Python</span>
                             <span class="tag">FastAPI</span>
@@ -615,33 +620,6 @@
                 </div>
 
                 <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-card-inner">
-                        <div class="project-meta">
-                            <i class="fas fa-football-ball project-icon"></i>
-                            <div class="project-links">
-                                <a href="https://github.com/AddisonTech/Chalk" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="https://chalk-sable.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">Chalk</h3>
-                        <p class="project-desc">An AI football intelligence platform built for coaches. Three modules cover film analysis, recruiting evaluation, and game plan recommendations, powered by recognition, analytics, and recommendation intelligence layers.</p>
-                        <p class="project-outcome">Film, board, and playbook intelligence in one platform.</p>
-                        <div class="project-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">React</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Tailwind</span>
-                            <span class="tag">shadcn/ui</span>
-                            <span class="tag">Supabase</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-aos="fade-up" data-aos-delay="150">
                     <div class="project-card-inner">
                         <div class="project-meta">
                             <i class="fas fa-eye project-icon"></i>
@@ -668,39 +646,32 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="150">
                     <div class="project-card-inner">
                         <div class="project-meta">
-                            <i class="fas fa-search project-icon"></i>
+                            <i class="fas fa-network-wired project-icon"></i>
                             <div class="project-links">
-                                <a href="https://github.com/AddisonTech/Sift" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                <a href="https://github.com/AddisonTech/ModBridge" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
                                     <i class="fab fa-github"></i>
                                 </a>
-                                <a href="https://sift-seven-chi.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
+                                <button id="modbridge-demo-btn" class="btn btn-primary btn-sm project-demo-btn" aria-label="Live Demo">
+                                    <i class="fas fa-play"></i> Live Demo
+                                </button>
                             </div>
                         </div>
-                        <h3 class="project-title">Sift</h3>
-                        <p class="project-desc">
-                            A camera-first personal decision engine. Point your phone at any product, restaurant,
-                            or item and get an instant AI-powered score, verdict, and ranked alternatives pulled
-                            from real reviews and local options. Built with preference learning so results get
-                            smarter over time.
-                        </p>
-                        <p class="project-outcome">Point. Scan. Decide. Your personal product intelligence engine.</p>
+                        <h3 class="project-title">ModBridge</h3>
+                        <p class="project-desc">Modbus TCP utility that polls live register values, serves them as a REST API, logs to CSV, and runs a built-in fake device for testing. Ships in both Rust and Python with identical feature sets.</p>
+                        <p class="project-outcome">Industrial field data, turned into a clean REST API, in one binary with no runtime required.</p>
                         <div class="project-tags">
-                            <span class="tag">React Native</span>
-                            <span class="tag">Expo</span>
-                            <span class="tag">Supabase</span>
-                            <span class="tag">Gemini</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">NativeWind</span>
+                            <span class="tag">Rust</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Modbus TCP</span>
+                            <span class="tag tag-accent">REST API</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="250">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="project-card-inner">
                         <div class="project-meta">
                             <i class="fas fa-bolt project-icon"></i>
@@ -725,7 +696,75 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+            </div>
+
+            <!-- Products & Applications -->
+            <div data-aos="fade-up" style="margin: 3rem 0 1.25rem 0;">
+                <span class="section-label">Products &amp; Applications</span>
+            </div>
+
+            <div class="projects-grid">
+
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-football-ball project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/Chalk" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://chalk-sable.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Chalk</h3>
+                        <p class="project-desc">An AI football intelligence platform built for coaches. Three modules cover film analysis, recruiting evaluation, and game plan recommendations, powered by recognition, analytics, and recommendation intelligence layers.</p>
+                        <p class="project-outcome">Three modules. One platform. Film, recruiting, and game planning intelligence built for coaches who think in systems.</p>
+                        <div class="project-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">React</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Tailwind</span>
+                            <span class="tag">shadcn/ui</span>
+                            <span class="tag">Supabase</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="50">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-search project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/Sift" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://sift-seven-chi.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Sift</h3>
+                        <p class="project-desc">
+                            A camera-first personal decision engine. Point your phone at any product, restaurant,
+                            or item and get an instant AI-powered score, verdict, and ranked alternatives pulled
+                            from real reviews and local options. Built with preference learning so results get
+                            smarter over time.
+                        </p>
+                        <p class="project-outcome">Point. Scan. Decide. AI-powered verdicts on any product, restaurant, or item in seconds.</p>
+                        <div class="project-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">Expo</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">Gemini</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">NativeWind</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-card-inner">
                         <div class="project-meta">
                             <i class="fas fa-file-code project-icon"></i>
@@ -745,31 +784,6 @@
                             <span class="tag">Python</span>
                             <span class="tag">Streamlit</span>
                             <span class="tag tag-accent">Live Coaching</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-aos="fade-up" data-aos-delay="350">
-                    <div class="project-card-inner">
-                        <div class="project-meta">
-                            <i class="fas fa-network-wired project-icon"></i>
-                            <div class="project-links">
-                                <a href="https://github.com/AddisonTech/ModBridge" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <button id="modbridge-demo-btn" class="btn btn-primary btn-sm project-demo-btn" aria-label="Live Demo">
-                                    <i class="fas fa-play"></i> Live Demo
-                                </button>
-                            </div>
-                        </div>
-                        <h3 class="project-title">ModBridge</h3>
-                        <p class="project-desc">Modbus TCP utility that polls live register values, serves them as a REST API, logs to CSV, and runs a built-in fake device for testing. Ships in both Rust and Python with identical feature sets.</p>
-                        <p class="project-outcome">Single-binary Rust build needs no runtime; Python version installs via pip for rapid prototyping and scripting against live field hardware.</p>
-                        <div class="project-tags">
-                            <span class="tag">Rust</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Modbus TCP</span>
-                            <span class="tag tag-accent">REST API</span>
                         </div>
                     </div>
                 </div>
@@ -926,94 +940,7 @@
                     </div>
                 </div>
 
-                <div class="cert-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="cert-icon cert-icon-cyan">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="cert-body">
-                        <p class="cert-name">JavaScript Algorithms and Data Structures</p>
-                        <div class="cert-row">
-                            <p class="cert-issuer">freeCodeCamp</p>
-                            <span class="cert-date">Sep 2025</span>
-                        </div>
-                        <div class="cert-tags">
-                            <span class="tag">JavaScript</span>
-                        </div>
-                        <a href="https://www.freecodecamp.org/certification/addison-tech/javascript-algorithms-and-data-structures-v8" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
-                    </div>
-                </div>
-
-                <div class="cert-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="cert-icon cert-icon-cyan">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <div class="cert-body">
-                        <p class="cert-name">Responsive Web Design</p>
-                        <div class="cert-row">
-                            <p class="cert-issuer">freeCodeCamp</p>
-                            <span class="cert-date">Aug 2025</span>
-                        </div>
-                        <div class="cert-tags">
-                            <span class="tag">HTML / CSS</span>
-                        </div>
-                        <a href="https://www.freecodecamp.org/certification/addison-tech/responsive-web-design" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
-                    </div>
-                </div>
-
-                <div class="cert-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="cert-icon cert-icon-accent">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="cert-body">
-                        <p class="cert-name">Machine Learning with Python</p>
-                        <div class="cert-row">
-                            <p class="cert-issuer">freeCodeCamp</p>
-                            <span class="cert-date">Aug 2025</span>
-                        </div>
-                        <div class="cert-tags">
-                            <span class="tag tag-accent">Python</span>
-                            <span class="tag tag-accent">Machine Learning</span>
-                        </div>
-                        <a href="https://www.freecodecamp.org/certification/addison-tech/machine-learning-with-python-v7" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
-                    </div>
-                </div>
-
-                <div class="cert-card" data-aos="fade-up" data-aos-delay="250">
-                    <div class="cert-icon cert-icon-purple">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="cert-body">
-                        <p class="cert-name">Data Analysis with Python</p>
-                        <div class="cert-row">
-                            <p class="cert-issuer">freeCodeCamp</p>
-                            <span class="cert-date">Aug 2025</span>
-                        </div>
-                        <div class="cert-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag tag-purple">Data Analysis</span>
-                        </div>
-                        <a href="https://www.freecodecamp.org/certification/addison-tech/data-analysis-with-python-v7" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
-                    </div>
-                </div>
-
                 <div class="cert-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="cert-icon cert-icon-cyan">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <div class="cert-body">
-                        <p class="cert-name">Scientific Computing with Python</p>
-                        <div class="cert-row">
-                            <p class="cert-issuer">freeCodeCamp</p>
-                            <span class="cert-date">Aug 2025</span>
-                        </div>
-                        <div class="cert-tags">
-                            <span class="tag">Python</span>
-                        </div>
-                        <a href="https://www.freecodecamp.org/certification/addison-tech/scientific-computing-with-python-v7" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
-                    </div>
-                </div>
-
-                <div class="cert-card" data-aos="fade-up" data-aos-delay="350">
                     <div class="cert-icon cert-icon-purple">
                         <i class="fab fa-wordpress"></i>
                     </div>
@@ -1031,6 +958,85 @@
                 </div>
 
             </div>
+
+            <details style="margin-top: 2rem;">
+                <summary style="cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-top: 1px solid rgba(255,255,255,0.06); outline: none;">
+                    <span class="section-label" style="opacity: 0.4; pointer-events: none;">Foundational Certifications</span>
+                    <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #475569;">(5)</span>
+                </summary>
+                <div class="certs-grid" style="margin-top: 1.5rem; opacity: 0.5;">
+                    <div class="cert-card">
+                        <div class="cert-icon cert-icon-cyan">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="cert-body">
+                            <p class="cert-name">JavaScript Algorithms and Data Structures</p>
+                            <div class="cert-row">
+                                <p class="cert-issuer">freeCodeCamp</p>
+                                <span class="cert-date">Sep 2025</span>
+                            </div>
+                            <div class="cert-tags"><span class="tag">JavaScript</span></div>
+                            <a href="https://www.freecodecamp.org/certification/addison-tech/javascript-algorithms-and-data-structures-v8" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon cert-icon-cyan">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="cert-body">
+                            <p class="cert-name">Responsive Web Design</p>
+                            <div class="cert-row">
+                                <p class="cert-issuer">freeCodeCamp</p>
+                                <span class="cert-date">Aug 2025</span>
+                            </div>
+                            <div class="cert-tags"><span class="tag">HTML / CSS</span></div>
+                            <a href="https://www.freecodecamp.org/certification/addison-tech/responsive-web-design" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon cert-icon-accent">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="cert-body">
+                            <p class="cert-name">Machine Learning with Python</p>
+                            <div class="cert-row">
+                                <p class="cert-issuer">freeCodeCamp</p>
+                                <span class="cert-date">Aug 2025</span>
+                            </div>
+                            <div class="cert-tags"><span class="tag">Python</span><span class="tag">Machine Learning</span></div>
+                            <a href="https://www.freecodecamp.org/certification/addison-tech/machine-learning-with-python-v7" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon cert-icon-purple">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="cert-body">
+                            <p class="cert-name">Data Analysis with Python</p>
+                            <div class="cert-row">
+                                <p class="cert-issuer">freeCodeCamp</p>
+                                <span class="cert-date">Aug 2025</span>
+                            </div>
+                            <div class="cert-tags"><span class="tag">Python</span><span class="tag">Data Analysis</span></div>
+                            <a href="https://www.freecodecamp.org/certification/addison-tech/data-analysis-with-python-v7" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon cert-icon-cyan">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="cert-body">
+                            <p class="cert-name">Scientific Computing with Python</p>
+                            <div class="cert-row">
+                                <p class="cert-issuer">freeCodeCamp</p>
+                                <span class="cert-date">Aug 2025</span>
+                            </div>
+                            <div class="cert-tags"><span class="tag">Python</span></div>
+                            <a href="https://www.freecodecamp.org/certification/addison-tech/scientific-computing-with-python-v7" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </section>
 
