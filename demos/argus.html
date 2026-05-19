@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Argus Live Demo — industrial Modbus anomaly detection with statistical analysis and local LLM diagnosis.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Argus | Live Demo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="argus.css">
+</head>
+<body class="demo-body">
+
+    <a href="#reg-grid" class="skip-nav">Skip to demo</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#projects" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="main-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <!-- Hero -->
+            <section class="demo-hero" aria-labelledby="demo-title">
+                <span class="section-label">Live Demo</span>
+                <h1 class="demo-title" id="demo-title">
+                    <span class="gradient-text">Argus</span>
+                </h1>
+                <p class="demo-subhead">
+                    Industrial anomaly detection for Modbus register data. Statistical analysis flags drift and faults in real time. Local LLM generates plain-English diagnoses.
+                </p>
+                <p class="demo-caption">
+                    <i class="fas fa-circle-info" aria-hidden="true"></i>
+                    Simulated data -- shows the live monitoring interface and diagnosis output the system produces locally.
+                </p>
+            </section>
+
+            <!-- Dashboard -->
+            <div class="argus-layout">
+
+                <!-- Left: register grid -->
+                <div class="reg-main">
+
+                    <div class="reg-toolbar">
+                        <div class="argus-status-bar">
+                            <span class="status-indicator" aria-hidden="true"></span>
+                            <span class="status-text" id="status-text">Monitoring active -- 4 registers online</span>
+                        </div>
+                        <button class="argus-btn" id="btn-fault" aria-label="Inject a simulated fault into a random register">
+                            <i class="fas fa-bolt" aria-hidden="true"></i>
+                            Simulate Fault
+                        </button>
+                    </div>
+
+                    <div class="reg-grid" id="reg-grid" aria-label="Register monitoring grid" aria-live="polite">
+
+                        <!-- Supply Temperature -->
+                        <article class="reg-card" id="reg-40001" aria-label="Supply Temperature register">
+                            <div class="reg-card-header">
+                                <div class="reg-name-block">
+                                    <span class="reg-name">Supply Temperature</span>
+                                    <span class="reg-addr">40001</span>
+                                </div>
+                                <span class="reg-badge badge-normal" aria-live="polite">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i> NORMAL
+                                </span>
+                            </div>
+                            <div class="reg-value-row">
+                                <span class="reg-value" aria-label="Current value">142.3</span>
+                                <span class="reg-unit">F</span>
+                            </div>
+                            <div class="reg-spark" aria-hidden="true">
+                                <svg id="spark-40001" viewBox="0 0 200 50" preserveAspectRatio="none"></svg>
+                            </div>
+                            <div class="reg-range" aria-label="Operating range 60 to 200 F">
+                                <span class="reg-limit">60</span>
+                                <div class="reg-track" role="presentation">
+                                    <div class="reg-range-marker" style="left: 58.8%"></div>
+                                </div>
+                                <span class="reg-limit">200 F</span>
+                            </div>
+                        </article>
+
+                        <!-- Discharge Pressure -->
+                        <article class="reg-card" id="reg-40002" aria-label="Discharge Pressure register">
+                            <div class="reg-card-header">
+                                <div class="reg-name-block">
+                                    <span class="reg-name">Discharge Pressure</span>
+                                    <span class="reg-addr">40002</span>
+                                </div>
+                                <span class="reg-badge badge-normal" aria-live="polite">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i> NORMAL
+                                </span>
+                            </div>
+                            <div class="reg-value-row">
+                                <span class="reg-value" aria-label="Current value">75.1</span>
+                                <span class="reg-unit">PSI</span>
+                            </div>
+                            <div class="reg-spark" aria-hidden="true">
+                                <svg id="spark-40002" viewBox="0 0 200 50" preserveAspectRatio="none"></svg>
+                            </div>
+                            <div class="reg-range" aria-label="Operating range 0 to 150 PSI">
+                                <span class="reg-limit">0</span>
+                                <div class="reg-track" role="presentation">
+                                    <div class="reg-range-marker" style="left: 50.1%"></div>
+                                </div>
+                                <span class="reg-limit">150 PSI</span>
+                            </div>
+                        </article>
+
+                        <!-- Motor Current -->
+                        <article class="reg-card" id="reg-40003" aria-label="Motor Current register">
+                            <div class="reg-card-header">
+                                <div class="reg-name-block">
+                                    <span class="reg-name">Motor Current</span>
+                                    <span class="reg-addr">40003</span>
+                                </div>
+                                <span class="reg-badge badge-normal" aria-live="polite">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i> NORMAL
+                                </span>
+                            </div>
+                            <div class="reg-value-row">
+                                <span class="reg-value" aria-label="Current value">28.2</span>
+                                <span class="reg-unit">A</span>
+                            </div>
+                            <div class="reg-spark" aria-hidden="true">
+                                <svg id="spark-40003" viewBox="0 0 200 50" preserveAspectRatio="none"></svg>
+                            </div>
+                            <div class="reg-range" aria-label="Operating range 0 to 50 A">
+                                <span class="reg-limit">0</span>
+                                <div class="reg-track" role="presentation">
+                                    <div class="reg-range-marker" style="left: 56.4%"></div>
+                                </div>
+                                <span class="reg-limit">50 A</span>
+                            </div>
+                        </article>
+
+                        <!-- Tank Level -->
+                        <article class="reg-card" id="reg-40004" aria-label="Tank Level register">
+                            <div class="reg-card-header">
+                                <div class="reg-name-block">
+                                    <span class="reg-name">Tank Level</span>
+                                    <span class="reg-addr">40004</span>
+                                </div>
+                                <span class="reg-badge badge-normal" aria-live="polite">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i> NORMAL
+                                </span>
+                            </div>
+                            <div class="reg-value-row">
+                                <span class="reg-value" aria-label="Current value">648</span>
+                                <span class="reg-unit">gal</span>
+                            </div>
+                            <div class="reg-spark" aria-hidden="true">
+                                <svg id="spark-40004" viewBox="0 0 200 50" preserveAspectRatio="none"></svg>
+                            </div>
+                            <div class="reg-range" aria-label="Operating range 0 to 1000 gal">
+                                <span class="reg-limit">0</span>
+                                <div class="reg-track" role="presentation">
+                                    <div class="reg-range-marker" style="left: 64.8%"></div>
+                                </div>
+                                <span class="reg-limit">1000 gal</span>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- Right: event feed -->
+                <aside class="feed-panel" aria-label="Live event log">
+                    <div class="feed-header">
+                        <span class="stage-eyebrow">// Event Log</span>
+                        <span class="feed-dot" aria-hidden="true"></span>
+                    </div>
+                    <div class="feed-log" id="feed-log" aria-live="polite" aria-atomic="false"></div>
+                </aside>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/Argus" target="_blank" rel="noopener noreferrer" aria-label="Argus on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="argus.js"></script>
+</body>
+</html>
