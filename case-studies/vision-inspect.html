@@ -144,7 +144,7 @@
 
                 <section class="cs-section">
                     <span class="cs-section-eyebrow">// the technical details</span>
-                    <h2 class="cs-section-heading">Latency, prompt design, and the migration to Vite</h2>
+                    <h2 class="cs-section-heading">Latency constraints and the prompt engineering that makes it work</h2>
                     <div class="cs-prose">
                         <p>
                             Inference latency is the main constraint. A VLM running on a mid-range GPU takes
@@ -162,18 +162,11 @@
                             asking for a direct pass/fail judgment.
                         </p>
                         <p>
-                            The frontend was originally built with Create React App and migrated to Vite
-                            during a refactor. The dev experience improvement was significant: cold start
-                            went from around 20 seconds to under 1 second. The migration required moving
-                            the entry point HTML to the project root, updating the TypeScript config for
-                            the bundler module resolution strategy, and replacing the CRA proxy config
-                            with Vite's native proxy support for the WebSocket and API routes.
-                        </p>
-                        <p>
-                            The WebSocket proxy in particular needed careful configuration to handle the
-                            upgrade header correctly. Vite's proxy handles this with a single flag, but
-                            it took a few iterations to get it working reliably with FastAPI's WebSocket
-                            endpoint.
+                            The frontend was migrated from Create React App to Vite during development.
+                            The WebSocket proxy configuration needed care to pass the upgrade header
+                            correctly alongside FastAPI's WebSocket endpoint, but once resolved the
+                            dev feedback loop became fast enough to iterate on UI and prompt changes
+                            in parallel.
                         </p>
                     </div>
                 </section>

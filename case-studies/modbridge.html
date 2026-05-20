@@ -107,7 +107,7 @@
 
                 <section class="cs-section">
                     <span class="cs-section-eyebrow">// how it works</span>
-                    <h2 class="cs-section-heading">Poll, serve, log, simulate</h2>
+                    <h2 class="cs-section-heading">Two modes, one contract</h2>
                     <div class="cs-prose">
                         <p>
                             ModBridge has two modes: serve and simulate. In serve mode, it connects to a
@@ -123,9 +123,10 @@
                             consuming application.
                         </p>
                         <div class="cs-callout">
-                            Both implementations write a CSV log of every poll. This gives you a local data
-                            record that you can pull into any analysis tool after the fact. The log captures
-                            the timestamp, register address, and value for every read.
+                            The REST response structure is identical between the Rust and Python versions:
+                            register address, raw integer value, hex representation, and poll timestamp.
+                            Swapping implementations requires no changes in the consuming application.
+                            That contract was the design goal, not an accident.
                         </div>
                         <p>
                             Configuration is handled via command-line flags. You pass the Modbus host, the

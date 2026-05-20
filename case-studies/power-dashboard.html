@@ -90,8 +90,8 @@
                         <p>
                             At work, I spend time around control systems that deal with real power data:
                             voltage, current, power factor, breaker states. I wanted to build something
-                            that looked and functioned like a real EPMS, with proper alarm management and
-                            a useful one-line diagram, but built with open-source tools on a standard stack.
+                            that was a real EPMS, with proper alarm management and
+                            a useful one-line diagram, built with open-source tools on a standard stack.
                         </p>
                         <p>
                             The ISA 18.2 alarm management standard was a specific goal. Most hobby projects
@@ -172,8 +172,7 @@
                             The simulation had to balance realism with predictability. Pure random noise
                             produces values that don't tell a useful story. The simulation uses mean-reverting
                             random walks with per-meter parameters, so readings look realistic but stay
-                            within sensible bounds. Fault scenarios are scripted: the simulation can inject
-                            an overcurrent event or a voltage sag on demand to demonstrate the alarm system.
+                            within sensible bounds.
                         </p>
                     </div>
                 </section>

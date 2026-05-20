@@ -146,15 +146,17 @@
 
                 <section class="cs-section">
                     <span class="cs-section-eyebrow">// the technical details</span>
-                    <h2 class="cs-section-heading">Architecture decisions and things that were harder than expected</h2>
+                    <h2 class="cs-section-heading">Where the real design work lives</h2>
                     <div class="cs-prose">
                         <p>
                             The hardest part of multi-agent design is preventing agents from contradicting each
                             other or getting stuck in loops. CrewAI provides the scaffolding, but you still have
                             to think carefully about task sequencing, what context each agent receives, and how
                             to handle cases where one agent's output doesn't match what the next agent needs.
-                            I spent a lot of time on the system prompts for each role, which turned out to be
-                            where most of the real design work lives.
+                            The system prompts for each role are where most of the real design work lives.
+                            A reviewer agent that returns freeform prose instead of a structured list breaks
+                            every downstream agent that expects structured input, so output format constraints
+                            had to be enforced through the prompt, not code.
                         </p>
                         <p>
                             Streaming was a specific engineering challenge. CrewAI runs synchronously by default.

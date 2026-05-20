@@ -143,7 +143,7 @@
 
                 <section class="cs-section">
                     <span class="cs-section-eyebrow">// the technical details</span>
-                    <h2 class="cs-section-heading">Scoring logic, Streamlit's reactivity model, and deployment</h2>
+                    <h2 class="cs-section-heading">Scoring logic and Streamlit's reactivity model</h2>
                     <div class="cs-prose">
                         <p>
                             Streamlit reruns the entire script on every user interaction. For a tool where
@@ -166,11 +166,12 @@
                             improvement visible immediately.
                         </p>
                         <p>
-                            The PDF export was the most technically involved piece. Streamlit doesn't have
-                            native PDF generation, so the export uses Python's `reportlab` library to
-                            render the resume content into a PDF buffer, which is then offered as a
-                            download. Getting the typography and spacing to look right required a fair
-                            amount of tuning in the layout code.
+                            Streamlit doesn't have native PDF generation, so export uses Python's
+                            <code>reportlab</code> library to render the resume content into a PDF buffer
+                            served as a download. The layout targets ATS parsers: single column, no tables,
+                            no text boxes. Getting the typography and line spacing to look right took more
+                            iteration in the layout code than expected, but the result passes cleanly
+                            through the parsers I tested.
                         </p>
                     </div>
                 </section>

@@ -79,7 +79,7 @@
 
                 <section class="cs-section">
                     <span class="cs-section-eyebrow">// the problem</span>
-                    <h2 class="cs-section-heading">Making quick decisions with incomplete information</h2>
+                    <h2 class="cs-section-heading">Every review app makes the problem worse</h2>
                     <div class="cs-prose">
                         <p>
                             The classic decision problem in a grocery store or a restaurant district: you're
@@ -98,10 +98,11 @@
                             that a search result isn't.
                         </p>
                         <p>
-                            The preference learning piece was the other motivating idea. Most recommendation
-                            systems require you to rate things explicitly or use a profile you set up once.
-                            Sift learns from your scan history and verdicts implicitly, so the results get
-                            more personal over time without any setup.
+                            The other part of the problem is that most recommendation apps don't know what
+                            you actually care about. Price-sensitive shoppers and quality-first buyers need
+                            different verdicts on the same item. Sift solves this with explicit preference
+                            weights rather than inferred ones: you say what matters, and the model scores
+                            accordingly.
                         </p>
                     </div>
                 </section>
@@ -133,11 +134,12 @@
                             score delta, and preference match.
                         </div>
                         <p>
-                            Preference learning works by tracking which verdicts you agree with and which
-                            ones you override. If you consistently scan items that Sift rates highly and
-                            purchase them, those preferences strengthen. If you scan a low-rated item and
-                            buy it anyway, the model updates its weights for your profile. The preference
-                            model is stored per-user in Supabase and updated asynchronously after each session.
+                            Preferences are five numeric weights on a 1-10 scale: price sensitivity,
+                            quality threshold, ethics weighting, health considerations, and speed of service.
+                            Those values live in a Supabase <code>user_preferences</code> table and get
+                            injected into Gemini's system prompt on every scan. Adjust a slider and the
+                            next scan reflects it immediately. There's no model training, no cold-start
+                            period, no black box. The preference system is just context passed to the model.
                         </p>
                     </div>
                 </section>
@@ -169,11 +171,12 @@
                             which helps latency on the network transfer side.
                         </p>
                         <p>
-                            NativeWind brings Tailwind's utility classes to React Native, which made
-                            styling much faster than working with React Native's StyleSheet API directly.
-                            The mental model is the same as web Tailwind, with a few mobile-specific
-                            differences around layout and text rendering. For a project moving quickly,
-                            the productivity gain was worth the occasional behavioral difference.
+                            Model selection was a deliberate tradeoff. Gemini 2.5 Flash returns a verdict
+                            in about two seconds. A more capable model takes closer to six. For something
+                            you're using in a store aisle or on a street corner, two seconds feels instant
+                            and six seconds feels broken. The cost is that Flash occasionally hedges on
+                            edge cases where a stronger model would be definitive. For most scans,
+                            the speed is worth it.
                         </p>
                     </div>
                 </section>

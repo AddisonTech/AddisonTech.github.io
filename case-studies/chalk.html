@@ -111,12 +111,15 @@
                     <h2 class="cs-section-heading">Film Room, Board, and Playbook</h2>
                     <div class="cs-prose">
                         <p>
-                            The Film Room module is for analyzing game film. You can log plays, tag
-                            formations and personnel, note tendencies, and query the accumulated film
-                            data to identify patterns. The analysis layer uses the film log as context
-                            to answer specific questions: what does a team run on third-and-short from
-                            the right hash, what's their tendency when they motion pre-snap, where are
-                            the blocking gaps in their zone scheme.
+                            The Film Room module is where play data goes in. Each play is tagged with
+                            down, distance, formation, personnel grouping, concept, and result. When you
+                            run the scouting report action, an aggregation layer processes all tagged plays
+                            and computes: run/pass split overall and by down, top four formations, top three
+                            personnel groupings, top five play concepts, red zone tendencies, third-down
+                            splits by distance, and pre-snap motion frequency. That aggregated profile
+                            gets passed to Groq's Llama 3.3 70B with a structured prompt template. The
+                            model reads the numbers and writes a six-section markdown report: Offensive
+                            Identity, Run Game, Pass Game, Third Down, Red Zone, and Key Adjustments.
                         </p>
                         <p>
                             The Board handles recruiting. You can log prospects with position, measurables,
@@ -126,11 +129,11 @@
                             on their film data.
                         </p>
                         <div class="cs-callout">
-                            The Playbook module is where film analysis feeds into game planning. Once
-                            you've built a tendency profile for an opponent in the Film Room, the Playbook
-                            can recommend specific play concepts and formation adjustments designed to
-                            exploit the tendencies you've identified. The recommendations are tied back
-                            to the film data so you can trace the reasoning.
+                            The LLM's job is interpretation, not pattern detection. By the time Llama sees
+                            the data, the patterns are already identified: run rate on second-and-long is
+                            31%, pre-snap motion appears on 62% of pass plays. The model reads those numbers
+                            and writes the analysis. The intelligence is in what gets measured and how it's
+                            aggregated, not in the model.
                         </div>
                         <p>
                             All data is persisted in Supabase. The application is a Next.js frontend
@@ -168,11 +171,13 @@
                             syncs annotations back to the main database in real time.
                         </p>
                         <p>
-                            The shadcn/ui component library was a deliberate choice. It gives you
-                            well-designed base components that you fully own and can modify, rather than
-                            fighting against an opinionated design system. For a project that needed to
-                            feel polished but also match a specific football-analytics aesthetic, that
-                            flexibility was important.
+                            The aggregation design was where most of the product thinking happened.
+                            Deciding what to measure shapes what the report says. Run/pass split overall
+                            is obvious; run/pass split by down is where the insight lives. Third-and-short
+                            and third-and-long behave differently enough that combining them into a single
+                            third-down row loses the information. Pre-snap motion frequency is easy to
+                            miss if you're not specifically looking for it. Getting the aggregation right
+                            took more iteration than any part of the code.
                         </p>
                     </div>
                 </section>
