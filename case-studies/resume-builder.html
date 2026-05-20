@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resume Portfolio Builder case study -- Streamlit resume builder with live bullet-strength analysis.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Resume Portfolio Builder | Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-body">
+
+    <a href="#cs-content" class="skip-nav">Skip to content</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#home" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="cs-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <section class="cs-hero" aria-labelledby="cs-title">
+                <span class="section-label">Case Study</span>
+                <h1 class="cs-title" id="cs-title">
+                    <span class="gradient-text">Resume Portfolio Builder</span>
+                </h1>
+                <p class="cs-tagline">
+                    A Streamlit resume builder with a live bullet-strength analyzer that scores every
+                    line in real time and grades the complete resume out of 100. It coaches users
+                    into stronger writing while they type.
+                </p>
+                <div class="cs-stack">
+                    <span class="cs-tag">Python</span>
+                    <span class="cs-tag">Streamlit</span>
+                    <span class="cs-tag">NLP</span>
+                    <span class="cs-tag">PDF Export</span>
+                    <span class="cs-tag">Live Scoring</span>
+                </div>
+                <div class="cs-links">
+                    <a href="https://github.com/AddisonTech/resume-portfolio-builder" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="../demos/resume-builder.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </section>
+
+            <article class="cs-article">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the problem</span>
+                    <h2 class="cs-section-heading">Most resume tools just format. They don't teach.</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The standard resume tool gives you a template and helps you fill it out.
+                            You write your experience bullets, it handles the layout, and you export
+                            a PDF. Whether your bullets are any good is entirely up to you. The feedback
+                            loop, if there is one, usually comes from a career counselor or a hiring
+                            manager rejection, neither of which is timely or specific enough to help
+                            you write better.
+                        </p>
+                        <p>
+                            The weakness of most resume bullets follows a predictable pattern. They use
+                            passive or weak verbs: "responsible for," "worked on," "helped with." They
+                            describe job duties rather than outcomes. They don't include numbers or
+                            metrics where numbers exist. These are well-known problems in the career
+                            advice space, but existing tools don't fix them because they don't analyze
+                            the text you write.
+                        </p>
+                        <p>
+                            The idea for this project was to build the analysis into the writing experience
+                            itself. You type a bullet point, and the tool immediately tells you how strong
+                            it is and why. The score updates on every keystroke. By the time you're done
+                            writing, you've already been coached.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// how it works</span>
+                    <h2 class="cs-section-heading">Per-bullet scoring, whole-resume grade, PDF export</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The analyzer evaluates each bullet point across several dimensions: whether it
+                            starts with a strong action verb, whether it includes quantifiable results,
+                            whether the length is appropriate, whether it contains any weak or filler
+                            phrases, and overall specificity. Each dimension has a weight in the final
+                            bullet score, which is displayed inline next to the bullet as you type.
+                        </p>
+                        <p>
+                            The verb check uses a categorized list of action verbs grouped by strength.
+                            "Led," "designed," and "reduced" rank higher than "supported," "helped,"
+                            or "assisted." Bullets starting with passive constructions are flagged
+                            regardless of the verb quality.
+                        </p>
+                        <div class="cs-callout">
+                            The whole-resume grade is computed from all bullet scores weighted by section.
+                            The experience section matters more than the skills section. The grade
+                            updates live as you add or edit content. A resume with consistently strong
+                            bullets, proper section structure, and appropriate length will score in the
+                            90s. Most first drafts land in the 50s to 70s, which gives concrete direction.
+                        </div>
+                        <p>
+                            When you're satisfied with the resume, you can export it as a PDF. The export
+                            uses a clean single-column layout that's designed to parse well through
+                            applicant tracking systems. The styling is intentionally minimal so the
+                            content does the work.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <h2 class="cs-section-heading">Scoring logic, Streamlit's reactivity model, and deployment</h2>
+                    <div class="cs-prose">
+                        <p>
+                            Streamlit reruns the entire script on every user interaction. For a tool where
+                            you want per-keystroke feedback, that means the scoring function runs on every
+                            character change. The performance constraint is that the analysis has to be fast
+                            enough to feel instant. Pure Python NLP without any heavy model inference is
+                            fast enough; the scoring typically completes in a few milliseconds.
+                        </p>
+                        <p>
+                            The verb detection uses a lookup against a curated word list rather than any
+                            learned model. For this specific task, a well-maintained list outperforms
+                            embedding-based approaches because the categories are well-defined and the
+                            signal you care about is simple: is this word on the strong-verb list or not.
+                        </p>
+                        <p>
+                            The metric detection is done with a regular expression that matches numbers,
+                            percentages, dollar amounts, and multipliers. A bullet that contains a
+                            quantified result gets a meaningful score boost. This alone pushes a lot of
+                            users toward writing better bullets, because the score feedback makes the
+                            improvement visible immediately.
+                        </p>
+                        <p>
+                            The PDF export was the most technically involved piece. Streamlit doesn't have
+                            native PDF generation, so the export uses Python's `reportlab` library to
+                            render the resume content into a PDF buffer, which is then offered as a
+                            download. Getting the typography and spacing to look right required a fair
+                            amount of tuning in the layout code.
+                        </p>
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/resume-portfolio-builder" target="_blank" rel="noopener noreferrer" aria-label="Resume Portfolio Builder on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Argus case study -- industrial Modbus anomaly detection with statistical analysis and local LLM diagnosis.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Argus | Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-body">
+
+    <a href="#cs-content" class="skip-nav">Skip to content</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#home" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="cs-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <section class="cs-hero" aria-labelledby="cs-title">
+                <span class="section-label">Case Study</span>
+                <h1 class="cs-title" id="cs-title">
+                    <span class="gradient-text">Argus</span>
+                </h1>
+                <p class="cs-tagline">
+                    Industrial anomaly detection for Modbus register data. Statistical analysis catches drift
+                    and faults in real time. A local language model turns raw numbers into plain-English diagnoses.
+                </p>
+                <div class="cs-stack">
+                    <span class="cs-tag">Python</span>
+                    <span class="cs-tag">FastAPI</span>
+                    <span class="cs-tag">React</span>
+                    <span class="cs-tag">SQLite</span>
+                    <span class="cs-tag">Ollama</span>
+                    <span class="cs-tag">Modbus TCP</span>
+                    <span class="cs-tag">3-Sigma Detection</span>
+                    <span class="cs-tag">CUSUM</span>
+                </div>
+                <div class="cs-links">
+                    <a href="https://github.com/AddisonTech/Argus" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="../demos/argus.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </section>
+
+            <article class="cs-article">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the problem</span>
+                    <h2 class="cs-section-heading">Equipment doesn't fail all at once</h2>
+                    <div class="cs-prose">
+                        <p>
+                            On a shop floor or in a data center, equipment rarely fails without warning. There are
+                            almost always precursor signals buried in the live data: a temperature reading that
+                            climbs a few degrees too slowly to trigger a hard alarm, a pressure value that drifts
+                            outside its normal band for a few minutes before recovering. By the time a threshold
+                            alarm fires, the problem is often already expensive.
+                        </p>
+                        <p>
+                            The standard approach relies on static thresholds configured in a PLC or SCADA system.
+                            You set a high-limit, you wait for it to trip. That works for hard faults but misses
+                            the soft ones entirely. What I wanted was a system that could watch register values over
+                            time, learn what normal looks like for each register, and flag deviations before they
+                            crossed any fixed limit.
+                        </p>
+                        <p>
+                            I also wanted the output to be useful to someone who isn't a data scientist. A z-score
+                            of 3.4 doesn't tell a technician much. A sentence like "bearing friction or insufficient
+                            lubrication detected, check lube system" does.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// how it works</span>
+                    <h2 class="cs-section-heading">Statistical detection, local language model, live dashboard</h2>
+                    <div class="cs-prose">
+                        <p>
+                            Argus connects to a Modbus TCP device (or the built-in simulator) and polls a
+                            configurable set of holding registers on a fixed interval. Each register maintains a
+                            rolling history window. On every tick, the detector computes the mean and standard
+                            deviation of the recent window, then scores the latest value as a z-score. A score
+                            above 2.0 triggers a drift warning. A score above 3.0 triggers a fault alert.
+                        </p>
+                        <p>
+                            There are two additional detection methods running alongside the sigma test. CUSUM
+                            (cumulative sum control) catches slow directional drift that doesn't produce a high
+                            z-score on any single tick but reveals a persistent upward or downward trend over time.
+                            The rate-of-change check catches abrupt spikes: if a value jumps by more than a
+                            configured multiple of its standard deviation in a single interval, that's a separate
+                            fault class from a gradual drift.
+                        </p>
+                        <p>
+                            When a fault is detected, Argus calls a locally-running language model via Ollama.
+                            The model gets the register name, the current value, the historical mean, and the
+                            deviation, and it returns a diagnosis in plain English. Nothing leaves the local
+                            network. The same system that runs on a production floor can run completely offline.
+                        </p>
+                        <div class="cs-callout">
+                            The frontend is a React dashboard with live WebSocket updates. Each register card
+                            shows the current value, a sparkline of the last 30 readings, a status badge
+                            (normal / drift / fault), and a range marker. An event log on the right side streams
+                            every detection event and diagnosis as they happen.
+                        </div>
+                        <p>
+                            All events are persisted to SQLite. The historical record lets you go back and look at
+                            how a register behaved in the hours before a fault, which is useful for root-cause
+                            analysis after the fact.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <h2 class="cs-section-heading">The parts that took the most thought</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The detection logic lives in a single Python module. I spent a fair amount of time
+                            deciding how to handle the bootstrap period -- the first few seconds after startup when
+                            the history window is too short to produce a meaningful standard deviation. The solution
+                            was simple: require a minimum window length before enabling detection. If the window
+                            has fewer than 8 values, no alerts fire. It's a blunt rule, but it prevents false
+                            positives during startup.
+                        </p>
+                        <p>
+                            The bigger design question was how to tune sensitivity without making it a parameter
+                            that requires expert knowledge to set. The 3-sigma threshold is standard and
+                            well-understood, so it stayed. CUSUM requires two parameters (a reference value and
+                            a decision threshold), and I exposed both in the configuration file alongside sane
+                            defaults. Most users can leave them alone.
+                        </p>
+                        <p>
+                            One thing I learned building the frontend: rendering a sparkline for each register
+                            every polling interval is fast enough when you're drawing raw SVG polylines and
+                            skipping the React reconciler for the SVG internals. Trying to do it as controlled
+                            React state caused noticeable jank at fast poll rates. The fix was to hold the SVG
+                            elements as refs and mutate them directly, which felt wrong in a React component but
+                            performed well.
+                        </p>
+                        <p>
+                            The test suite covers the detector in isolation: normal values, hard limit violations,
+                            CUSUM accumulation, rate-of-change trips, and recovery after a fault clears. The
+                            detector is a pure function of its input config and register history, which makes it
+                            straightforward to test without mocking any I/O.
+                        </p>
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/Argus" target="_blank" rel="noopener noreferrer" aria-label="Argus on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

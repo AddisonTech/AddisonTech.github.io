@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sift case study -- camera-first personal decision engine for products, restaurants, and anything else you point your phone at.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Sift | Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-body">
+
+    <a href="#cs-content" class="skip-nav">Skip to content</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#home" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="cs-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <section class="cs-hero" aria-labelledby="cs-title">
+                <span class="section-label">Case Study</span>
+                <h1 class="cs-title" id="cs-title">
+                    <span class="gradient-text">Sift</span>
+                </h1>
+                <p class="cs-tagline">
+                    A camera-first personal decision engine. Point your phone at any product, restaurant,
+                    or item and get an instant verdict, score, and ranked alternatives pulled from real
+                    reviews and local options.
+                </p>
+                <div class="cs-stack">
+                    <span class="cs-tag">React Native</span>
+                    <span class="cs-tag">Expo</span>
+                    <span class="cs-tag">TypeScript</span>
+                    <span class="cs-tag">Supabase</span>
+                    <span class="cs-tag">Gemini</span>
+                    <span class="cs-tag">NativeWind</span>
+                    <span class="cs-tag">Edge Functions</span>
+                </div>
+                <div class="cs-links">
+                    <a href="https://github.com/AddisonTech/Sift" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://sift-seven-chi.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </section>
+
+            <article class="cs-article">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the problem</span>
+                    <h2 class="cs-section-heading">Making quick decisions with incomplete information</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The classic decision problem in a grocery store or a restaurant district: you're
+                            looking at something and you want a fast, honest answer about whether it's good.
+                            You could open several review apps, cross-reference them, weigh the star ratings
+                            against the number of reviews, and try to filter out the noise. In practice,
+                            almost nobody does that. You either trust a friend's recommendation, go with
+                            your gut, or spend five minutes on your phone that you didn't want to spend.
+                        </p>
+                        <p>
+                            The interesting opportunity here is that modern multimodal models can take a photo
+                            of a product label, a restaurant sign, or a menu item and reason about it with
+                            actual context: what the item is, what the reviews say about it, how it compares
+                            to nearby options, whether it matches your stated preferences. That reasoning,
+                            delivered in a few seconds from a camera snap, is genuinely useful in a way
+                            that a search result isn't.
+                        </p>
+                        <p>
+                            The preference learning piece was the other motivating idea. Most recommendation
+                            systems require you to rate things explicitly or use a profile you set up once.
+                            Sift learns from your scan history and verdicts implicitly, so the results get
+                            more personal over time without any setup.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// how it works</span>
+                    <h2 class="cs-section-heading">Scan, score, decide</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The core flow is fast: you open the camera, point it at something, and tap.
+                            The image goes to a Supabase edge function that passes it to Gemini along
+                            with any relevant review data and your preference profile. The model identifies
+                            what it's looking at, retrieves relevant signals, and returns a score out of
+                            ten, a one-sentence verdict, and a ranked list of alternatives within a few
+                            seconds.
+                        </p>
+                        <p>
+                            The score is calibrated to feel useful rather than precise. A 7 means it's
+                            worth getting but not exceptional. A 4 means skip it. The verdict is always
+                            a single sentence because the point is speed, not justification. If you want
+                            the reasoning, you can tap through to the detail view.
+                        </p>
+                        <div class="cs-callout">
+                            The alternatives panel is often more useful than the verdict itself. If the
+                            thing you scanned is mediocre, knowing there's a better option two blocks away
+                            is the actually actionable information. The alternatives are ranked by distance,
+                            score delta, and preference match.
+                        </div>
+                        <p>
+                            Preference learning works by tracking which verdicts you agree with and which
+                            ones you override. If you consistently scan items that Sift rates highly and
+                            purchase them, those preferences strengthen. If you scan a low-rated item and
+                            buy it anyway, the model updates its weights for your profile. The preference
+                            model is stored per-user in Supabase and updated asynchronously after each session.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <h2 class="cs-section-heading">Camera handling, edge latency, and building for mobile first</h2>
+                    <div class="cs-prose">
+                        <p>
+                            React Native with Expo was the right choice for a camera-first app. Expo's
+                            Camera module handles permissions, preview rendering, and capture consistently
+                            across iOS and Android without native code. The tradeoff is that some low-level
+                            camera controls aren't accessible, but for a scan-and-judge use case, the
+                            high-level API is sufficient.
+                        </p>
+                        <p>
+                            Latency was the main engineering challenge. The round trip from camera snap
+                            to verdict involves image encoding, network transfer, LLM inference, and response
+                            rendering. On a good connection this is under three seconds. On a slow connection
+                            it can stretch to six or seven. The UI handles this with a skeleton state that
+                            shows partial results as they arrive, so the interaction doesn't feel frozen.
+                        </p>
+                        <p>
+                            Supabase edge functions handle the inference calls. This keeps API keys
+                            server-side and makes it straightforward to rate-limit by user. The edge
+                            deployment also puts the inference call geographically close to most users,
+                            which helps latency on the network transfer side.
+                        </p>
+                        <p>
+                            NativeWind brings Tailwind's utility classes to React Native, which made
+                            styling much faster than working with React Native's StyleSheet API directly.
+                            The mental model is the same as web Tailwind, with a few mobile-specific
+                            differences around layout and text rendering. For a project moving quickly,
+                            the productivity gain was worth the occasional behavioral difference.
+                        </p>
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/Sift" target="_blank" rel="noopener noreferrer" aria-label="Sift on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

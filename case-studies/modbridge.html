@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ModBridge case study -- Modbus TCP to REST API bridge in Rust and Python.">
+    <meta name="author" content="Addison Smith">
+
+    <title>ModBridge | Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-body">
+
+    <a href="#cs-content" class="skip-nav">Skip to content</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#home" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="cs-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <section class="cs-hero" aria-labelledby="cs-title">
+                <span class="section-label">Case Study</span>
+                <h1 class="cs-title" id="cs-title">
+                    <span class="gradient-text">ModBridge</span>
+                </h1>
+                <p class="cs-tagline">
+                    A Modbus TCP to REST API bridge that polls live register values, serves them over HTTP,
+                    logs to CSV, and ships with a built-in device simulator. Available in both Rust and
+                    Python with identical feature sets.
+                </p>
+                <div class="cs-stack">
+                    <span class="cs-tag">Rust</span>
+                    <span class="cs-tag">Python</span>
+                    <span class="cs-tag">Modbus TCP</span>
+                    <span class="cs-tag">REST API</span>
+                    <span class="cs-tag">Tokio</span>
+                    <span class="cs-tag">FastAPI</span>
+                    <span class="cs-tag">pymodbus</span>
+                </div>
+                <div class="cs-links">
+                    <a href="https://github.com/AddisonTech/ModBridge" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> Rust
+                    </a>
+                    <a href="https://github.com/AddisonTech/ModBridge_py" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> Python
+                    </a>
+                </div>
+            </section>
+
+            <article class="cs-article">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the problem</span>
+                    <h2 class="cs-section-heading">Getting data out of industrial devices shouldn't require a SCADA license</h2>
+                    <div class="cs-prose">
+                        <p>
+                            Modbus TCP is the lowest common denominator of industrial communication. Nearly
+                            every PLC, VFD, power meter, and sensor that speaks Ethernet speaks Modbus.
+                            But reading Modbus data from a modern application means either licensing a
+                            proprietary driver, writing your own polling loop, or using a SCADA platform
+                            that's overkill for most use cases.
+                        </p>
+                        <p>
+                            For projects like Argus and Power Dashboard, I needed a way to get live register
+                            data into a Python or JavaScript application without dealing with Modbus directly
+                            in the application code. A small sidecar process that polls Modbus and exposes
+                            the data over a clean REST API was the obvious answer. ModBridge is that sidecar.
+                        </p>
+                        <p>
+                            I built the Python version first because it was the fastest path to something
+                            working. Then I built the Rust version as a way to learn Rust properly, applying
+                            it to a problem I already understood deeply. The two implementations ended up
+                            being a useful comparison study in how the same problem feels in both languages.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// how it works</span>
+                    <h2 class="cs-section-heading">Poll, serve, log, simulate</h2>
+                    <div class="cs-prose">
+                        <p>
+                            ModBridge has two modes: serve and simulate. In serve mode, it connects to a
+                            real Modbus TCP device, polls the configured register range on a set interval,
+                            caches the values in memory, and serves them at a REST endpoint. In simulate
+                            mode, it runs a fake Modbus device on localhost that generates random-walking
+                            register values, so you can test without physical hardware.
+                        </p>
+                        <p>
+                            The REST API returns register values with addresses, raw integer values, and
+                            hex representations. The response structure is identical between the Rust and
+                            Python implementations, so you can swap between them without changing the
+                            consuming application.
+                        </p>
+                        <div class="cs-callout">
+                            Both implementations write a CSV log of every poll. This gives you a local data
+                            record that you can pull into any analysis tool after the fact. The log captures
+                            the timestamp, register address, and value for every read.
+                        </div>
+                        <p>
+                            Configuration is handled via command-line flags. You pass the Modbus host, the
+                            register range to poll, the polling interval, and the port for the REST server.
+                            No config file required for basic usage, which keeps it easy to stand up quickly.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <h2 class="cs-section-heading">Rust vs Python, and what the comparison taught me</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The Rust implementation was my first real Rust project beyond tutorials. The
+                            borrow checker forced a level of explicitness about ownership and threading
+                            that took some getting used to, but the result is a binary with no runtime
+                            dependency that starts in milliseconds and uses negligible memory. Dropping it
+                            onto a low-power embedded Linux device is straightforward.
+                        </p>
+                        <p>
+                            Async I/O in Rust with Tokio is conceptually similar to asyncio in Python,
+                            but the type system makes the concurrency explicit in a way Python doesn't.
+                            Getting the Modbus polling loop and the HTTP server running on the same Tokio
+                            runtime without blocking took some trial and error, but the final structure is
+                            clean. Shared state between the poller and the HTTP handler uses an Arc and
+                            a RwLock, which is the canonical Rust pattern for this.
+                        </p>
+                        <p>
+                            The Python version has a different strength: it's easy to modify. Adding a new
+                            endpoint, changing the polling logic, or switching the Modbus function code is
+                            a matter of editing a few lines. For use cases where you want to prototype
+                            quickly or adapt the behavior, the Python version is more practical.
+                        </p>
+                        <p>
+                            The simulator implementations differ in an interesting way. The Python simulator
+                            uses a TOML configuration file that lets you define register ranges, walk
+                            speeds, and value distributions. The Rust simulator uses command-line flags.
+                            Both serve the same purpose but reflect the different ergonomics of the two
+                            ecosystems.
+                        </p>
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/ModBridge" target="_blank" rel="noopener noreferrer" aria-label="ModBridge on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

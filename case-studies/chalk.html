@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chalk case study -- AI football intelligence platform for coaches covering film analysis, recruiting, and game planning.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Chalk | Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-body">
+
+    <a href="#cs-content" class="skip-nav">Skip to content</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#home" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="cs-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <section class="cs-hero" aria-labelledby="cs-title">
+                <span class="section-label">Case Study</span>
+                <h1 class="cs-title" id="cs-title">
+                    <span class="gradient-text">Chalk</span>
+                </h1>
+                <p class="cs-tagline">
+                    An intelligence platform for football coaches. Three modules cover film analysis,
+                    recruiting evaluation, and game plan recommendations, each powered by a separate
+                    reasoning layer built for that specific problem.
+                </p>
+                <div class="cs-stack">
+                    <span class="cs-tag">Next.js</span>
+                    <span class="cs-tag">React</span>
+                    <span class="cs-tag">TypeScript</span>
+                    <span class="cs-tag">Tailwind CSS</span>
+                    <span class="cs-tag">shadcn/ui</span>
+                    <span class="cs-tag">Supabase</span>
+                    <span class="cs-tag">Vercel</span>
+                </div>
+                <div class="cs-links">
+                    <a href="https://github.com/AddisonTech/Chalk" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://chalk-sable.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </section>
+
+            <article class="cs-article">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the problem</span>
+                    <h2 class="cs-section-heading">Coaching intelligence is scattered across too many tools</h2>
+                    <div class="cs-prose">
+                        <p>
+                            Most football coaches at the high school and smaller college level do their film
+                            work in one place, track recruiting in a spreadsheet, and build game plans in
+                            their heads or in a whiteboard session. The tools that exist are either designed
+                            for major programs with large budgets, or they're general-purpose platforms that
+                            weren't built with football-specific context.
+                        </p>
+                        <p>
+                            The insight behind Chalk was that these three areas, film, recruiting, and game
+                            planning, have different analytical needs but they're all part of the same job.
+                            A platform that treats them as connected rather than separate could save
+                            significant time and surface connections that aren't visible when the data
+                            lives in different places.
+                        </p>
+                        <p>
+                            I'm personally interested in the strategy side of football. The project gave me
+                            a chance to apply language model capabilities to a domain where the right framing
+                            and football-specific knowledge actually matter, rather than just using generic
+                            assistant prompts.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// how it works</span>
+                    <h2 class="cs-section-heading">Film Room, Board, and Playbook</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The Film Room module is for analyzing game film. You can log plays, tag
+                            formations and personnel, note tendencies, and query the accumulated film
+                            data to identify patterns. The analysis layer uses the film log as context
+                            to answer specific questions: what does a team run on third-and-short from
+                            the right hash, what's their tendency when they motion pre-snap, where are
+                            the blocking gaps in their zone scheme.
+                        </p>
+                        <p>
+                            The Board handles recruiting. You can log prospects with position, measurables,
+                            film grades, and contact notes. The evaluation layer scores prospects against
+                            configurable position profiles and generates comparison summaries across a
+                            recruiting class. It surfaces candidates who match specific scheme fits based
+                            on their film data.
+                        </p>
+                        <div class="cs-callout">
+                            The Playbook module is where film analysis feeds into game planning. Once
+                            you've built a tendency profile for an opponent in the Film Room, the Playbook
+                            can recommend specific play concepts and formation adjustments designed to
+                            exploit the tendencies you've identified. The recommendations are tied back
+                            to the film data so you can trace the reasoning.
+                        </div>
+                        <p>
+                            All data is persisted in Supabase. The application is a Next.js frontend
+                            deployed on Vercel. The intelligence layer runs on server actions and edge
+                            functions, which keeps the client clean and the latency low.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <h2 class="cs-section-heading">Domain knowledge, module boundaries, and the remote inspection feature</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The hardest part of building Chalk was making the intelligence layer actually
+                            useful rather than just impressive-looking. Football has a specific vocabulary,
+                            and the recommendations need to use that vocabulary correctly to be trusted by
+                            someone who thinks in terms of gap schemes, coverage shells, and route concepts.
+                            Getting the framing right in the system context took multiple iterations.
+                        </p>
+                        <p>
+                            The three modules have clean boundaries but shared data. A prospect in the
+                            Board can have film notes attached that came from the Film Room. A game plan
+                            in the Playbook references specific opponent tendencies logged in the Film Room.
+                            The database schema had to support these relationships without creating tight
+                            coupling between the modules at the application level.
+                        </p>
+                        <p>
+                            There's a remote inspection feature on the `remote-inspect` branch that adds
+                            the ability to review and annotate film from a mobile browser. This was built
+                            to address a real workflow problem: coaches often watch film from their phones
+                            during off-hours. The feature adds a touch-optimized review interface that
+                            syncs annotations back to the main database in real time.
+                        </p>
+                        <p>
+                            The shadcn/ui component library was a deliberate choice. It gives you
+                            well-designed base components that you fully own and can modify, rather than
+                            fighting against an opinionated design system. For a project that needed to
+                            feel polished but also match a specific football-analytics aesthetic, that
+                            flexibility was important.
+                        </p>
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/Chalk" target="_blank" rel="noopener noreferrer" aria-label="Chalk on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

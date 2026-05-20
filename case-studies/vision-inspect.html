@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vision_Inspect case study -- local VLM-powered visual inspection for manufacturing processes.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Vision_Inspect | Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-body">
+
+    <a href="#cs-content" class="skip-nav">Skip to content</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#home" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="cs-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <section class="cs-hero" aria-labelledby="cs-title">
+                <span class="section-label">Case Study</span>
+                <h1 class="cs-title" id="cs-title">
+                    <span class="gradient-text">Vision_Inspect</span>
+                </h1>
+                <p class="cs-tagline">
+                    A shop-floor visual inspection system that uses a locally-running Vision Language Model
+                    to monitor manufacturing processes in real time. No cloud, no subscription, no custom
+                    training required.
+                </p>
+                <div class="cs-stack">
+                    <span class="cs-tag">Python</span>
+                    <span class="cs-tag">FastAPI</span>
+                    <span class="cs-tag">React</span>
+                    <span class="cs-tag">Ollama</span>
+                    <span class="cs-tag">Qwen2.5-VL</span>
+                    <span class="cs-tag">WebSockets</span>
+                    <span class="cs-tag">OpenCV</span>
+                    <span class="cs-tag">Vite</span>
+                </div>
+                <div class="cs-links">
+                    <a href="https://github.com/AddisonTech/Vision_Inspect" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="../demos/vision-inspect.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </section>
+
+            <article class="cs-article">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the problem</span>
+                    <h2 class="cs-section-heading">Most machine vision solutions require too much setup to be practical</h2>
+                    <div class="cs-prose">
+                        <p>
+                            Traditional machine vision on a shop floor usually means one of two things: a
+                            dedicated industrial camera with specialized software and a custom model trained on
+                            your specific defect types, or a general-purpose camera feeding a cloud API that
+                            flags anomalies. The first option is expensive and slow to deploy. The second means
+                            sending production images off-site, which isn't acceptable everywhere.
+                        </p>
+                        <p>
+                            The interesting development over the past couple of years is that Vision Language
+                            Models have gotten good enough to describe and reason about images in useful detail
+                            without any fine-tuning. You can give a VLM a frame from a camera feed and a
+                            description of what you're looking for, and it can often tell you what it sees
+                            and whether anything looks wrong. That capability, running locally through Ollama,
+                            was the core idea behind Vision_Inspect.
+                        </p>
+                        <p>
+                            The goal was a system that a small team could set up in a few minutes using hardware
+                            they already have, pointed at any process, with no training data required. Define
+                            what you want to watch for in plain language, point a camera at it, and the system
+                            does the rest.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// how it works</span>
+                    <h2 class="cs-section-heading">Camera feed, VLM inference, live alerts</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The Python backend handles camera capture using OpenCV. On a configurable interval,
+                            it grabs a frame, runs it through the VLM via Ollama, and evaluates the response
+                            against the inspection criteria you've defined. Qwen2.5-VL is the default model,
+                            chosen for its strong visual grounding and reasonable inference speed on consumer
+                            hardware.
+                        </p>
+                        <p>
+                            Inspection criteria are defined in a configuration file. You describe what a passing
+                            state looks like, what failure states to watch for, and the severity level for each
+                            failure type. The system prompt sent to the VLM includes these criteria, which means
+                            you can change what the system monitors without retraining anything.
+                        </p>
+                        <div class="cs-callout">
+                            The React frontend connects over WebSocket and shows the live camera feed alongside
+                            the VLM's running analysis. Each inspection result is logged with a timestamp,
+                            the model's reasoning, and the pass/fail verdict. Alerts are surfaced in the UI
+                            immediately and written to a local SQLite database for historical review.
+                        </div>
+                        <p>
+                            The system supports multiple inspection zones per camera frame. You can define
+                            regions of interest and assign different criteria to each one. A single camera
+                            can simultaneously watch for surface defects in one region while monitoring
+                            assembly completeness in another.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <h2 class="cs-section-heading">Latency, prompt design, and the migration to Vite</h2>
+                    <div class="cs-prose">
+                        <p>
+                            Inference latency is the main constraint. A VLM running on a mid-range GPU takes
+                            somewhere between 1 and 5 seconds per frame depending on model size and image
+                            resolution. That rules out per-frame inspection on a high-speed line, but it's
+                            completely workable for slower processes, periodic checks, or lines where a
+                            2-3 second detection window is acceptable.
+                        </p>
+                        <p>
+                            Prompt engineering ended up being more important than I expected. The VLM's
+                            usefulness as an inspector depends heavily on how the criteria are framed.
+                            Too vague and the model hedges everything. Too prescriptive and it hallucinates
+                            specifics. The sweet spot was asking the model to describe what it sees first,
+                            then evaluate against the criteria, which produces more reliable verdicts than
+                            asking for a direct pass/fail judgment.
+                        </p>
+                        <p>
+                            The frontend was originally built with Create React App and migrated to Vite
+                            during a refactor. The dev experience improvement was significant: cold start
+                            went from around 20 seconds to under 1 second. The migration required moving
+                            the entry point HTML to the project root, updating the TypeScript config for
+                            the bundler module resolution strategy, and replacing the CRA proxy config
+                            with Vite's native proxy support for the WebSocket and API routes.
+                        </p>
+                        <p>
+                            The WebSocket proxy in particular needed careful configuration to handle the
+                            upgrade header correctly. Vite's proxy handles this with a single flag, but
+                            it took a few iterations to get it working reliably with FastAPI's WebSocket
+                            endpoint.
+                        </p>
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/Vision_Inspect" target="_blank" rel="noopener noreferrer" aria-label="Vision_Inspect on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

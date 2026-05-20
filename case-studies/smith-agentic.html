@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smith_Agentic case study -- modular multi-agent framework for engineering workflows.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Smith_Agentic | Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-body">
+
+    <a href="#cs-content" class="skip-nav">Skip to content</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#home" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="cs-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <section class="cs-hero" aria-labelledby="cs-title">
+                <span class="section-label">Case Study</span>
+                <h1 class="cs-title" id="cs-title">
+                    <span class="gradient-text">Smith_Agentic</span>
+                </h1>
+                <p class="cs-tagline">
+                    A modular multi-agent framework for engineering workflows. Twenty specialized agents
+                    across four crews, a React dashboard with live streaming, and an MCP server that plugs
+                    the whole thing into Claude Desktop and Claude Code.
+                </p>
+                <div class="cs-stack">
+                    <span class="cs-tag">Python</span>
+                    <span class="cs-tag">CrewAI</span>
+                    <span class="cs-tag">Ollama</span>
+                    <span class="cs-tag">FastAPI</span>
+                    <span class="cs-tag">React</span>
+                    <span class="cs-tag">ChromaDB</span>
+                    <span class="cs-tag">WebSockets</span>
+                    <span class="cs-tag">MCP</span>
+                    <span class="cs-tag">Rust</span>
+                </div>
+                <div class="cs-links">
+                    <a href="https://github.com/AddisonTech/Smith_Agentic" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://addisontech.github.io/Smith_Agentic_UI/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </section>
+
+            <article class="cs-article">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the problem</span>
+                    <h2 class="cs-section-heading">Most engineering tasks require more than one person thinking</h2>
+                    <div class="cs-prose">
+                        <p>
+                            A lot of engineering work follows a recognizable pattern: you have a goal, you need
+                            someone to research it, someone to write the solution, and someone to review the output
+                            before it goes anywhere. On a real team, those roles exist naturally. Working alone
+                            or with a small team, you end up doing all three yourself, which is slow and error-prone.
+                        </p>
+                        <p>
+                            What I wanted was a framework that could simulate that division of labor for the kinds
+                            of engineering tasks I run into regularly: PLC code review, HMI design, safety
+                            documentation, vision system configuration, and ops planning. Not a general-purpose
+                            assistant, but a system with domain knowledge and structured roles baked in.
+                        </p>
+                        <p>
+                            I also wanted it to run completely offline. Using a cloud API for every agent call
+                            was a non-starter for anything that might involve proprietary process data or control
+                            system configuration.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// how it works</span>
+                    <h2 class="cs-section-heading">Four crews, twenty agents, one interface</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The backend is a Python service built on CrewAI. There are four crews covering
+                            different engineering domains: Code (Python, PLC, HMI), Vision (model configuration,
+                            inspection setup), Safety (hazard analysis, documentation), and Ops (runbooks,
+                            planning, handoff notes). Each crew has agents with specific roles and toolsets,
+                            and crews can be composed together for more complex tasks.
+                        </p>
+                        <p>
+                            The template library has 18 pre-built task templates across those categories. You
+                            pick a template, fill in the context fields, and the appropriate crew handles the
+                            execution. There's also a free-form mode where you describe the task directly and
+                            the system figures out which crew should own it.
+                        </p>
+                        <div class="cs-callout">
+                            All language model inference runs through Ollama. Nothing goes to the cloud. The
+                            system works on a machine with no internet access as long as the required models
+                            are pulled locally. ChromaDB handles vector storage for any retrieval-augmented
+                            tasks where the agents need to search project context.
+                        </div>
+                        <p>
+                            The React UI connects to the FastAPI backend over WebSocket and streams agent output
+                            as it happens. You can watch each agent's reasoning live, see handoffs between roles,
+                            and monitor crew status in the dashboard. Completed runs are stored and accessible
+                            from the run history page.
+                        </p>
+                        <p>
+                            The MCP server is a separate component that exposes crew runs as tools. It lets you
+                            trigger any template directly from Claude Code or Claude Desktop using the Model
+                            Context Protocol. The CLI provides the same access from the terminal.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <h2 class="cs-section-heading">Architecture decisions and things that were harder than expected</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The hardest part of multi-agent design is preventing agents from contradicting each
+                            other or getting stuck in loops. CrewAI provides the scaffolding, but you still have
+                            to think carefully about task sequencing, what context each agent receives, and how
+                            to handle cases where one agent's output doesn't match what the next agent needs.
+                            I spent a lot of time on the system prompts for each role, which turned out to be
+                            where most of the real design work lives.
+                        </p>
+                        <p>
+                            Streaming was a specific engineering challenge. CrewAI runs synchronously by default.
+                            To get live output to the frontend, I run each crew in a thread and capture stdout,
+                            then push it over a WebSocket connection. This works well in practice but requires
+                            some care around thread safety when multiple runs are in flight simultaneously.
+                        </p>
+                        <p>
+                            The offline demo mode deserves a mention. The UI has a demo state where all runs
+                            are simulated using pre-recorded agent output. This made it possible to showcase the
+                            system on the portfolio without requiring a live backend. The demo and live modes
+                            share the same component tree, which keeps the codebase clean.
+                        </p>
+                        <p>
+                            The YAML-based configuration for agents and crews was a deliberate choice. It makes
+                            the system extensible without touching Python code. Adding a new agent is a matter
+                            of writing a few lines in a config file. The same config file drives the template
+                            library, the UI's task picker, and the MCP tool definitions.
+                        </p>
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/Smith_Agentic" target="_blank" rel="noopener noreferrer" aria-label="Smith_Agentic on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

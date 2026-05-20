@@ -1,0 +1,126 @@
+/* ============================================================
+   Case Study pages -- inherits tokens from ../styles.css
+   ============================================================ */
+
+/* Reuses .demo-body .demo-nav .demo-main .demo-bg .demo-container
+   from the site-wide stylesheet. Only case-study content styles live here. */
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.cs-hero {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 64px;
+}
+.cs-hero .section-label { margin-bottom: 16px; }
+
+.cs-title {
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    font-family: var(--ff-display);
+    line-height: 1.05;
+}
+
+.cs-tagline {
+    color: var(--text-1);
+    font-size: 1.05rem;
+    line-height: 1.78;
+    max-width: 600px;
+    margin: 0 auto 28px;
+}
+
+.cs-stack {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+.cs-tag {
+    font-family: var(--ff-mono);
+    font-size: 0.7rem;
+    color: var(--text-1);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.03em;
+}
+
+.cs-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* ============================================================
+   Article
+   ============================================================ */
+.cs-article {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cs-section {
+    margin-bottom: 60px;
+}
+
+.cs-section-eyebrow {
+    font-family: var(--ff-mono);
+    font-size: 0.68rem;
+    color: var(--cyan);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.85;
+    display: block;
+}
+
+.cs-section-heading {
+    font-family: var(--ff-display);
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: var(--text-0);
+    margin-bottom: 22px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.cs-prose {
+    color: var(--text-1);
+    font-size: 1rem;
+    line-height: 1.88;
+}
+.cs-prose p { margin-bottom: 20px; }
+.cs-prose p:last-child { margin-bottom: 0; }
+
+.cs-callout {
+    background: rgba(34,211,238,0.04);
+    border: 1px solid rgba(34,211,238,0.18);
+    border-left: 3px solid var(--cyan);
+    border-radius: 0 var(--r-sm) var(--r-sm) 0;
+    padding: 18px 22px;
+    margin: 28px 0;
+    color: var(--text-1);
+    font-size: 0.95rem;
+    line-height: 1.78;
+}
+
+.cs-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 60px 0;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 600px) {
+    .cs-title { font-size: 2rem; }
+    .cs-tagline { font-size: 0.95rem; }
+    .cs-section-heading { font-size: 1.3rem; }
+    .demo-main { padding: 32px 0 56px; }
+}

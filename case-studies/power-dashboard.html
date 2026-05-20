@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Power Dashboard case study -- real-time electrical power monitoring with ISA 18.2 alarm management.">
+    <meta name="author" content="Addison Smith">
+
+    <title>Power Dashboard | Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-body">
+
+    <a href="#cs-content" class="skip-nav">Skip to content</a>
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="../index.html#home" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+            <a href="../index.html#projects" class="demo-back-link">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="demo-main" id="cs-content">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="demo-container">
+
+            <section class="cs-hero" aria-labelledby="cs-title">
+                <span class="section-label">Case Study</span>
+                <h1 class="cs-title" id="cs-title">
+                    <span class="gradient-text">Power Dashboard</span>
+                </h1>
+                <p class="cs-tagline">
+                    A full-stack electrical power monitoring system with real-time WebSocket data,
+                    eight simulated meters, ISA 18.2 alarm management, interactive one-line diagrams,
+                    and historical trending.
+                </p>
+                <div class="cs-stack">
+                    <span class="cs-tag">Python</span>
+                    <span class="cs-tag">FastAPI</span>
+                    <span class="cs-tag">React</span>
+                    <span class="cs-tag">WebSockets</span>
+                    <span class="cs-tag">SQLite</span>
+                    <span class="cs-tag">ISA 18.2</span>
+                    <span class="cs-tag">Recharts</span>
+                </div>
+                <div class="cs-links">
+                    <a href="https://github.com/AddisonTech/power-dashboard" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://power-dashboard-vd3w.onrender.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </section>
+
+            <article class="cs-article">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the problem</span>
+                    <h2 class="cs-section-heading">Power monitoring dashboards are either too simple or too expensive</h2>
+                    <div class="cs-prose">
+                        <p>
+                            Electrical Power Monitoring Systems for data centers and industrial facilities
+                            tend to fall into two categories: basic single-page dashboards that show raw
+                            meter readings with no context, or enterprise SCADA systems that cost six figures
+                            and take months to deploy. There isn't much in the middle.
+                        </p>
+                        <p>
+                            At work, I spend time around control systems that deal with real power data:
+                            voltage, current, power factor, breaker states. I wanted to build something
+                            that looked and functioned like a real EPMS, with proper alarm management and
+                            a useful one-line diagram, but built with open-source tools on a standard stack.
+                        </p>
+                        <p>
+                            The ISA 18.2 alarm management standard was a specific goal. Most hobby projects
+                            skip alarm logic entirely or implement it as a simple threshold check. ISA 18.2
+                            defines four priority levels, acknowledgment states, and return-to-normal
+                            transitions that reflect how alarms actually work in real facilities. I wanted
+                            to implement that properly.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// how it works</span>
+                    <h2 class="cs-section-heading">Eight simulated meters, live WebSocket feeds, and a real alarm engine</h2>
+                    <div class="cs-prose">
+                        <p>
+                            The backend simulates eight power meters across a simplified data center topology:
+                            a main service entrance, two distribution panels, and five branch circuits at
+                            the rack level. Each meter generates realistic-looking voltage, current, and
+                            power factor readings with configurable variance. The simulation is designed to
+                            match the behavior of a real facility under normal and fault conditions.
+                        </p>
+                        <p>
+                            The WebSocket layer pushes meter updates to the frontend every second. The
+                            React UI renders a live numerical display for each meter and updates the
+                            one-line diagram dynamically based on current readings and breaker states.
+                            Historical data is written to SQLite and served through a REST endpoint
+                            that powers the trending charts.
+                        </p>
+                        <div class="cs-callout">
+                            The alarm engine evaluates four ISA 18.2 priority levels: critical, high,
+                            medium, and low. Each alarm has an activation threshold, a return-to-normal
+                            threshold (with hysteresis), and an acknowledgment state. Unacknowledged alarms
+                            display differently from acknowledged ones. The alarm summary view shows
+                            active, acknowledged, and historical events in separate lists.
+                        </div>
+                        <p>
+                            The one-line diagram is drawn in SVG with React. Transformers, breakers, meters,
+                            and buses are all individual components. Breaker state changes are animated,
+                            and alarm conditions change the color and styling of the affected element.
+                            Clicking any element brings up its detail panel.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="cs-divider">
+
+                <section class="cs-section">
+                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <h2 class="cs-section-heading">Alarm state machines, SVG layout, and simulation fidelity</h2>
+                    <div class="cs-prose">
+                        <p>
+                            Implementing ISA 18.2 correctly required thinking of each alarm as a state
+                            machine rather than a simple threshold check. The states are: normal, active
+                            unacknowledged, active acknowledged, return-to-normal unacknowledged, and
+                            shelved. Each state has valid transitions and rules about what actions are
+                            permitted. Getting the acknowledgment flow right was the part that took the
+                            most iteration.
+                        </p>
+                        <p>
+                            The hysteresis requirement was interesting to implement. A naive alarm that
+                            activates above a threshold and clears below the same threshold will chatter
+                            when the value oscillates near the limit. ISA 18.2 addresses this by requiring
+                            a separate return-to-normal setpoint that's offset from the trip setpoint.
+                            The implementation uses two limits per alarm configured in the backend.
+                        </p>
+                        <p>
+                            The SVG one-line diagram posed a layout challenge. One-line diagrams follow
+                            conventions that don't map naturally to standard web layout systems. Power flows
+                            from top to bottom, buses run horizontally, and feeders branch off vertically.
+                            I built a grid-based placement system that positions each SVG element by row
+                            and column, which made the diagram easier to maintain and extend without
+                            manually managing pixel coordinates.
+                        </p>
+                        <p>
+                            The simulation had to balance realism with predictability. Pure random noise
+                            produces values that don't tell a useful story. The simulation uses mean-reverting
+                            random walks with per-meter parameters, so readings look realistic but stay
+                            within sensible bounds. Fault scenarios are scripted: the simulation can inject
+                            an overcurrent event or a voltage sag on demand to demonstrate the alarm system.
+                        </p>
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="../index.html#home" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="../index.html#projects" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+                    <a href="https://github.com/AddisonTech/power-dashboard" target="_blank" rel="noopener noreferrer" aria-label="Power Dashboard on GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
