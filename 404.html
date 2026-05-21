@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page not found.">
+    <meta name="author" content="Addison Smith">
+
+    <title>404 | Addison Smith</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .not-found-main {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .not-found-content {
+            max-width: 480px;
+        }
+
+        .not-found-code {
+            font-family: var(--ff-display);
+            font-size: clamp(6rem, 20vw, 10rem);
+            font-weight: 700;
+            line-height: 1;
+            margin: 0 0 1rem;
+        }
+
+        .not-found-heading {
+            font-family: var(--ff-display);
+            font-size: clamp(1.25rem, 4vw, 1.75rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 0.75rem;
+        }
+
+        .not-found-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin: 0 0 2.5rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="demo-body">
+
+    <header class="demo-nav" role="banner">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" aria-label="Back to portfolio">
+                AS<span class="accent">.</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="not-found-main">
+
+        <div class="demo-bg" aria-hidden="true">
+            <div class="demo-glow demo-glow-1"></div>
+            <div class="demo-glow demo-glow-2"></div>
+            <div class="demo-grid"></div>
+        </div>
+
+        <div class="not-found-content">
+            <p class="not-found-code"><span class="gradient-text">404</span></p>
+            <h1 class="not-found-heading">Nothing here.</h1>
+            <p class="not-found-sub">That page doesn't exist. You might have followed a broken link or typed something wrong.</p>
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> Back to portfolio
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="index.html" class="nav-logo">AS<span class="accent">.</span></a>
+                <p class="footer-copy">&copy; 2026 Addison Smith. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="https://github.com/AddisonTech" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/addison-smith-tech" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
