@@ -34,4 +34,4 @@ Dark glassmorphism aesthetic built for a technical audience. Custom typography p
 
 Addison Smith
 GitHub: https://github.com/AddisonTech
-Email: stalor54@yahoo.com
+Email: addisontechdev@gmail.com
