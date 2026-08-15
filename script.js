@@ -71,7 +71,7 @@ sections.forEach(s => sectionObserver.observe(s));
    Typewriter - hero subtitle
    ============================================================ */
 const PHRASES = [
-    'Controls Engineering Technician',
+    'Controls Application Engineer',
     'Software Developer',
     'AI/ML Engineer in Progress',
     'Mechatronics → Machine Learning',

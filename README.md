@@ -1,6 +1,6 @@
 # Addison Smith - Personal Portfolio
 
-Personal portfolio site for Addison Smith. Controls Engineering Technician and Software Developer at Daedalus Industrial, currently pursuing a BS in Information Technology with an AI/ML concentration at ECPI University.
+Personal portfolio site for Addison Smith. Controls Application Engineer and Software Developer at Mantis Innovation, currently pursuing a BS in Information Technology with an AI/ML concentration at ECPI University.
 
 Live site: https://addisontech.github.io
 
@@ -13,7 +13,7 @@ Built to showcase real shipped projects, technical credentials, and the dual-tra
 - Featured projects with interactive demos, including a multi-agent AI framework, an AI football intelligence platform, and a local VLM-powered manufacturing inspection system
 - Live deployments for Sift, Power Dashboard, and Resume Portfolio Builder
 - Certifications from NVIDIA Deep Learning Institute, Anthropic, freeCodeCamp, and Mordor Intelligence
-- Work and education timeline covering Daedalus Industrial, prior roles at Vertiv and AIRSYS, and current studies at ECPI
+- Work and education timeline covering Mantis Innovation, prior roles at Daedalus Industrial, Vertiv, and AIRSYS, and current studies at ECPI
 - Blog with technical, engineering, and personal writing
 - Contact section linking phone, email, LinkedIn, and GitHub
 
