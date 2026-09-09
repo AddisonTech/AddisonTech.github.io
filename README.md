@@ -10,8 +10,9 @@ Built to showcase real shipped projects, technical credentials, and the dual-tra
 
 ## What's on the site
 
+- Professional controls work, including a structured text compiler for Distech GFX programs, Niagara station tooling, and an Ignition Perspective site generator
 - Featured projects with interactive demos, including a multi-agent AI framework, an AI football intelligence platform, and a local VLM-powered manufacturing inspection system
-- Live deployments for Sift, Power Dashboard, and Resume Portfolio Builder
+- Live deployments for Sift, Chalk, and Power Dashboard
 - Certifications from NVIDIA Deep Learning Institute, Anthropic, freeCodeCamp, and Mordor Intelligence
 - Work and education timeline covering Mantis Innovation, prior roles at Daedalus Industrial, Vertiv, and AIRSYS, and current studies at ECPI
 - Blog with technical, engineering, and personal writing
