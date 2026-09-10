@@ -15,7 +15,7 @@
 
     --text-0:      #f1f5f9;
     --text-1:      #94a3b8;
-    --text-2:      #475569;
+    --text-2:      #7c8ba1;
 
     --border:      rgba(255, 255, 255, 0.08);
     --border-a:    rgba(34, 211, 238, 0.25);
@@ -1621,27 +1621,6 @@ h1, h2, h3, h4 {
     color: var(--text-2);
     white-space: nowrap;
     flex-shrink: 0;
-}
-
-.skill-bar-track {
-    width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.10);
-    border-radius: 100px;
-    overflow: hidden;
-    position: relative;
-}
-
-.skill-bar-fill {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0;
-    border-radius: 100px;
-    background: linear-gradient(90deg, var(--cyan) 0%, var(--violet) 100%);
-    transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
-    box-shadow: 0 0 8px rgba(34, 211, 238, 0.35);
 }
 
 /* ============================================================

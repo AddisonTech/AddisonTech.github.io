@@ -553,42 +553,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 
 /* ============================================================
-   3. ANIMATED SKILL BARS - animate on scroll into view
-   ============================================================ */
-(function () {
-    const fills = document.querySelectorAll('.skill-bar-fill');
-    if (!fills.length) return;
-
-    const container = document.querySelector('.skill-bars');
-    if (!container) return;
-
-    let triggered = false;
-
-    function runBars() {
-        if (triggered) return;
-        triggered = true;
-        fills.forEach((el, i) => {
-            setTimeout(() => {
-                el.style.width = (el.dataset.pct || '0') + '%';
-            }, i * 65);
-        });
-    }
-
-    // Delay past AOS fade-in (AOS duration = 680ms) so the
-    // width transition is visible, not hidden behind opacity:0
-    const obs = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-            obs.disconnect();
-            setTimeout(runBars, 750);
-        }
-    }, { threshold: 0.1 });
-
-    obs.observe(container);
-})();
-
-
-/* ============================================================
-   4. CUSTOM CURSOR - glowing dot + trailing ring
+   3. CUSTOM CURSOR - glowing dot + trailing ring
    ============================================================ */
 (function () {
     if (window.matchMedia('(hover: none)').matches) return;
@@ -639,7 +604,7 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 
 /* ============================================================
-   5. HERO PARALLAX - depth layers on scroll
+   4. HERO PARALLAX - depth layers on scroll
    ============================================================ */
 (function () {
     const heroSection = document.querySelector('.hero');
