@@ -109,6 +109,35 @@
     line-height: 1.78;
 }
 
+.cs-figure {
+    /* break out of the 700px prose column so the diagram renders at native scale */
+    width: min(920px, calc(100vw - 48px));
+    margin: 4px auto 30px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 16px 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+}
+
+.cs-figure svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+}
+
+.cs-figure figcaption {
+    font-family: var(--ff-mono);
+    font-size: 0.7rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    text-align: center;
+    margin-top: 14px;
+}
+
 .cs-divider {
     border: none;
     border-top: 1px solid var(--border);
@@ -122,5 +151,7 @@
     .cs-title { font-size: 2rem; }
     .cs-tagline { font-size: 0.95rem; }
     .cs-section-heading { font-size: 1.3rem; }
+    .cs-figure { padding: 14px 10px 10px; overflow-x: auto; }
+    .cs-figure svg { min-width: 620px; }
     .demo-main { padding: 32px 0 56px; }
 }

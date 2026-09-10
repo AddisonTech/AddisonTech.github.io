@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Argus case study -- industrial Modbus anomaly detection with statistical analysis and local LLM diagnosis.">
     <meta name="author" content="Addison Smith">
+    <link rel="canonical" href="https://addisontech.github.io/case-studies/argus.html">
 
     <title>Argus | Case Study</title>
 
@@ -78,7 +79,7 @@
             <article class="cs-article">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the problem</span>
+                    <span class="cs-section-eyebrow">// the failure mode</span>
                     <h2 class="cs-section-heading">Equipment doesn't fail all at once</h2>
                     <div class="cs-prose">
                         <p>
@@ -106,9 +107,65 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// how it works</span>
+                    <span class="cs-section-eyebrow">// the detection loop</span>
                     <h2 class="cs-section-heading">Statistical detection, local language model, live dashboard</h2>
                     <div class="cs-prose">
+                        <figure class="cs-figure">
+                            <svg viewBox="0 0 884 280" role="img" aria-labelledby="csDiagTitle csDiagDesc" style="max-width:884px;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
+                            <title id="csDiagTitle">Argus detection pipeline</title>
+                            <desc id="csDiagDesc">Modbus registers are polled on an interval, scored by three statistical detectors, and any fault is sent to a local language model before reaching the dashboard.</desc>
+                            <defs><marker id="csArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker></defs>
+                            <rect x="14" y="59" width="136" height="52" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="81" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Modbus TCP</text>
+                            <text x="82" y="95" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">device</text>
+                            <rect x="14" y="123" width="136" height="52" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="145" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Built-in</text>
+                            <text x="82" y="159" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">simulator</text>
+                            <text x="82" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">SOURCE</text>
+                            <rect x="194" y="92" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="262" y="114" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Poller</text>
+                            <text x="262" y="131" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">rolling window</text>
+                            <text x="262" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">POLL</text>
+                            <rect x="374" y="30" width="136" height="50" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="442" y="52" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">3-sigma</text>
+                            <text x="442" y="69" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">z &gt; 2 drift, 3 fault</text>
+                            <rect x="374" y="92" width="136" height="50" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="442" y="114" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">CUSUM</text>
+                            <text x="442" y="131" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">directional drift</text>
+                            <rect x="374" y="154" width="136" height="50" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="442" y="176" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Rate of change</text>
+                            <text x="442" y="193" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">single-tick spike</text>
+                            <text x="442" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">DETECT</text>
+                            <rect x="554" y="85" width="136" height="64" rx="9" fill="rgba(167,139,250,0.075)" stroke="rgba(167,139,250,0.45)"/>
+                            <text x="622" y="107" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Ollama</text>
+                            <text x="622" y="121" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">local LLM</text>
+                            <text x="622" y="138" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">plain-English cause</text>
+                            <text x="622" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">EXPLAIN</text>
+                            <rect x="734" y="85" width="136" height="64" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="802" y="107" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">React</text>
+                            <text x="802" y="121" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">dashboard</text>
+                            <text x="802" y="138" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">WebSocket</text>
+                            <text x="802" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">SURFACE</text>
+                            <path d="M160 85 L160 149" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M150 85 L160 85" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M150 149 L160 149" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M160 117 L188 117" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M364 55 L364 179" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M374 55 L364 55" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M374 117 L364 117" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M374 179 L364 179" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M330 117 L358 117" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M520 55 L520 179" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 55 L520 55" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 117 L520 117" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 179 L520 179" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M520 117 L548 117" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M690 117 L728 117" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <text x="802" y="242" text-anchor="middle" font-size="9" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">SQLite event log</text>
+                            <path d="M802 224 L802 157" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3 3" fill="none" marker-end="url(#csArrow)" opacity="0.8"/>
+                            </svg>
+                            <figcaption>Poll, score, diagnose. Every stage runs on the local network.</figcaption>
+                        </figure>
                         <p>
                             Argus connects to a Modbus TCP device (or the built-in simulator) and polls a
                             configurable set of holding registers on a fixed interval. Each register maintains a
@@ -147,7 +204,7 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <span class="cs-section-eyebrow">// tuning and tradeoffs</span>
                     <h2 class="cs-section-heading">Bootstrap windows, sensitivity tuning, and a React performance lesson</h2>
                     <div class="cs-prose">
                         <p>

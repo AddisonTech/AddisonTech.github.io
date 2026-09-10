@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Smith_Agentic case study -- modular multi-agent framework for engineering workflows.">
     <meta name="author" content="Addison Smith">
+    <link rel="canonical" href="https://addisontech.github.io/case-studies/smith-agentic.html">
 
     <title>Smith_Agentic | Case Study</title>
 
@@ -80,7 +81,7 @@
             <article class="cs-article">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the problem</span>
+                    <span class="cs-section-eyebrow">// why one agent is not enough</span>
                     <h2 class="cs-section-heading">Most engineering tasks require more than one person thinking</h2>
                     <div class="cs-prose">
                         <p>
@@ -106,9 +107,70 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// how it works</span>
+                    <span class="cs-section-eyebrow">// the architecture</span>
                     <h2 class="cs-section-heading">Four crews, twenty agents, one interface</h2>
                     <div class="cs-prose">
+                        <figure class="cs-figure">
+                            <svg viewBox="0 0 884 342" role="img" aria-labelledby="csDiagTitle csDiagDesc" style="max-width:884px;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
+                            <title id="csDiagTitle">Smith_Agentic crew architecture</title>
+                            <desc id="csDiagDesc">A template or free-form goal is routed by the backend to one of four CrewAI crews, all running local inference, with output streamed to the UI.</desc>
+                            <defs><marker id="csArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker></defs>
+                            <rect x="14" y="73" width="136" height="38" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="95" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">18 templates</text>
+                            <rect x="14" y="123" width="136" height="38" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="145" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Free-form goal</text>
+                            <rect x="14" y="173" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="195" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">MCP server</text>
+                            <text x="82" y="212" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">Claude Code / Desktop</text>
+                            <text x="82" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">ENTRY</text>
+                            <rect x="194" y="122" width="136" height="52" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="262" y="144" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">FastAPI</text>
+                            <text x="262" y="158" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">backend</text>
+                            <text x="262" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">ROUTE</text>
+                            <rect x="374" y="30" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="442" y="52" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Code</text>
+                            <text x="442" y="69" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">Python, PLC, HMI</text>
+                            <rect x="374" y="92" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="442" y="114" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Vision</text>
+                            <text x="442" y="131" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">model, inspection</text>
+                            <rect x="374" y="154" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="442" y="176" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Safety</text>
+                            <text x="442" y="193" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">hazard, docs</text>
+                            <rect x="374" y="216" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="442" y="238" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Ops</text>
+                            <text x="442" y="255" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">runbooks, handoff</text>
+                            <text x="442" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">CREWS</text>
+                            <rect x="554" y="123" width="136" height="50" rx="9" fill="rgba(167,139,250,0.075)" stroke="rgba(167,139,250,0.45)"/>
+                            <text x="622" y="145" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Ollama</text>
+                            <text x="622" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">local models</text>
+                            <text x="622" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">INFER</text>
+                            <rect x="734" y="123" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="802" y="145" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">React UI</text>
+                            <text x="802" y="162" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">live agent output</text>
+                            <text x="802" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">STREAM</text>
+                            <path d="M160 92 L160 198" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M150 92 L160 92" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M150 142 L160 142" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M150 198 L160 198" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M160 148 L188 148" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M364 55 L364 241" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M374 55 L364 55" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M374 117 L364 117" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M374 179 L364 179" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M374 241 L364 241" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M330 148 L358 148" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M520 55 L520 241" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 55 L520 55" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 117 L520 117" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 179 L520 179" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 241 L520 241" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M520 148 L548 148" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M690 148 L728 148" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <text x="442" y="304" text-anchor="middle" font-size="9" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">ChromaDB project context</text>
+                            <path d="M442 286 L442 274" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3 3" fill="none" marker-end="url(#csArrow)" opacity="0.8"/>
+                            </svg>
+                            <figcaption>Four crews, twenty agents. Inference never leaves the machine.</figcaption>
+                        </figure>
                         <p>
                             The backend is a Python service built on CrewAI. There are four crews covering
                             different engineering domains: Code (Python, PLC, HMI), Vision (model configuration,
@@ -145,7 +207,7 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <span class="cs-section-eyebrow">// the design decisions</span>
                     <h2 class="cs-section-heading">Where the real design work lives</h2>
                     <div class="cs-prose">
                         <p>

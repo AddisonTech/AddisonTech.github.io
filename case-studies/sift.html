@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sift case study -- camera-first personal decision engine for products, restaurants, and anything else you point your phone at.">
     <meta name="author" content="Addison Smith">
+    <link rel="canonical" href="https://addisontech.github.io/case-studies/sift.html">
 
     <title>Sift | Case Study</title>
 
@@ -78,7 +79,7 @@
             <article class="cs-article">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the problem</span>
+                    <span class="cs-section-eyebrow">// the review problem</span>
                     <h2 class="cs-section-heading">Every review app makes the problem worse</h2>
                     <div class="cs-prose">
                         <p>
@@ -116,9 +117,46 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// how it works</span>
+                    <span class="cs-section-eyebrow">// the flow</span>
                     <h2 class="cs-section-heading">Scan, score, decide</h2>
                     <div class="cs-prose">
+                        <figure class="cs-figure">
+                            <svg viewBox="0 0 704 256" role="img" aria-labelledby="csDiagTitle csDiagDesc" style="max-width:704px;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
+                            <title id="csDiagTitle">Sift scan flow</title>
+                            <desc id="csDiagDesc">A camera frame and the stored preference weights go to an edge function, which calls the model and returns a score, a verdict, and ranked alternatives.</desc>
+                            <defs><marker id="csArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker></defs>
+                            <rect x="14" y="80" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="102" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Camera frame</text>
+                            <text x="82" y="119" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">point and tap</text>
+                            <text x="82" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">CAPTURE</text>
+                            <rect x="194" y="79" width="136" height="52" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="262" y="101" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Supabase</text>
+                            <text x="262" y="115" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">edge function</text>
+                            <text x="262" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">EDGE</text>
+                            <rect x="374" y="80" width="136" height="50" rx="9" fill="rgba(167,139,250,0.075)" stroke="rgba(167,139,250,0.45)"/>
+                            <text x="442" y="102" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Gemini</text>
+                            <text x="442" y="119" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">review data + prefs</text>
+                            <text x="442" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">REASON</text>
+                            <rect x="554" y="30" width="136" height="38" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="622" y="52" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Score out of 10</text>
+                            <rect x="554" y="80" width="136" height="38" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="622" y="102" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">One-line verdict</text>
+                            <rect x="554" y="130" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="622" y="152" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Ranked alternatives</text>
+                            <text x="622" y="169" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">distance, delta, fit</text>
+                            <text x="622" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">RETURN</text>
+                            <path d="M150 105 L188 105" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M330 105 L368 105" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M544 49 L544 155" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M554 49 L544 49" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M554 99 L544 99" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M554 155 L544 155" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 105 L538 105" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <text x="262" y="218" text-anchor="middle" font-size="9" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">five preference weights (Supabase)</text>
+                            <path d="M262 200 L262 139" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3 3" fill="none" marker-end="url(#csArrow)" opacity="0.8"/>
+                            </svg>
+                            <figcaption>Preferences are context on every scan, not a trained model.</figcaption>
+                        </figure>
                         <p>
                             The core flow is fast: you open the camera, point it at something, and tap.
                             The image goes to a Supabase edge function that passes it to Gemini along
@@ -153,7 +191,7 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <span class="cs-section-eyebrow">// mobile constraints</span>
                     <h2 class="cs-section-heading">Camera handling, edge functions, and a deliberate model choice</h2>
                     <div class="cs-prose">
                         <p>

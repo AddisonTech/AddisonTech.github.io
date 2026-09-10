@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Vision_Inspect case study -- local VLM-powered visual inspection for manufacturing processes.">
     <meta name="author" content="Addison Smith">
+    <link rel="canonical" href="https://addisontech.github.io/case-studies/vision-inspect.html">
 
     <title>Vision_Inspect | Case Study</title>
 
@@ -79,7 +80,7 @@
             <article class="cs-article">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the problem</span>
+                    <span class="cs-section-eyebrow">// the setup barrier</span>
                     <h2 class="cs-section-heading">Most machine vision solutions require too much setup to be practical</h2>
                     <div class="cs-prose">
                         <p>
@@ -109,9 +110,48 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// how it works</span>
+                    <span class="cs-section-eyebrow">// the pipeline</span>
                     <h2 class="cs-section-heading">Camera feed, VLM inference, live alerts</h2>
                     <div class="cs-prose">
+                        <figure class="cs-figure">
+                            <svg viewBox="0 0 884 206" role="img" aria-labelledby="csDiagTitle csDiagDesc" style="max-width:884px;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
+                            <title id="csDiagTitle">Vision_Inspect inspection loop</title>
+                            <desc id="csDiagDesc">Frames are captured on an interval, sent to a local vision language model with the criteria as prompt, and the verdict is streamed and logged.</desc>
+                            <defs><marker id="csArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker></defs>
+                            <rect x="14" y="55" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="77" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">OpenCV</text>
+                            <text x="82" y="94" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">frame on interval</text>
+                            <text x="82" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">CAPTURE</text>
+                            <rect x="194" y="55" width="136" height="50" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="262" y="77" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Zones</text>
+                            <text x="262" y="94" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">per-region criteria</text>
+                            <text x="262" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">SCOPE</text>
+                            <rect x="374" y="55" width="136" height="50" rx="9" fill="rgba(167,139,250,0.075)" stroke="rgba(167,139,250,0.45)"/>
+                            <text x="442" y="77" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Qwen2.5-VL</text>
+                            <text x="442" y="94" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">via Ollama</text>
+                            <text x="442" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">INFER</text>
+                            <rect x="554" y="55" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="622" y="77" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Pass / fail</text>
+                            <text x="622" y="94" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">with reasoning</text>
+                            <text x="622" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">VERDICT</text>
+                            <rect x="734" y="30" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="802" y="52" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Live UI</text>
+                            <text x="802" y="69" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">WebSocket</text>
+                            <rect x="734" y="92" width="136" height="38" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="802" y="114" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">SQLite log</text>
+                            <text x="802" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">SURFACE</text>
+                            <path d="M150 80 L188 80" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M330 80 L368 80" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M510 80 L548 80" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M724 55 L724 111" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M734 55 L724 55" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M734 111 L724 111" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M690 80 L718 80" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <text x="262" y="168" text-anchor="middle" font-size="9" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">criteria config file</text>
+                            <path d="M262 150 L262 113" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3 3" fill="none" marker-end="url(#csArrow)" opacity="0.8"/>
+                            </svg>
+                            <figcaption>Change the criteria file, not the model. Nothing is retrained.</figcaption>
+                        </figure>
                         <p>
                             The Python backend handles camera capture using OpenCV. On a configurable interval,
                             it grabs a frame, runs it through the VLM via Ollama, and evaluates the response
@@ -143,7 +183,7 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <span class="cs-section-eyebrow">// latency and prompts</span>
                     <h2 class="cs-section-heading">Latency constraints and the prompt engineering that makes it work</h2>
                     <div class="cs-prose">
                         <p>

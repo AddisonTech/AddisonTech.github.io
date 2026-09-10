@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ModBridge case study -- Modbus TCP to REST API bridge in Rust and Python.">
     <meta name="author" content="Addison Smith">
+    <link rel="canonical" href="https://addisontech.github.io/case-studies/modbridge.html">
 
     <title>ModBridge | Case Study</title>
 
@@ -78,7 +79,7 @@
             <article class="cs-article">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the problem</span>
+                    <span class="cs-section-eyebrow">// the access problem</span>
                     <h2 class="cs-section-heading">Getting data out of industrial devices shouldn't require a SCADA license</h2>
                     <div class="cs-prose">
                         <p>
@@ -106,9 +107,44 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// how it works</span>
+                    <span class="cs-section-eyebrow">// the interface</span>
                     <h2 class="cs-section-heading">Two modes, one contract</h2>
                     <div class="cs-prose">
+                        <figure class="cs-figure">
+                            <svg viewBox="0 0 704 218" role="img" aria-labelledby="csDiagTitle csDiagDesc" style="max-width:704px;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
+                            <title id="csDiagTitle">ModBridge serve and simulate modes</title>
+                            <desc id="csDiagDesc">Both modes feed the same poller, cache, and REST contract, and the Rust and Python builds return identical responses.</desc>
+                            <defs><marker id="csArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker></defs>
+                            <rect x="14" y="30" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="52" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">serve</text>
+                            <text x="82" y="69" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">real Modbus TCP</text>
+                            <rect x="14" y="92" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="114" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">simulate</text>
+                            <text x="82" y="131" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">local fake device</text>
+                            <text x="82" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">MODE</text>
+                            <rect x="194" y="61" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="262" y="83" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Register poller</text>
+                            <text x="262" y="100" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">configurable range</text>
+                            <text x="262" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">POLL</text>
+                            <rect x="374" y="60" width="136" height="52" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="442" y="82" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">In-memory</text>
+                            <text x="442" y="96" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">cache</text>
+                            <text x="442" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">HOLD</text>
+                            <rect x="554" y="61" width="136" height="50" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="622" y="83" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">REST endpoint</text>
+                            <text x="622" y="100" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">address, raw, hex, ts</text>
+                            <text x="622" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">SERVE</text>
+                            <path d="M160 55 L160 117" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M150 55 L160 55" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M150 117 L160 117" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M160 86 L188 86" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M330 86 L368 86" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M510 86 L548 86" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <text x="622" y="180" text-anchor="middle" font-size="9" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">identical in Rust and Python</text>
+                            <path d="M622 162 L622 115" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3 3" fill="none" opacity="0.8"/>
+                            </svg>
+                            <figcaption>One response contract. Two modes feeding it, two implementations serving it.</figcaption>
+                        </figure>
                         <p>
                             ModBridge has two modes: serve and simulate. In serve mode, it connects to a
                             real Modbus TCP device, polls the configured register range on a set interval,
@@ -139,7 +175,7 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <span class="cs-section-eyebrow">// two implementations</span>
                     <h2 class="cs-section-heading">Rust vs Python, and what the comparison taught me</h2>
                     <div class="cs-prose">
                         <p>

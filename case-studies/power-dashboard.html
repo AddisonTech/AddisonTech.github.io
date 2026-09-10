@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Power Dashboard case study -- real-time electrical power monitoring with ISA 18.2 alarm management.">
     <meta name="author" content="Addison Smith">
+    <link rel="canonical" href="https://addisontech.github.io/case-studies/power-dashboard.html">
 
     <title>Power Dashboard | Case Study</title>
 
@@ -78,7 +79,7 @@
             <article class="cs-article">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the problem</span>
+                    <span class="cs-section-eyebrow">// the gap</span>
                     <h2 class="cs-section-heading">Power monitoring dashboards are either too simple or too expensive</h2>
                     <div class="cs-prose">
                         <p>
@@ -106,9 +107,43 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// how it works</span>
+                    <span class="cs-section-eyebrow">// the simulation</span>
                     <h2 class="cs-section-heading">Eight simulated meters, live WebSocket feeds, and a real alarm engine</h2>
                     <div class="cs-prose">
+                        <figure class="cs-figure">
+                            <svg viewBox="0 0 704 206" role="img" aria-labelledby="csDiagTitle csDiagDesc" style="max-width:704px;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
+                            <title id="csDiagTitle">Power Dashboard data and alarm flow</title>
+                            <desc id="csDiagDesc">Eight simulated meters feed an ISA 18.2 alarm engine and a one-second WebSocket push, with history written to SQLite for trending.</desc>
+                            <defs><marker id="csArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker></defs>
+                            <rect x="14" y="55" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="77" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">8 power meters</text>
+                            <text x="82" y="94" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">V, A, power factor</text>
+                            <text x="82" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">SIMULATE</text>
+                            <rect x="194" y="55" width="136" height="50" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="262" y="77" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Alarm engine</text>
+                            <text x="262" y="94" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">ISA 18.2, hysteresis</text>
+                            <text x="262" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">EVALUATE</text>
+                            <rect x="374" y="55" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="442" y="77" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">WebSocket</text>
+                            <text x="442" y="94" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">1 Hz push</text>
+                            <text x="442" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">STREAM</text>
+                            <rect x="554" y="30" width="136" height="50" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="622" y="52" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">SVG one-line</text>
+                            <text x="622" y="69" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">breaker + alarm state</text>
+                            <rect x="554" y="92" width="136" height="38" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="622" y="114" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Trend charts</text>
+                            <text x="622" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">RENDER</text>
+                            <path d="M150 80 L188 80" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M330 80 L368 80" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M544 55 L544 111" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M554 55 L544 55" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M554 111 L544 111" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M510 80 L538 80" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <text x="622" y="168" text-anchor="middle" font-size="9" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">SQLite history over REST</text>
+                            <path d="M622 150 L622 138" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3 3" fill="none" marker-end="url(#csArrow)" opacity="0.8"/>
+                            </svg>
+                            <figcaption>Live path pushes every second. History path serves the trend charts.</figcaption>
+                        </figure>
                         <p>
                             The backend simulates eight power meters across a simplified data center topology:
                             a main service entrance, two distribution panels, and five branch circuits at
@@ -142,7 +177,7 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <span class="cs-section-eyebrow">// alarms and rendering</span>
                     <h2 class="cs-section-heading">Alarm state machines, SVG layout, and simulation fidelity</h2>
                     <div class="cs-prose">
                         <p>

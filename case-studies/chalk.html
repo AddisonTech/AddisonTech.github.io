@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Chalk case study -- AI football intelligence platform for coaches covering film analysis, recruiting, and game planning.">
     <meta name="author" content="Addison Smith">
+    <link rel="canonical" href="https://addisontech.github.io/case-studies/chalk.html">
 
     <title>Chalk | Case Study</title>
 
@@ -80,7 +81,7 @@
             <article class="cs-article">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the problem</span>
+                    <span class="cs-section-eyebrow">// the coaching problem</span>
                     <h2 class="cs-section-heading">Coaching intelligence is scattered across too many tools</h2>
                     <div class="cs-prose">
                         <p>
@@ -109,9 +110,48 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// how it works</span>
+                    <span class="cs-section-eyebrow">// three modules</span>
                     <h2 class="cs-section-heading">Film Room, Board, and Playbook</h2>
                     <div class="cs-prose">
+                        <figure class="cs-figure">
+                            <svg viewBox="0 0 884 160" role="img" aria-labelledby="csDiagTitle csDiagDesc" style="max-width:884px;margin:0 auto" xmlns="http://www.w3.org/2000/svg">
+                            <title id="csDiagTitle">Chalk scouting report pipeline</title>
+                            <desc id="csDiagDesc">Tagged plays are aggregated into a tendency profile before any model runs; the language model writes the report from those numbers.</desc>
+                            <defs><marker id="csArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker></defs>
+                            <rect x="14" y="62" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="82" y="84" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Tagged plays</text>
+                            <text x="82" y="101" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">down, form, concept</text>
+                            <text x="82" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">FILM ROOM</text>
+                            <rect x="194" y="55" width="136" height="64" rx="9" fill="rgba(34,211,238,0.075)" stroke="rgba(34,211,238,0.45)"/>
+                            <text x="262" y="77" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Tendency</text>
+                            <text x="262" y="91" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">profile</text>
+                            <text x="262" y="108" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">splits, frequencies</text>
+                            <text x="262" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">AGGREGATE</text>
+                            <rect x="374" y="61" width="136" height="52" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="442" y="83" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Structured</text>
+                            <text x="442" y="97" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">prompt template</text>
+                            <text x="442" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">PROMPT</text>
+                            <rect x="554" y="62" width="136" height="50" rx="9" fill="rgba(167,139,250,0.075)" stroke="rgba(167,139,250,0.45)"/>
+                            <text x="622" y="84" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Llama 3.3 70B</text>
+                            <text x="622" y="101" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">via Groq</text>
+                            <text x="622" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">INTERPRET</text>
+                            <rect x="734" y="30" width="136" height="50" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="802" y="52" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Scouting report</text>
+                            <text x="802" y="69" text-anchor="middle" font-size="9.5" fill="#94a3b8" font-family="JetBrains Mono, ui-monospace, monospace">six sections</text>
+                            <rect x="734" y="92" width="136" height="52" rx="9" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.14)"/>
+                            <text x="802" y="114" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">Playbook</text>
+                            <text x="802" y="128" text-anchor="middle" font-size="12" fill="#e2e9f3" font-family="Inter, system-ui, sans-serif" font-weight="500">recommendations</text>
+                            <text x="802" y="18" text-anchor="middle" font-size="9" fill="#7c8ba1" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="1.2">OUTPUT</text>
+                            <path d="M150 87 L188 87" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M330 87 L368 87" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M510 87 L548 87" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            <path d="M724 55 L724 118" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M734 55 L724 55" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M734 118 L724 118" stroke="#64748b" stroke-width="1.2" fill="none" opacity="0.75"/>
+                            <path d="M690 87 L718 87" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#csArrow)"/>
+                            </svg>
+                            <figcaption>The aggregation layer does the counting. The model only interprets.</figcaption>
+                        </figure>
                         <p>
                             The Film Room module is where play data goes in. Each play is tagged with
                             down, distance, formation, personnel grouping, concept, and result. When you
@@ -155,7 +195,7 @@
                 <hr class="cs-divider">
 
                 <section class="cs-section">
-                    <span class="cs-section-eyebrow">// the technical details</span>
+                    <span class="cs-section-eyebrow">// domain modeling</span>
                     <h2 class="cs-section-heading">Domain knowledge, module boundaries, and getting the aggregation right</h2>
                     <div class="cs-prose">
                         <p>
