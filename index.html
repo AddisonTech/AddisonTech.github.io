@@ -242,7 +242,7 @@
                     <img src="addison_professional.jpg" alt="Addison Smith" class="profile-photo" width="280" height="280" loading="lazy">
                 </div>
                 <div class="about-text" data-aos="fade-up">
-    <p class="about-position">I wire 480V control panels at 8am and train neural networks at 8pm. I bridge the gap between industrial hardware and intelligent software.</p>
+    <p class="about-position">I integrate BACnet networks at 8am and train neural networks at 8pm. I bridge the gap between industrial hardware and intelligent software.</p>
 
     <div class="about-what">
         <div class="about-what-col">
@@ -306,9 +306,6 @@
 
                         <div class="skill-group">
                             <span class="skill-cat-label">AI / ML</span>
-                            <div class="skill-bar-item">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Prompt Engineering</span><span class="skill-bar-pct">Advanced</span></div>
-                            </div>
                             <div class="skill-bar-item">
                                 <div class="skill-bar-header"><span class="skill-bar-name">LLM APIs</span><span class="skill-bar-pct">Proficient</span></div>
                             </div>
@@ -636,6 +633,36 @@
                 <div class="project-card" data-aos="fade-up">
                     <div class="project-card-inner">
                         <div class="project-meta">
+                            <i class="fas fa-bell project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/bms-alarm-triage-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">BMS Alarm Triage Agent</h3>
+                        <p class="project-desc">
+                            Turns a raw building automation alarm queue into a short ranked list of what a controls engineer
+                            should actually look at first. A Python/LangGraph pipeline collapses repeated events into distinct
+                            conditions using ANSI/ISA-18.2 definitions for chattering, fleeting, repeating, and stale alarms,
+                            ranks them, retrieves supporting trend evidence, and reassesses what should be escalated. A local
+                            LLM served through Ollama is used only at the final explanation step. The agent never writes to the
+                            building system or takes control action.
+                        </p>
+                        <p class="project-outcome">On a frozen synthetic holdout corpus: 15 of 15 target escalations captured, review volume reduced 30.4x, 100% escalation recall, 0% false escalation rate, and 390 passing tests. The corpus is synthetic, so this demonstrates the pipeline and validation harness end to end rather than proving the same performance on a real building's alarm queue.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">LangGraph</span>
+                            <span class="tag">Ollama</span>
+                            <span class="tag">ANSI/ISA-18.2</span>
+                            <span class="tag">BMS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
                             <i class="fas fa-diagram-project project-icon"></i>
                             <div class="project-links">
                                 <a href="https://github.com/AddisonTech/Smith_Agentic" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
@@ -894,6 +921,28 @@
             </div>
 
             <div class="certs-grid">
+
+                <!-- Building RAG Agents with LLMs -->
+                <div class="cert-card cert-featured" data-aos="fade-up">
+                    <div class="cert-icon cert-icon-cyan">
+                        <i class="fas fa-magnifying-glass-chart"></i>
+                    </div>
+                    <div class="cert-body">
+                        <div class="cert-top-row">
+                            <span class="cert-badge">Featured</span>
+                            <span class="cert-date">Sep 2026</span>
+                        </div>
+                        <p class="cert-name">Building RAG Agents with LLMs</p>
+                        <p class="cert-issuer">NVIDIA Deep Learning Institute</p>
+                        <div class="cert-tags">
+                            <span class="tag tag-accent">RAG</span>
+                            <span class="tag tag-accent">LangChain</span>
+                            <span class="tag tag-accent">LangServe</span>
+                            <span class="tag tag-accent">NVIDIA</span>
+                        </div>
+                        <a href="https://learn.nvidia.com/certificates?id=44skqvlFQmaopA9S0WoCrg" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
+                    </div>
+                </div>
 
                 <!-- Ignition Core Certified -->
                 <div class="cert-card cert-featured" data-aos="fade-up">
