@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Argus case study -- industrial Modbus anomaly detection with statistical analysis and local LLM diagnosis.">
+    <meta name="description" content="Argus case study: industrial Modbus anomaly detection with statistical analysis and local LLM diagnosis.">
     <meta name="author" content="Addison Smith">
     <link rel="canonical" href="https://addisontech.github.io/case-studies/argus.html">
 
@@ -209,7 +209,7 @@
                     <div class="cs-prose">
                         <p>
                             The detection logic lives in a single Python module. I spent a fair amount of time
-                            deciding how to handle the bootstrap period -- the first few seconds after startup when
+                            deciding how to handle the bootstrap period: the first few seconds after startup when
                             the history window is too short to produce a meaningful standard deviation. The solution
                             was simple: require a minimum window length before enabling detection. If the window
                             has fewer than 8 values, no alerts fire. It's a blunt rule, but it prevents false
