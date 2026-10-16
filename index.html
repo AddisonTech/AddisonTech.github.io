@@ -554,6 +554,43 @@
                 <h2 class="section-title">Things I've <span class="gradient-text">Built</span></h2>
             </div>
 
+            <!-- Featured: BMS Alarm Triage Agent -->
+            <div class="projects-grid" style="margin-top: 2.5rem;">
+
+                <div class="project-card project-featured" data-aos="fade-up">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-bell project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://addisontech.github.io/bms-alarm-triage-agent/" target="_blank" rel="noopener noreferrer" aria-label="See the BMS Alarm Triage Agent run" class="btn btn-primary btn-sm project-demo-btn">
+                                    <i class="fas fa-play"></i> See it run
+                                </a>
+                                <a href="https://github.com/AddisonTech/bms-alarm-triage-agent" target="_blank" rel="noopener noreferrer" aria-label="BMS Alarm Triage Agent GitHub repository" class="btn-ghost">
+                                    <i class="fab fa-github"></i> Repo
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">BMS Alarm Triage Agent</h3>
+                        <p class="project-desc">
+                            A building automation alarm queue goes in. A short ranked list of what an engineer should
+                            look at comes out, each item backed by trend evidence and the named rule behind its rank.
+                            The pipeline is mostly deterministic, so every result is traceable. Claude Haiku writes the
+                            two-sentence explanations at build time, and they pass the same guardrails as everything else.
+                            Read-only, with no write path to any building system.
+                        </p>
+                        <p class="project-outcome">548 alarm events down to 18 items to review on the holdout set, with all 15 target escalations captured. The evaluation data is synthetic, so this shows the pipeline and test harness working end to end, not proven performance on a real building.</p>
+                        <div class="project-tags">
+                            <span class="tag tag-accent">Python</span>
+                            <span class="tag tag-accent">LangGraph</span>
+                            <span class="tag tag-accent">Claude Haiku</span>
+                            <span class="tag tag-accent">ANSI/ISA-18.2</span>
+                            <span class="tag tag-accent">BMS</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
             <!-- Professional Work -->
             <div data-aos="fade-up" style="margin: 2.5rem 0 1.25rem 0;">
                 <span class="section-label">Professional Work</span>
@@ -561,26 +598,17 @@
 
             <div class="projects-grid">
 
-                <div class="project-card project-featured" data-aos="fade-up">
+                <div class="project-card" data-aos="fade-up">
                     <div class="project-card-inner">
                         <div class="project-meta">
-                            <span class="project-label">Featured Project</span>
+                            <i class="fas fa-code project-icon"></i>
                         </div>
-                        <h3 class="project-title">gfx-forge</h3>
-                        <p class="project-desc">
-                            Structured text authoring for Distech GFX programs, which are function block only.
-                            Write a control sequence as text and it generates the function block program. A
-                            decompiler reads existing programs back into text, and a local web front end drives
-                            both.
-                        </p>
-                        <p class="project-outcome">Distech's own compiler reports Build succeeded on programs generated from a text file with no hand editing.</p>
+                        <h3 class="project-title">Distech GFX Tooling</h3>
+                        <p class="project-desc">Tooling for authoring Distech GFX programs as text instead of function blocks by hand.</p>
                         <div class="project-tags">
-                            <span class="tag tag-accent">C#</span>
-                            <span class="tag tag-accent">.NET</span>
-                            <span class="tag tag-accent">Compiler</span>
-                            <span class="tag tag-accent">Decompiler</span>
-                            <span class="tag tag-accent">Structured Text</span>
-                            <span class="tag tag-accent">Distech GFX</span>
+                            <span class="tag">Distech GFX</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Structured Text</span>
                         </div>
                     </div>
                 </div>
@@ -629,36 +657,6 @@
             </div>
 
             <div class="projects-grid">
-
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-card-inner">
-                        <div class="project-meta">
-                            <i class="fas fa-bell project-icon"></i>
-                            <div class="project-links">
-                                <a href="https://github.com/AddisonTech/bms-alarm-triage-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">BMS Alarm Triage Agent</h3>
-                        <p class="project-desc">
-                            Turns a raw building automation alarm queue into a short ranked list of what a controls engineer
-                            should actually look at first. A Python/LangGraph pipeline collapses repeated events into distinct
-                            conditions using ANSI/ISA-18.2 definitions for chattering, fleeting, repeating, and stale alarms,
-                            ranks them, retrieves supporting trend evidence, and reassesses what should be escalated. A local
-                            LLM served through Ollama is used only at the final explanation step. The agent never writes to the
-                            building system or takes control action.
-                        </p>
-                        <p class="project-outcome">On a frozen synthetic holdout corpus: 15 of 15 target escalations captured, review volume reduced 30.4x, 100% escalation recall, 0% false escalation rate, and 390 passing tests. The corpus is synthetic, so this demonstrates the pipeline and validation harness end to end rather than proving the same performance on a real building's alarm queue.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">LangGraph</span>
-                            <span class="tag">Ollama</span>
-                            <span class="tag">ANSI/ISA-18.2</span>
-                            <span class="tag">BMS</span>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="project-card" data-aos="fade-up">
                     <div class="project-card-inner">
