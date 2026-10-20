@@ -176,7 +176,7 @@
         { ts: '12:44:17', text: 'Alert sent to supervisor queue', cls: 'feed-sys' },
         { ts: '12:44:22', text: 'Frame captured - Part #B2-1088', cls: 'feed-sys' },
         { ts: '12:44:24', text: 'VLM analysis complete - REVIEW (79.2%)', cls: 'feed-review' },
-        { ts: '12:44:24', text: 'Low confidence — supervisor review queued', cls: 'feed-review' }
+        { ts: '12:44:24', text: 'Low confidence, supervisor review queued', cls: 'feed-review' }
     ];
 
     INITIAL_LOG.forEach(function (entry) {
@@ -217,16 +217,16 @@
 
                 if (outcome.status === 'fail') {
                     var ts3 = timestamp();
-                    addLog(ts3, 'Defect logged — alert sent to supervisor queue', 'feed-fail');
+                    addLog(ts3, 'Defect logged, alert sent to supervisor queue', 'feed-fail');
                 } else if (outcome.status === 'review') {
                     var ts3b = timestamp();
-                    addLog(ts3b, 'Low confidence — supervisor review queued', 'feed-review');
+                    addLog(ts3b, 'Low confidence, supervisor review queued', 'feed-review');
                 } else {
                     var ts3c = timestamp();
                     addLog(ts3c, 'Verdict written to PLC register', 'feed-sys');
                 }
 
-                if (statusText) statusText.textContent = 'System online — monitoring active';
+                if (statusText) statusText.textContent = 'System online, monitoring active';
                 btnInspect.disabled = false;
             }, analyzeDelay);
         });
