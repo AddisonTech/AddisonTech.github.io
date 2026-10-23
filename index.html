@@ -612,9 +612,46 @@
                 <h2 class="section-title">Things I've <span class="gradient-text">Built</span></h2>
             </div>
 
-            <!-- Featured Projects -->
+            <!-- Featured: BMS Alarm Triage Agent -->
+            <div class="projects-grid" style="margin-top: 2.5rem;">
+
+                <div class="project-card project-featured" data-aos="fade-up">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-bell project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://addisontech.github.io/bms-alarm-triage-agent/" target="_blank" rel="noopener noreferrer" aria-label="See the BMS Alarm Triage Agent run" class="btn btn-primary btn-sm project-demo-btn">
+                                    <i class="fas fa-play"></i> See it run
+                                </a>
+                                <a href="https://github.com/AddisonTech/bms-alarm-triage-agent" target="_blank" rel="noopener noreferrer" aria-label="BMS Alarm Triage Agent GitHub repository" class="btn-ghost">
+                                    <i class="fab fa-github"></i> Repo
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">BMS Alarm Triage Agent</h3>
+                        <p class="project-desc">
+                            A building automation alarm queue goes in. A short ranked list of what an engineer should
+                            look at comes out, each item backed by trend evidence and the named rule behind its rank.
+                            The pipeline is mostly deterministic, so every result is traceable. Claude Haiku writes the
+                            two-sentence explanations at build time, and they pass the same guardrails as everything else.
+                            Read-only, with no write path to any building system.
+                        </p>
+                        <p class="project-outcome">548 alarm events down to 18 items to review on the holdout set, with all 15 target escalations captured. The evaluation data is synthetic, so this shows the pipeline and test harness working end to end, not proven performance on a real building.</p>
+                        <div class="project-tags">
+                            <span class="tag tag-accent">Python</span>
+                            <span class="tag tag-accent">LangGraph</span>
+                            <span class="tag tag-accent">Claude Haiku</span>
+                            <span class="tag tag-accent">ANSI/ISA-18.2</span>
+                            <span class="tag tag-accent">BMS</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Professional Work -->
             <div data-aos="fade-up" style="margin: 2.5rem 0 1.25rem 0;">
-                <span class="section-label">Featured Projects</span>
+                <span class="section-label">Professional Work</span>
             </div>
 
             <div class="projects-grid">
@@ -622,28 +659,85 @@
                 <div class="project-card" data-aos="fade-up">
                     <div class="project-card-inner">
                         <div class="project-meta">
-                            <i class="fas fa-football-ball project-icon"></i>
+                            <i class="fas fa-code project-icon"></i>
+                        </div>
+                        <h3 class="project-title">Distech GFX Tooling</h3>
+                        <p class="project-desc">Tooling for authoring Distech GFX programs as text instead of function blocks by hand.</p>
+                        <div class="project-tags">
+                            <span class="tag">Distech GFX</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Structured Text</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="50">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-sitemap project-icon"></i>
+                        </div>
+                        <h3 class="project-title">Niagara Station Tooling</h3>
+                        <p class="project-desc">Tooling for working with Niagara station configurations offline instead of station by station in the engineering tool.</p>
+                        <div class="project-tags">
+                            <span class="tag">Niagara 4</span>
+                            <span class="tag">BACnet</span>
+                            <span class="tag">Station Config</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">XML</span>
+                            <span class="tag">BMS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-layer-group project-icon"></i>
+                        </div>
+                        <h3 class="project-title">Ignition Site Pack Generator</h3>
+                        <p class="project-desc">Generates an Ignition Perspective site from spreadsheet equipment lists. Produces the UDT library, tag instances, parameterized detail views, navigation, scoped alarms, and a tenant billing chain.</p>
+                        <div class="project-tags">
+                            <span class="tag">Ignition 8.3</span>
+                            <span class="tag">Perspective</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">UDTs</span>
+                            <span class="tag">Alarming</span>
+                            <span class="tag">Code Generation</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Industrial & AI Systems -->
+            <div data-aos="fade-up" style="margin: 3rem 0 1.25rem 0;">
+                <span class="section-label">Industrial &amp; AI Systems</span>
+            </div>
+
+            <div class="projects-grid">
+
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-building project-icon"></i>
                             <div class="project-links">
-                                <a href="https://github.com/AddisonTech/Chalk" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                <a href="https://github.com/AddisonTech/Hyperbolic" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
                                     <i class="fab fa-github"></i>
                                 </a>
-                                <a href="case-studies/chalk.html" aria-label="Case Study" class="btn-ghost">
-                                    <i class="fas fa-file-alt"></i> Case Study
-                                </a>
-                                <a href="https://chalk-sable.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                <a href="https://addisontech.github.io/Hyperbolic/" target="_blank" rel="noopener noreferrer" aria-label="Replay viewer" class="btn btn-primary btn-sm project-demo-btn">
+                                    <i class="fas fa-play"></i> See it run
                                 </a>
                             </div>
                         </div>
-                        <h3 class="project-title">Chalk: Football Intelligence Platform</h3>
-                        <p class="project-desc">A coaching workspace for football staffs with three modules: Film Room, Board, and Playbook.</p>
+                        <h3 class="project-title">Hyperbolic</h3>
+                        <p class="project-desc">An AI supervisor that runs a simulated three-building district in CityLearn and tries to beat the no-control reference on cost, emissions, and comfort. Every simulated hour a language model picks one action per device, a deterministic safety envelope checks it against hard limits, and only what survives is applied. Every decision is logged and replays exactly. Simulator only, with no connection to any real building.</p>
+                        <p class="project-outcome">One summer month, scored by CityLearn's own KPIs: cost down 7.5%, emissions down 3.5%, and uncomfortable occupied hours cut from 17.1% to 9.4%, for $0.46 in model calls.</p>
                         <div class="project-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">React</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Tailwind CSS</span>
-                            <span class="tag">Supabase</span>
-                            <span class="tag">Vercel</span>
+                            <span class="tag tag-accent">Python</span>
+                            <span class="tag tag-accent">CityLearn</span>
+                            <span class="tag tag-accent">LLM</span>
+                            <span class="tag tag-accent">Supervisory Control</span>
+                            <span class="tag tag-accent">HVAC</span>
                         </div>
                     </div>
                 </div>
@@ -664,11 +758,13 @@
                                 </a>
                             </div>
                         </div>
-                        <h3 class="project-title">Smith_Agentic: Multi-Agent AI System</h3>
+                        <h3 class="project-title">Smith_Agentic</h3>
                         <p class="project-desc">
-                            A modular multi-agent architecture with 20 agents across four specialized crews (Default, PLC,
-                            React, Vision) built with CrewAI and Ollama. Ships with a React UI with live WebSocket streaming,
-                            an MCP server that exposes crew runs as tools, and a Rust CLI for driving the backend from the terminal.
+                            A modular multi-agent framework for engineering workflows, built as four components: a Python/CrewAI
+                            backend with twenty specialized agents across four crews; a React UI with live WebSocket streaming,
+                            18 pre-built task templates across Code, PLC, HMI, Vision, Safety, and Ops, and an offline demo mode;
+                            an MCP server that exposes crew runs as tools for Claude Code and Claude Desktop; and a Rust CLI for
+                            driving the backend from the terminal.
                         </p>
                         <p class="project-outcome">Twenty specialized agents. Four crews. One framework that turns engineering goals into finished deliverables without touching the cloud.</p>
                         <div class="project-tags">
@@ -701,6 +797,122 @@
                 <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-card-inner">
                         <div class="project-meta">
+                            <i class="fas fa-wave-square project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/Argus" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="case-studies/argus.html" aria-label="Case Study" class="btn-ghost">
+                                    <i class="fas fa-file-alt"></i> Case Study
+                                </a>
+                                <a href="demos/argus.html" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Argus</h3>
+                        <p class="project-desc">Industrial anomaly detection platform. Monitors live Modbus register data using statistical analysis, generates plain-English diagnoses via local LLM, and fires alerts before problems become failures.</p>
+                        <p class="project-outcome">Watches your Modbus registers around the clock, catches drift before it becomes failure, and tells you exactly what's wrong in plain English.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">React</span>
+                            <span class="tag">SQLite</span>
+                            <span class="tag">Ollama</span>
+                            <span class="tag">Modbus</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-eye project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/Vision_Inspect" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="case-studies/vision-inspect.html" aria-label="Case Study" class="btn-ghost">
+                                    <i class="fas fa-file-alt"></i> Case Study
+                                </a>
+                                <a href="demos/vision-inspect.html" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Vision_Inspect</h3>
+                        <p class="project-desc">A local shop-floor visual process monitoring system using Visual Language Models via Ollama for real-time inspection of manufacturing processes. Sees everything, touches nothing, reports everything.</p>
+                        <p class="project-outcome">Local VLM-powered visual inspection for manufacturing.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">React</span>
+                            <span class="tag">Ollama</span>
+                            <span class="tag">Qwen2.5-VL</span>
+                            <span class="tag">WebSocket</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-network-wired project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/ModBridge" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="case-studies/modbridge.html" aria-label="Case Study" class="btn-ghost">
+                                    <i class="fas fa-file-alt"></i> Case Study
+                                </a>
+                                <button id="modbridge-demo-btn" class="btn btn-primary btn-sm project-demo-btn" aria-label="Live Demo">
+                                    <i class="fas fa-play"></i> Live Demo
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="project-title">ModBridge</h3>
+                        <p class="project-desc">Modbus TCP utility that polls live register values, serves them as a REST API, logs to CSV, and runs a built-in fake device for testing. Ships in both Rust and Python with identical feature sets.</p>
+                        <p class="project-outcome">Industrial field data, turned into a clean REST API, in one binary with no runtime required.</p>
+                        <div class="project-tags">
+                            <span class="tag">Rust</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Modbus TCP</span>
+                            <span class="tag tag-accent">REST API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
+                            <i class="fas fa-bolt project-icon"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/AddisonTech/power-dashboard" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="case-studies/power-dashboard.html" aria-label="Case Study" class="btn-ghost">
+                                    <i class="fas fa-file-alt"></i> Case Study
+                                </a>
+                                <a href="https://power-dashboard-vd3w.onrender.com" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Power Dashboard</h3>
+                        <p class="project-desc">Real-time Electrical Power Monitoring System dashboard with simulated Modbus data collection, ISA 18.2 alarm management, interactive one-line diagrams, and historical trending. Built for data center and industrial facility monitoring.</p>
+                        <p class="project-outcome">Full-stack EPMS with real-time WebSocket data, 8 simulated meters, and ISA 18.2 alarm engine.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">React</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">WebSockets</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card-inner">
+                        <div class="project-meta">
                             <i class="fas fa-code-branch project-icon"></i>
                         </div>
                         <h3 class="project-title">L5X Ladder Logic Generator</h3>
@@ -714,7 +926,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="350">
                     <div class="project-card-inner">
                         <div class="project-meta">
                             <i class="fas fa-stopwatch project-icon"></i>
@@ -734,36 +946,36 @@
             <details style="margin-top: 3rem;">
                 <summary style="cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-top: 1px solid rgba(255,255,255,0.06); outline: none;">
                     <span class="section-label" style="opacity: 0.4; pointer-events: none;">Other Projects</span>
-                    <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--text-2);">(5)</span>
+                    <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--text-2);">(2)</span>
                 </summary>
                 <div class="projects-grid" style="margin-top: 1.5rem; opacity: 0.5;">
 
                     <div class="project-card" data-aos="fade-up">
                         <div class="project-card-inner">
                             <div class="project-meta">
-                                <i class="fas fa-bell project-icon"></i>
+                                <i class="fas fa-football-ball project-icon"></i>
                                 <div class="project-links">
-                                    <a href="https://github.com/AddisonTech/bms-alarm-triage-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <a href="https://github.com/AddisonTech/Chalk" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
                                         <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="case-studies/chalk.html" aria-label="Case Study" class="btn-ghost">
+                                        <i class="fas fa-file-alt"></i> Case Study
+                                    </a>
+                                    <a href="https://chalk-sable.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
+                                        <i class="fas fa-external-link-alt"></i> Live Demo
                                     </a>
                                 </div>
                             </div>
-                            <h3 class="project-title">BMS Alarm Triage Agent</h3>
-                            <p class="project-desc">
-                                Turns a raw building automation alarm queue into a short ranked list of what a controls engineer
-                                should actually look at first. A Python/LangGraph pipeline collapses repeated events into distinct
-                                conditions using ANSI/ISA-18.2 definitions for chattering, fleeting, repeating, and stale alarms,
-                                ranks them, retrieves supporting trend evidence, and reassesses what should be escalated. A local
-                                LLM served through Ollama is used only at the final explanation step. The agent never writes to the
-                                building system or takes control action.
-                            </p>
-                            <p class="project-outcome">On a frozen synthetic holdout corpus: 15 of 15 target escalations captured, review volume reduced 30.4x, 100% escalation recall, 0% false escalation rate, and 390 passing tests. The corpus is synthetic, so this demonstrates the pipeline and validation harness end to end rather than proving the same performance on a real building's alarm queue.</p>
+                            <h3 class="project-title">Chalk</h3>
+                            <p class="project-desc">An AI football intelligence platform built for coaches. Three modules cover film analysis, recruiting evaluation, and game plan recommendations, powered by recognition, analytics, and recommendation intelligence layers.</p>
+                            <p class="project-outcome">Three modules. One platform. Film, recruiting, and game planning intelligence built for coaches who think in systems.</p>
                             <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">LangGraph</span>
-                                <span class="tag">Ollama</span>
-                                <span class="tag">ANSI/ISA-18.2</span>
-                                <span class="tag">BMS</span>
+                                <span class="tag">Next.js</span>
+                                <span class="tag">React</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">Tailwind</span>
+                                <span class="tag">shadcn/ui</span>
+                                <span class="tag">Supabase</span>
                             </div>
                         </div>
                     </div>
@@ -771,115 +983,34 @@
                     <div class="project-card" data-aos="fade-up" data-aos-delay="50">
                         <div class="project-card-inner">
                             <div class="project-meta">
-                                <i class="fas fa-wave-square project-icon"></i>
+                                <i class="fas fa-search project-icon"></i>
                                 <div class="project-links">
-                                    <a href="https://github.com/AddisonTech/Argus" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+                                    <a href="https://github.com/AddisonTech/Sift" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
                                         <i class="fab fa-github"></i>
                                     </a>
-                                    <a href="case-studies/argus.html" aria-label="Case Study" class="btn-ghost">
+                                    <a href="case-studies/sift.html" aria-label="Case Study" class="btn-ghost">
                                         <i class="fas fa-file-alt"></i> Case Study
                                     </a>
-                                    <a href="demos/argus.html" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
+                                    <a href="https://sift-seven-chi.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
                                         <i class="fas fa-external-link-alt"></i> Live Demo
                                     </a>
                                 </div>
                             </div>
-                            <h3 class="project-title">Argus</h3>
-                            <p class="project-desc">Industrial anomaly detection platform. Monitors live Modbus register data using statistical analysis, generates plain-English diagnoses via local LLM, and fires alerts before problems become failures.</p>
-                            <p class="project-outcome">Watches your Modbus registers around the clock, catches drift before it becomes failure, and tells you exactly what's wrong in plain English.</p>
+                            <h3 class="project-title">Sift</h3>
+                            <p class="project-desc">
+                                A camera-first personal decision engine. Point your phone at any product, restaurant,
+                                or item and get an instant AI-powered score, verdict, and ranked alternatives pulled
+                                from real reviews and local options. Built with preference learning so results get
+                                smarter over time.
+                            </p>
+                            <p class="project-outcome">Point. Scan. Decide. AI-powered verdicts on any product, restaurant, or item in seconds.</p>
                             <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">FastAPI</span>
-                                <span class="tag">React</span>
-                                <span class="tag">SQLite</span>
-                                <span class="tag">Ollama</span>
-                                <span class="tag">Modbus</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="project-card-inner">
-                            <div class="project-meta">
-                                <i class="fas fa-eye project-icon"></i>
-                                <div class="project-links">
-                                    <a href="https://github.com/AddisonTech/Vision_Inspect" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                    <a href="case-studies/vision-inspect.html" aria-label="Case Study" class="btn-ghost">
-                                        <i class="fas fa-file-alt"></i> Case Study
-                                    </a>
-                                    <a href="demos/vision-inspect.html" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
-                                        <i class="fas fa-external-link-alt"></i> Live Demo
-                                    </a>
-                                </div>
-                            </div>
-                            <h3 class="project-title">Vision_Inspect</h3>
-                            <p class="project-desc">A local shop-floor visual process monitoring system using Visual Language Models via Ollama for real-time inspection of manufacturing processes. Sees everything, touches nothing, reports everything.</p>
-                            <p class="project-outcome">Local VLM-powered visual inspection for manufacturing.</p>
-                            <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">FastAPI</span>
-                                <span class="tag">React</span>
-                                <span class="tag">Ollama</span>
-                                <span class="tag">Qwen2.5-VL</span>
-                                <span class="tag">WebSocket</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-aos="fade-up" data-aos-delay="150">
-                        <div class="project-card-inner">
-                            <div class="project-meta">
-                                <i class="fas fa-network-wired project-icon"></i>
-                                <div class="project-links">
-                                    <a href="https://github.com/AddisonTech/ModBridge" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                    <a href="case-studies/modbridge.html" aria-label="Case Study" class="btn-ghost">
-                                        <i class="fas fa-file-alt"></i> Case Study
-                                    </a>
-                                    <button id="modbridge-demo-btn" class="btn btn-primary btn-sm project-demo-btn" aria-label="Live Demo">
-                                        <i class="fas fa-play"></i> Live Demo
-                                    </button>
-                                </div>
-                            </div>
-                            <h3 class="project-title">ModBridge</h3>
-                            <p class="project-desc">Modbus TCP utility that polls live register values, serves them as a REST API, logs to CSV, and runs a built-in fake device for testing. Ships in both Rust and Python with identical feature sets.</p>
-                            <p class="project-outcome">Industrial field data, turned into a clean REST API, in one binary with no runtime required.</p>
-                            <div class="project-tags">
-                                <span class="tag">Rust</span>
-                                <span class="tag">Python</span>
-                                <span class="tag">Modbus TCP</span>
-                                <span class="tag">REST API</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="project-card-inner">
-                            <div class="project-meta">
-                                <i class="fas fa-bolt project-icon"></i>
-                                <div class="project-links">
-                                    <a href="https://github.com/AddisonTech/power-dashboard" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                    <a href="case-studies/power-dashboard.html" aria-label="Case Study" class="btn-ghost">
-                                        <i class="fas fa-file-alt"></i> Case Study
-                                    </a>
-                                    <a href="https://power-dashboard-vd3w.onrender.com" target="_blank" rel="noopener noreferrer" aria-label="Live Demo" class="btn btn-primary btn-sm project-demo-btn">
-                                        <i class="fas fa-external-link-alt"></i> Live Demo
-                                    </a>
-                                </div>
-                            </div>
-                            <h3 class="project-title">Power Dashboard</h3>
-                            <p class="project-desc">Real-time Electrical Power Monitoring System dashboard with simulated Modbus data collection, ISA 18.2 alarm management, interactive one-line diagrams, and historical trending. Built for data center and industrial facility monitoring.</p>
-                            <p class="project-outcome">Full-stack EPMS with real-time WebSocket data, 8 simulated meters, and ISA 18.2 alarm engine.</p>
-                            <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">React</span>
-                                <span class="tag">FastAPI</span>
-                                <span class="tag">WebSockets</span>
+                                <span class="tag">React Native</span>
+                                <span class="tag">Expo</span>
+                                <span class="tag">Supabase</span>
+                                <span class="tag">Gemini</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">NativeWind</span>
                             </div>
                         </div>
                     </div>
@@ -905,45 +1036,7 @@
 
             <div class="certs-grid">
 
-                <div class="cert-card cert-featured" data-aos="fade-up">
-                    <div class="cert-icon cert-icon-accent">
-                        <i class="fas fa-industry"></i>
-                    </div>
-                    <div class="cert-body">
-                        <div class="cert-top-row">
-                            <span class="cert-badge">Featured</span>
-                            <span class="cert-date">Oct 2026</span>
-                        </div>
-                        <p class="cert-name">Ignition Gold Certified</p>
-                        <p class="cert-issuer">Inductive Automation</p>
-                        <div class="cert-tags">
-                            <span class="tag tag-accent">SCADA</span>
-                            <span class="tag tag-accent">Ignition</span>
-                            <span class="tag tag-accent">Industrial Automation</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cert-card cert-featured" data-aos="fade-up">
-                    <div class="cert-icon cert-icon-accent">
-                        <i class="fas fa-industry"></i>
-                    </div>
-                    <div class="cert-body">
-                        <div class="cert-top-row">
-                            <span class="cert-badge">Featured</span>
-                            <span class="cert-date">May 2026</span>
-                        </div>
-                        <p class="cert-name">Ignition Core Certified</p>
-                        <p class="cert-issuer">Inductive Automation</p>
-                        <div class="cert-tags">
-                            <span class="tag tag-accent">SCADA</span>
-                            <span class="tag tag-accent">Ignition</span>
-                            <span class="tag tag-accent">Industrial Automation</span>
-                        </div>
-                        <a href="AddisonSmithCoreCertification.pdf" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> View Certificate</a>
-                    </div>
-                </div>
-
+                <!-- Building RAG Agents with LLMs -->
                 <div class="cert-card cert-featured" data-aos="fade-up">
                     <div class="cert-icon cert-icon-cyan">
                         <i class="fas fa-magnifying-glass-chart"></i>
@@ -965,6 +1058,50 @@
                     </div>
                 </div>
 
+                <!-- Ignition Gold Certified -->
+                <div class="cert-card cert-featured" data-aos="fade-up">
+                    <div class="cert-icon cert-icon-accent">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="cert-body">
+                        <div class="cert-top-row">
+                            <span class="cert-badge">Featured</span>
+                            <span class="cert-date">Oct 2026</span>
+                        </div>
+                        <p class="cert-name">Ignition Gold Certified</p>
+                        <p class="cert-issuer">Inductive Automation</p>
+                        <div class="cert-tags">
+                            <span class="tag tag-accent">SCADA</span>
+                            <span class="tag tag-accent">Ignition</span>
+                            <span class="tag tag-accent">Perspective</span>
+                            <span class="tag tag-accent">Vision</span>
+                        </div>
+                        <a href="AddisonSmithGoldCertification.pdf" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+                    </div>
+                </div>
+
+                <!-- Ignition Core Certified -->
+                <div class="cert-card cert-featured" data-aos="fade-up">
+                    <div class="cert-icon cert-icon-accent">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="cert-body">
+                        <div class="cert-top-row">
+                            <span class="cert-badge">Featured</span>
+                            <span class="cert-date">May 2026</span>
+                        </div>
+                        <p class="cert-name">Ignition Core Certified</p>
+                        <p class="cert-issuer">Inductive Automation</p>
+                        <div class="cert-tags">
+                            <span class="tag tag-accent">SCADA</span>
+                            <span class="tag tag-accent">Ignition</span>
+                            <span class="tag tag-accent">Industrial Automation</span>
+                        </div>
+                        <a href="AddisonSmithCoreCertification.pdf" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+                    </div>
+                </div>
+
+                <!-- Featured cert -->
                 <div class="cert-card cert-featured" data-aos="fade-up">
                     <div class="cert-icon cert-icon-cyan">
                         <i class="fas fa-robot"></i>
@@ -974,7 +1111,7 @@
                             <span class="cert-badge">Featured</span>
                             <span class="cert-date">Apr 2026</span>
                         </div>
-                        <p class="cert-name">Building Agentic AI Applications with LLMs</p>
+                        <p class="cert-name">Building Agentic AI Applications with Large Language Models</p>
                         <p class="cert-issuer">NVIDIA Deep Learning Institute</p>
                         <div class="cert-tags">
                             <span class="tag tag-accent">Agentic AI</span>
@@ -1006,23 +1143,6 @@
                     </div>
                 </div>
 
-                <div class="cert-card" data-aos="fade-up">
-                    <div class="cert-icon cert-icon-cyan">
-                        <i class="fas fa-link"></i>
-                    </div>
-                    <div class="cert-body">
-                        <p class="cert-name">Foundation: Introduction to LangChain - Python</p>
-                        <div class="cert-row">
-                            <p class="cert-issuer">LangChain Academy</p>
-                            <span class="cert-date">May 2026</span>
-                        </div>
-                        <div class="cert-tags">
-                            <span class="tag tag-accent">LangChain</span>
-                            <span class="tag tag-accent">Python</span>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="cert-card" data-aos="fade-up" data-aos-delay="50">
                     <div class="cert-icon cert-icon-accent">
                         <i class="fas fa-network-wired"></i>
@@ -1043,13 +1163,49 @@
 
                 <div class="cert-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="cert-icon cert-icon-accent">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <div class="cert-body">
+                        <p class="cert-name">Introduction to Subagents</p>
+                        <div class="cert-row">
+                            <p class="cert-issuer">Anthropic</p>
+                            <span class="cert-date">April 2026</span>
+                        </div>
+                        <div class="cert-tags">
+                            <span class="tag tag-accent">Subagents</span>
+                            <span class="tag tag-accent">Anthropic</span>
+                        </div>
+                        <a href="https://anthropic.skilljar.com/certificate/t2vt2dgnwn37" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
+                    </div>
+                </div>
+
+                <div class="cert-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="cert-icon cert-icon-accent">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="cert-body">
+                        <p class="cert-name">Introduction to Agent Skills</p>
+                        <div class="cert-row">
+                            <p class="cert-issuer">Anthropic</p>
+                            <span class="cert-date">April 2026</span>
+                        </div>
+                        <div class="cert-tags">
+                            <span class="tag tag-accent">Agents</span>
+                            <span class="tag tag-accent">Anthropic</span>
+                        </div>
+                        <a href="https://anthropic.skilljar.com/certificate/6go5bkprzxbm" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
+                    </div>
+                </div>
+
+                <div class="cert-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="cert-icon cert-icon-accent">
                         <i class="fas fa-plug"></i>
                     </div>
                     <div class="cert-body">
                         <p class="cert-name">Introduction to Model Context Protocol</p>
                         <div class="cert-row">
                             <p class="cert-issuer">Anthropic</p>
-                            <span class="cert-date">Apr 2026</span>
+                            <span class="cert-date">April 2026</span>
                         </div>
                         <div class="cert-tags">
                             <span class="tag tag-accent">MCP</span>
@@ -1059,25 +1215,7 @@
                     </div>
                 </div>
 
-                <div class="cert-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="cert-icon cert-icon-accent">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="cert-body">
-                        <p class="cert-name">Workbench Basics and Niagara Data Service</p>
-                        <div class="cert-row">
-                            <p class="cert-issuer">Tridium University</p>
-                            <span class="cert-date">Aug 2026</span>
-                        </div>
-                        <div class="cert-tags">
-                            <span class="tag tag-accent">Niagara N4</span>
-                            <span class="tag tag-accent">Workbench</span>
-                            <span class="tag tag-accent">BMS</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cert-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="cert-card" data-aos="fade-up" data-aos-delay="250">
                     <div class="cert-icon cert-icon-purple">
                         <i class="fas fa-award"></i>
                     </div>
@@ -1085,7 +1223,7 @@
                         <p class="cert-name">Expert Panel Contributor, Data Center Cooling</p>
                         <div class="cert-row">
                             <p class="cert-issuer">Mordor Intelligence</p>
-                            <span class="cert-date">Sep 2025</span>
+                            <span class="cert-date">2025</span>
                         </div>
                         <p class="cert-desc">Recognized as a member of their Expert Panel Group for contributing subject matter expertise and strategic insights to the Data Center Cooling market report.</p>
                         <div class="cert-tags">
@@ -1100,37 +1238,9 @@
             <details style="margin-top: 2rem;">
                 <summary style="cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-top: 1px solid rgba(255,255,255,0.06); outline: none;">
                     <span class="section-label" style="opacity: 0.4; pointer-events: none;">Foundational Certifications</span>
-                    <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--text-2);">(8)</span>
+                    <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--text-2);">(6)</span>
                 </summary>
                 <div class="certs-grid" style="margin-top: 1.5rem; opacity: 0.5;">
-                    <div class="cert-card">
-                        <div class="cert-icon cert-icon-accent">
-                            <i class="fas fa-sitemap"></i>
-                        </div>
-                        <div class="cert-body">
-                            <p class="cert-name">Introduction to Subagents</p>
-                            <div class="cert-row">
-                                <p class="cert-issuer">Anthropic</p>
-                                <span class="cert-date">Apr 2026</span>
-                            </div>
-                            <div class="cert-tags"><span class="tag">Subagents</span><span class="tag">Anthropic</span></div>
-                            <a href="https://anthropic.skilljar.com/certificate/t2vt2dgnwn37" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
-                        </div>
-                    </div>
-                    <div class="cert-card">
-                        <div class="cert-icon cert-icon-accent">
-                            <i class="fas fa-puzzle-piece"></i>
-                        </div>
-                        <div class="cert-body">
-                            <p class="cert-name">Introduction to Agent Skills</p>
-                            <div class="cert-row">
-                                <p class="cert-issuer">Anthropic</p>
-                                <span class="cert-date">Apr 2026</span>
-                            </div>
-                            <div class="cert-tags"><span class="tag">Agents</span><span class="tag">Anthropic</span></div>
-                            <a href="https://anthropic.skilljar.com/certificate/6go5bkprzxbm" target="_blank" rel="noopener noreferrer" class="cert-verify"><i class="fas fa-external-link-alt"></i> Verify</a>
-                        </div>
-                    </div>
                     <div class="cert-card">
                         <div class="cert-icon cert-icon-cyan">
                             <i class="fas fa-code"></i>
